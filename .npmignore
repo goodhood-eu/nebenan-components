@@ -1,0 +1,12 @@
+build/
+!lib/
+!style.css
+preview/
+test/
+.babelrc
+.eslintignore
+.eslintrc
+.gitignore
+.npmignore
+.stylintrc
+gulpfile.js

@@ -1,0 +1,28 @@
+.c-link_header
+  padding-right: 25px
+  display: block
+  position: relative
+
+  &.is-reversed
+    padding-right: 0
+    padding-left: 25px
+
+  a&
+    color: $colorDark
+
+  > .ui-h1,
+  > .ui-h2,
+  > .ui-h3
+    display: block
+
+  > i
+    iconSize(16px)
+    position: absolute
+    top: 50%
+    right: 0
+    transform: translateY(-50%)
+    color: $colorDark70
+
+  &.is-reversed > i
+    right: auto
+    left: 0
