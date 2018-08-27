@@ -1,4 +1,4 @@
-import React, { PureComponent, Children } from 'react';
+import React, { PureComponent, Children, createRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import clamp from 'lodash/clamp';
@@ -16,6 +16,9 @@ class Carousel extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { position: 0, isAnimated: false };
+
+    this.wrapper = createRef();
+    this.draggable = createRef();
 
     bindTo(this,
       'handleDragStart',
@@ -47,8 +50,8 @@ class Carousel extends PureComponent {
   }
 
   calculateMeasurements() {
-    const containerWidth = size(this.els.draggable.getNode()).width;
-    const wrapperWidth = size(this.els.wrapper).width;
+    const containerWidth = size(this.draggable.current.getNode()).width;
+    const wrapperWidth = size(this.wrapper.current).width;
 
     this.minPosition = Math.min(wrapperWidth - containerWidth, 0);
   }
@@ -94,9 +97,9 @@ class Carousel extends PureComponent {
 
     return (
       <article {...cleanProps} className={className}>
-        <div className="c-carousel-wrapper" ref={this.setEl('wrapper')}>
+        <div className="c-carousel-wrapper" ref={this.wrapper)}>
           <Draggable
-            ref={this.setEl('draggable')}
+            ref={this.draggable)}
             style={draggableStyle}
             className="c-carousel-draggable"
             onDragStart={this.handleDragStart}

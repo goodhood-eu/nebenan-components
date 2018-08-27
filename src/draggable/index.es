@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 
@@ -8,6 +8,8 @@ import { bindTo } from 'nebenan-helpers/lib/utils';
 class Draggable extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.node = createRef();
 
     bindTo(this,
       'handleTouchStart',
@@ -23,7 +25,7 @@ class Draggable extends PureComponent {
   }
 
   getNode() {
-    return this.els.node;
+    return this.node.current;
   }
 
   activateMouse() {
@@ -82,7 +84,7 @@ class Draggable extends PureComponent {
     return (
       <div
         {...cleanProps}
-        ref={this.setEl('node')}
+        ref={this.node}
         onTouchStart={this.handleTouchStart}
         onMouseDown={this.handleMouseDown}
       />

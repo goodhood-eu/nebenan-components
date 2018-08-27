@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
@@ -13,19 +13,22 @@ import {
   eventCoordinates,
 } from 'nebenan-helpers/lib/dom';
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
-
-import InteractiveComponent from '../../base/interactive_component';
+import { bindTo } from 'nebenan-helpers/lib/utils';
 
 const UPDATE_RATE = 20;
 const MIN_SCROLLER_HEIGHT = 20;
 
 
-class Scrollable extends InteractiveComponent {
+class Scrollable extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.getDefaultState();
 
-    this.bindToComponent(
+    this.component = createRef();
+    this.container = createRef();
+    this.content = createRef();
+
+    bindTo(this,
       'reset',
       'resize',
       'syncScrollPosition',
@@ -49,8 +52,8 @@ class Scrollable extends InteractiveComponent {
   }
 
   componentDidMount() {
-    super.componentDidMount();
-    this.scroll = scroll(this.els.container);
+    this.isComponentMounted = true;
+    this.scroll = scroll(this.container.current);
     this.updateScrollPosition = throttle(this.updateScrollPosition, UPDATE_RATE);
     this.stopListeningToResize = eventproxy('resize', this.handleResize);
     this.resize();
@@ -59,7 +62,7 @@ class Scrollable extends InteractiveComponent {
   componentWillUnmount() {
     this.deactivateSwipe();
     this.stopListeningToResize();
-    super.componentWillUnmount();
+    this.isComponentMounted = false;
   }
 
   getDefaultState() {
@@ -69,6 +72,11 @@ class Scrollable extends InteractiveComponent {
       containerWidth: 0,
       sliderHeight: MIN_SCROLLER_HEIGHT,
     };
+  }
+
+  setControlPosition(position) {
+    const contentDiff = (position * this.contentHeight) / this.controlHeight;
+    this.scroll.to(contentDiff);
   }
 
   reset(done) {
@@ -81,12 +89,12 @@ class Scrollable extends InteractiveComponent {
   }
 
   resize(done) {
-    const componentSize = size(this.els.component);
+    const componentSize = size(this.component.current);
 
     this.controlHeight = componentSize.height;
-    this.contentHeight = size(this.els.content).height;
+    this.contentHeight = size(this.content.current).height;
     this.ratio = (this.controlHeight ** 2) / this.contentHeight;
-    this.controlOffsetTop = documentOffset(global, this.els.component).top;
+    this.controlOffsetTop = documentOffset(global, this.component.current).top;
 
     const containerWidth = componentSize.width;
     const sliderHeight = Math.max(MIN_SCROLLER_HEIGHT, this.ratio);
@@ -105,11 +113,6 @@ class Scrollable extends InteractiveComponent {
   syncScrollPosition() {
     this.scrolled = this.scroll.get();
     this.updateScrollPosition();
-  }
-
-  setControlPosition(position) {
-    const contentDiff = (position * this.contentHeight) / this.controlHeight;
-    this.scroll.to(contentDiff);
   }
 
   activate() {
@@ -234,16 +237,16 @@ class Scrollable extends InteractiveComponent {
     return (
       <article
         {...cleanProps} className={className}
-        ref={this.setEl('component')} onWheel={this.handleWheel}
+        ref={this.component} onWheel={this.handleWheel}
         onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}
       >
         <div
-          className="c-scrollable-container" ref={this.setEl('container')}
+          className="c-scrollable-container" ref={this.container}
           onScroll={this.handleScroll} onTouchMove={this.handleScroll}
         >
           <div
             className="c-scrollable-content"
-            ref={this.setEl('content')}
+            ref={this.content}
             onLoad={this.handleLoad}
             style={contentStyle}
           >

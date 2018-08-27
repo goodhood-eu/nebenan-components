@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 import classNames from 'classnames';
@@ -11,6 +11,7 @@ class ContextMenu extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { isActive: false };
+    this.container = createRef();
     bindTo(this,
       'handleGlobalClick',
       'hide',
@@ -62,8 +63,8 @@ class ContextMenu extends PureComponent {
 
   handleGlobalClick(event) {
     // click registered before rendering/after unmounting was complete
-    if (!this.els.container) return;
-    if (!this.els.container.contains(event.target)) this.hide();
+    if (!this.container.current) return;
+    if (!this.container.current.contains(event.target)) this.hide();
   }
 
   render() {
@@ -79,7 +80,7 @@ class ContextMenu extends PureComponent {
     );
 
     return (
-      <aside {...cleanProps} className={className} ref={this.setEl('container')}>
+      <aside {...cleanProps} className={className} ref={this.container}>
         {label}
         {this.props.children}
       </aside>

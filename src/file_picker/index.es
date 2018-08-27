@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 import classNames from 'classnames';
@@ -7,12 +7,12 @@ import classNames from 'classnames';
 class FilePicker extends PureComponent {
   constructor(props) {
     super(props);
-    this.els = {};
+    this.input = createRef();
     this.handleChange = this.handleChange.bind(this);
   }
 
   getInput() {
-    return this.els.input;
+    return this.input.current;
   }
 
   handleChange(event) {
@@ -22,7 +22,7 @@ class FilePicker extends PureComponent {
     if (this.props.onSelect && files.length) this.props.onSelect(files);
 
     if (this.props.onChange) this.props.onChange(event);
-    this.els.input.value = '';
+    this.input.current.value = '';
   }
 
   render() {
@@ -34,7 +34,7 @@ class FilePicker extends PureComponent {
         {this.props.children}
         <input
           {...cleanProps}
-          ref={(node) => { this.els.input = node; }}
+          ref={this.input}
           type="file"
           className="c-file_picker-input"
           onChange={this.handleChange}

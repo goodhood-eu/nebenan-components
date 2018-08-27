@@ -40,5 +40,4 @@ Progress.propTypes = {
   children: PropTypes.node,
 };
 
-
 export default Progress;

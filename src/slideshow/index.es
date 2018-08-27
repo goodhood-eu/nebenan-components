@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React, { Children, PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
@@ -7,6 +7,7 @@ import clamp from 'lodash/clamp';
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
 import heartbeat from 'nebenan-helpers/lib/heartbeat';
 import { getPrefixed, eventCoordinates, size } from 'nebenan-helpers/lib/dom';
+import { bindTo } from 'nebenan-helpers/lib/utils';
 
 import {
   BOUNDARIES_EXCESS, DISABLE_SCROLL_DISTANCE, SWIPE_TRIGGER_DISTANCE,
@@ -14,18 +15,19 @@ import {
   getSectionsCount, isItemWidthChanged, getPositionOptions,
 } from './utils';
 
-import InteractiveComponent from '../../base/interactive_component';
 import Draggable from '../draggable';
 import Dots from '../dots';
 
 
-class Slideshow extends InteractiveComponent {
+class Slideshow extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = this.getDefaultState();
 
-    this.bindToComponent(
+    this.element = createRef();
+
+    bindTo(this,
       'snapToGrid',
       'setSection',
       'nextSection',
@@ -42,16 +44,10 @@ class Slideshow extends InteractiveComponent {
   }
 
   componentDidMount() {
-    super.componentDidMount();
+    this.isComponentMounted = true;
     this.startAutoRotation();
     this.stopListeningToResize = eventproxy('resize', this.handleResize);
     this.calculateMeasurements();
-  }
-
-  componentWillUnmount() {
-    this.stopListeningToResize();
-    this.stopAutoRotation();
-    super.componentWillUnmount();
   }
 
   componentDidUpdate(prevProps) {
@@ -59,6 +55,12 @@ class Slideshow extends InteractiveComponent {
     const itemWidthChanged = isItemWidthChanged(prevProps, this.props);
 
     if (isLengthChanged || itemWidthChanged) this.handleResize();
+  }
+
+  componentWillUnmount() {
+    this.stopListeningToResize();
+    this.stopAutoRotation();
+    this.isComponentMounted = false;
   }
 
   getDefaultState() {
@@ -71,20 +73,6 @@ class Slideshow extends InteractiveComponent {
       itemWidth: 0,
       listWidth: 0,
     };
-  }
-
-  startAutoRotation() {
-    if (this.props.rotationInterval) {
-      this.stopAutoRotation();
-      this.removeRotationListener = heartbeat(this.props.rotationInterval, this.nextSection);
-    }
-  }
-
-  stopAutoRotation() {
-    if (this.removeRotationListener) {
-      this.removeRotationListener();
-      this.removeRotationListener = null;
-    }
   }
 
   getValidPosition(position) {
@@ -111,6 +99,20 @@ class Slideshow extends InteractiveComponent {
     this.setState(updater, done);
   }
 
+  startAutoRotation() {
+    if (this.props.rotationInterval) {
+      this.stopAutoRotation();
+      this.removeRotationListener = heartbeat(this.props.rotationInterval, this.nextSection);
+    }
+  }
+
+  stopAutoRotation() {
+    if (this.removeRotationListener) {
+      this.removeRotationListener();
+      this.removeRotationListener = null;
+    }
+  }
+
   snapToGrid() {
     const position = getGridPosition(this.state.position, this.state.sceneWidth, this.direction);
     this.setPosition(this.getValidPosition(position));
@@ -118,7 +120,7 @@ class Slideshow extends InteractiveComponent {
 
   calculateMeasurements(done) {
     const updater = (state, props) => {
-      const sceneWidth = size(this.els.element).width;
+      const sceneWidth = size(this.element.current).width;
       const itemWidth = getItemWidth(global, sceneWidth, props);
       const listWidth = itemWidth * props.items.length;
 
@@ -202,9 +204,8 @@ class Slideshow extends InteractiveComponent {
     this.sectionsCount = getSectionsCount(this.state.sceneWidth, this.state.listWidth);
 
     return (
-      <article {...cleanProps} className={className} ref={this.setEl('element')}>
+      <article {...cleanProps} className={className} ref={this.element}>
         <Draggable
-          ref={this.setEl('draggable')}
           style={draggableStyle}
           className="c-slideshow-draggable"
 
