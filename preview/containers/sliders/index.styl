@@ -1,7 +1,35 @@
-.preview-inputs
-  .preview-section > ul
-    margin-top: 30px
+.preview-sliders-slide
+  background: $colorSnow00
+  border-radius: $borderRadiusM
+  box-shadow: $shadowL
 
-    > li
-      margin-top: 15px
-      display: block
+.preview-sliders-slide-header
+  padding: 20px 10px
+  color: $colorDark
+  text-align: center
+  text-transform: uppercase
+  border-bottom: 2px solid
+
+  i
+    margin-right: $offsetSpace
+    display: inline-block
+    vertical-align: middle
+
+    &:before
+      vertical-align: top
+
+.preview-sliders-slide-image
+  display: block
+  blockResponsive(75%)
+
+  background-color: $colorSnow
+  backgroundFill()
+
+.preview-sliders-slide-content
+  min-height: 120px
+  padding: 15px
+  text-align: center
+
+.preview-sliders-slideshow-image
+  blockFill()
+  backgroundFill()
