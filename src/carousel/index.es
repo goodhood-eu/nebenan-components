@@ -97,9 +97,9 @@ class Carousel extends PureComponent {
 
     return (
       <article {...cleanProps} className={className}>
-        <div className="c-carousel-wrapper" ref={this.wrapper)}>
+        <div className="c-carousel-wrapper" ref={this.wrapper}>
           <Draggable
-            ref={this.draggable)}
+            ref={this.draggable}
             style={draggableStyle}
             className="c-carousel-draggable"
             onDragStart={this.handleDragStart}

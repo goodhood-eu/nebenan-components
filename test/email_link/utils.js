@@ -1,8 +1,8 @@
-import { assert } from 'chai';
+const { assert } = require('chai');
 
-import {
+const {
   getQuery,
-} from '../../../client/ui/email_link/utils';
+} = require('../../lib/email_link/utils');
 
 
 describe('ui/email_link/utils', () => {

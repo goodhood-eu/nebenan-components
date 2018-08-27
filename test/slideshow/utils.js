@@ -1,9 +1,9 @@
-import { assert } from 'chai';
+const { assert } = require('chai');
 
-import {
+const {
   getGridPosition, getSectionsCount,
   getActiveSection, isItemWidthChanged,
-} from '../../../client/ui/slideshow/utils';
+} = require('../../lib/slideshow/utils');
 
 
 describe('ui/slideshow/utils', () => {

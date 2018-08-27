@@ -16,8 +16,8 @@
     "prepublishOnly": "NODE_ENV=production npm run gulp compile",
     "lint": "eslint --ext .es,.js ./",
     "lint:tofile": "eslint --ext .es,.js --no-color -o ./eslint-report.log ./",
-    "test": "env TZ='Europe/Berlin' mocha \"test/**/*.js\"",
-    "test:tofile": "mocha --no-colors -R spec \"test/**/*.js\" 2>&1 | tee test-report.log",
+    "test": "npm run gulp compile && env TZ='Europe/Berlin' mocha \"test/**/*.js\"",
+    "test:tofile": "npm run gulp compile && mocha --no-colors -R spec \"test/**/*.js\" 2>&1 | tee test-report.log",
     "start": "NODE_ENV=production npm run gulp"
   },
   "devDependencies": {
@@ -65,27 +65,26 @@
     "stylint-json-reporter": "0.3.1",
     "stylint-stylish": "1.4.1",
     "vinyl-source-stream": "2.0.0",
-
     "lodash": "^4.17.10",
     "react": "^16.4.2",
     "prop-types": "^15.6.2",
     "classnames": "^2.2.6",
-
     "nebenan-helpers": "^2.0.0",
     "nebenan-ui-kit": "^2.3.0",
     "smartcontent": "^1.2.0",
-    "emojitsu": "^1.1.0"
+    "emojitsu": "^1.1.0",
+    "date-fns": "^1.x"
   },
   "peerDependencies": {
     "lodash": "^4.17.10",
     "react": "^16.4.2",
     "prop-types": "^15.6.2",
     "classnames": "^2.2.6",
-
     "nebenan-helpers": "^2.0.0",
     "nebenan-ui-kit": "^2.3.0",
     "smartcontent": "^1.2.0",
-    "emojitsu": "^1.1.0"
+    "emojitsu": "^1.1.0",
+    "date-fns": "^1.x"
   },
   "dependencies": {
     "marked": "^0.5.0",
