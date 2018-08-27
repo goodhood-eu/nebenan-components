@@ -1,23 +1,23 @@
-import React, { Children } from 'react';
+import React, { PureComponent, Children } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import clamp from 'lodash/clamp';
 
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
 import { getPrefixed, eventCoordinates, size } from 'nebenan-helpers/lib/dom';
+import { bindTo } from 'nebenan-helpers/lib/utils';
 
-import InteractiveComponent from '../../base/interactive_component';
 import Draggable from '../draggable';
 
 const BOUNDARIES_EXCESS = 40;
 
 
-class Carousel extends InteractiveComponent {
+class Carousel extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { position: 0, isAnimated: false };
 
-    this.bindToComponent(
+    bindTo(this,
       'handleDragStart',
       'handleDrag',
       'handleDragStop',
@@ -26,20 +26,24 @@ class Carousel extends InteractiveComponent {
   }
 
   componentDidMount() {
-    super.componentDidMount();
+    this.isComponentMounted = true;
     this.stopListeningToResize = eventproxy('resize', this.handleResize);
     this.calculateMeasurements();
-  }
-
-  componentWillUnmount() {
-    this.stopListeningToResize();
-    super.componentWillUnmount();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.children !== this.props.children) {
       process.nextTick(this.handleResize);
     }
+  }
+
+  componentWillUnmount() {
+    this.stopListeningToResize();
+    this.isComponentMounted = false;
+  }
+
+  setPosition(position, isAnimated = false) {
+    this.setState({ position, isAnimated });
   }
 
   calculateMeasurements() {
@@ -52,10 +56,6 @@ class Carousel extends InteractiveComponent {
   alignPosition() {
     const position = clamp(this.state.position, this.minPosition, 0);
     this.setPosition(position, true);
-  }
-
-  setPosition(position, isAnimated = false) {
-    this.setState({ position, isAnimated });
   }
 
   handleResize() {

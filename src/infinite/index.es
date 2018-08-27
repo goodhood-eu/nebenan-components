@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -10,14 +10,13 @@ import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
 import { scroll, documentOffset, size, offset } from 'nebenan-helpers/lib/dom';
 
-import InteractiveComponent from '../../base/interactive_component';
 import { LoadingSpinner } from '../loading';
 
 export const SCROLL_RATE = 100;
 const OFFSET = 150;
 
 
-class Infinite extends InteractiveComponent {
+class Infinite extends PureComponent {
   constructor(props) {
     super(props);
     bindTo(this,
@@ -27,20 +26,20 @@ class Infinite extends InteractiveComponent {
   }
 
   componentDidMount() {
-    super.componentDidMount();
+    this.isComponentMounted = true;
     // pause to render to get refs
     process.nextTick(this.startScroller);
-  }
-
-  componentWillUnmount() {
-    this.deactivate();
-    super.componentWillUnmount();
   }
 
   componentDidUpdate() {
     if (this.props.loading) this.deactivate();
     // pause to render to get refs
     else process.nextTick(this.startScroller);
+  }
+
+  componentWillUnmount() {
+    this.deactivate();
+    this.isComponentMounted = false;
   }
 
   startScroller() {

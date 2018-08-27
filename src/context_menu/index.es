@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 import classNames from 'classnames';
 
 import keymanager from 'nebenan-helpers/lib/keymanager';
+import { bindTo } from 'nebenan-helpers/lib/utils';
 
-import BaseComponent from '../../base/base_component';
 
-
-class ContextMenu extends BaseComponent {
+class ContextMenu extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { isActive: false };
-    this.bindToComponent(
+    bindTo(this,
       'handleGlobalClick',
       'hide',
       'show',
       'toggle',
     );
+  }
+
+  componentDidMount() {
+    if (this.props.defaultState) this.show();
+  }
+
+  componentWillUnmount() {
+    this.deactivate();
   }
 
   activate() {
@@ -32,20 +39,6 @@ class ContextMenu extends BaseComponent {
     this.stopListeningToKeys();
     document.removeEventListener('click', this.handleGlobalClick);
     this.isListenerActive = false;
-  }
-
-  componentDidMount() {
-    if (this.props.defaultState) this.show();
-  }
-
-  componentWillUnmount() {
-    this.deactivate();
-  }
-
-  handleGlobalClick(event) {
-    // click registered before rendering/after unmounting was complete
-    if (!this.els.container) return;
-    if (!this.els.container.contains(event.target)) this.hide();
   }
 
   hide() {
@@ -65,6 +58,12 @@ class ContextMenu extends BaseComponent {
 
   isActive() {
     return this.state.isActive;
+  }
+
+  handleGlobalClick(event) {
+    // click registered before rendering/after unmounting was complete
+    if (!this.els.container) return;
+    if (!this.els.container.contains(event.target)) this.hide();
   }
 
   render() {

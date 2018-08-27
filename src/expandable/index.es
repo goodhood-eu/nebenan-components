@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import BaseComponent from '../../base/base_component';
 
-
-class Expandable extends BaseComponent {
+class Expandable extends PureComponent {
   constructor(props) {
     super(props);
-    this.bindToComponent('handleControlClick');
-
+    this.handleControlClick = this.handleControlClick.bind(this);
     this.state = { isActive: props.defaultState };
   }
 

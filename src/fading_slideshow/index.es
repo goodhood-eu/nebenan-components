@@ -5,6 +5,7 @@ import omit from 'lodash/omit';
 import clamp from 'lodash/clamp';
 
 import heartbeat from 'nebenan-helpers/lib/heartbeat';
+import { bindTo } from 'nebenan-helpers/lib/utils';
 
 import Dots from '../dots';
 
@@ -16,9 +17,11 @@ class FadingSlideshow extends PureComponent {
       activeItemIndex: this.props.defaultItemIndex,
     };
 
-    this.setSlide = this.setSlide.bind(this);
-    this.rotate = this.rotate.bind(this);
-    this.renderItem = this.renderItem.bind(this);
+    bindTo(this,
+      'setSlide',
+      'rotate',
+      'renderItem',
+    );
   }
 
   componentDidMount() {
@@ -62,7 +65,9 @@ class FadingSlideshow extends PureComponent {
   }
 
   renderItem(item, index) {
-    const className = classNames('c-fading_slideshow-item', { 'is-active': this.state.activeItemIndex === index });
+    const className = classNames('c-fading_slideshow-item', {
+      'is-active': this.state.activeItemIndex === index,
+    });
     return <span className={className}>{item}</span>;
   }
 

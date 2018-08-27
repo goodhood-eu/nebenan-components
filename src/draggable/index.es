@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 
-import BaseComponent from '../../base/base_component';
+import { bindTo } from 'nebenan-helpers/lib/utils';
 
 
-class Draggable extends BaseComponent {
+class Draggable extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.bindToComponent(
+    bindTo(this,
       'handleTouchStart',
       'handleMouseDown',
       'handleMove',
