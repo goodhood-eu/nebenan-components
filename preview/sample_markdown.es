@@ -77,15 +77,15 @@ export default `
   Images:
 
   Inline-style:
-  ![alt text](/apple-touch-icon.png "Logo Title Text 1")
+  ![alt text](https://c1.staticflickr.com/8/7346/8757771114_03d85b646b.jpg "Logo Title Text 1")
 
   Reference-style:
   ![alt text][logo]
 
   Image with a link:
-  [![alt text](/apple-touch-icon.png)](http://www.reddit.com "Logo Title Text 1")
+  [![alt text](https://c1.staticflickr.com/8/7346/8757771114_03d85b646b.jpg)](http://www.reddit.com "Logo Title Text 1")
 
-  [logo]: /apple-touch-icon.png "Logo Title Text 2"
+  [logo]: https://c1.staticflickr.com/8/7346/8757771114_03d85b646b.jpg "Logo Title Text 2"
 
 
   ------

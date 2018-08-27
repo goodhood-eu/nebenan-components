@@ -1,20 +1,15 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 import Header from '../../components/header';
+import MicroHelmet from '../../../lib/micro_helmet';
 
-import content from '../../sample_data';
+const Meta = () => (
+  <article className="preview-markdown">
+    <Header>Meta</Header>
+    <p>Check window title</p>
+    <MicroHelmet title="TEST SUCCESSFUL!!!" />
+  </article>
+);
 
 
-class Inputs extends PureComponent {
-  render() {
-    return (
-      <article className="preview-inputs">
-        <Header>Inputs</Header>
-        <div className="preview-section">
-        </div>
-      </article>
-    );
-  }
-}
-
-export default Inputs;
+export default Meta;

@@ -1,6 +1,7 @@
 // A mixture of https://github.com/nfl/react-helmet and https://github.com/gaearon/react-document-title
 /* eslint-disable react/no-unused-prop-types */
-import React, { PureComponent } from 'react';
+
+import { Children } from 'react';
 import PropTypes from 'prop-types';
 import withSideEffect from 'react-side-effect';
 
@@ -12,7 +13,6 @@ const proxyProps = [
   'robots',
   'canonical',
 ];
-
 
 const parseProps = (headProps) => {
   const { title, titleTemplate, defaultTitle } = headProps;
@@ -28,26 +28,15 @@ const parseProps = (headProps) => {
   return result;
 };
 
-const reducePropsToState = (propsList) => {
-  const result = propsList.reduce((acc, prop) => {
-    if (propsList[prop]) Object.assign(acc, prop);
-    return acc;
-  }, {});
-
-  return parseProps(result);
-};
+const reducePropsToState = (propsList) => parseProps(propsList.reduce((acc, headProps) => (
+  Object.assign(acc, headProps)
+), {}));
 
 const handleStateChangeOnClient = ({ title }) => {
   if (title && title !== document.title) document.title = title;
 };
 
-class MicroHelmet extends PureComponent {
-  render() {
-    const { children } = this.props;
-    const content = children ? React.Children.only(children) : null;
-    return content;
-  }
-}
+const MicroHelmet = ({ children }) => (children ? Children.only(children) : null);
 
 MicroHelmet.propTypes = {
   children: PropTypes.node,

@@ -5,6 +5,9 @@ import Header from '../../components/header';
 import Accordion from '../../../lib/accordion';
 import Slideshow from '../../../lib/slideshow';
 import FadingSlideshow from '../../../lib/fading_slideshow';
+import Carousel from '../../../lib/carousel';
+import Expandable from '../../../lib/expandable';
+import ExpandableCard from '../../../lib/expandable_card';
 
 import content from '../../sample_data';
 
@@ -47,6 +50,17 @@ class Sliders extends PureComponent {
   render() {
     const fadingSlideshowItems = content.images.map(this.constructor.renderImage);
     const slideshowItems = content.slides.map(this.constructor.renderSlide);
+    const carouselItems = [];
+
+    for (let i = 1; i <= 50; i += 1) {
+      carouselItems.push((
+        <div className="ui-card" key={i}>
+          <div className="ui-card-section">{i}</div>
+        </div>
+      ));
+    }
+
+    const control = <span className="ui-link">Show stuff</span>;
 
     return (
       <article className="preview-sliders">
@@ -66,6 +80,18 @@ class Sliders extends PureComponent {
 
         <div className="preview-section">
           <FadingSlideshow items={fadingSlideshowItems} rotationInterval={1000 * 5} />
+        </div>
+
+        <div className="preview-section">
+          <Carousel>{carouselItems}</Carousel>
+        </div>
+
+        <div className="preview-section">
+          <ExpandableCard title="whoopsiewoo">This is more stuff</ExpandableCard>
+        </div>
+
+        <div className="preview-section">
+          <Expandable control={control}>This is more stuff</Expandable>
         </div>
       </article>
     );
