@@ -4,7 +4,7 @@ import Header from '../../components/header';
 import MicroHelmet from '../../../lib/micro_helmet';
 
 const Meta = () => (
-  <article className="preview-markdown">
+  <article className="preview-meta">
     <Header>Meta</Header>
     <p>Check window title</p>
     <MicroHelmet title="TEST SUCCESSFUL!!!" />

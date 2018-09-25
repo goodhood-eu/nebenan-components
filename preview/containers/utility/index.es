@@ -8,8 +8,8 @@ import content from '../../sample_data';
 class Inputs extends PureComponent {
   render() {
     return (
-      <article className="preview-inputs">
-        <Header>Inputs</Header>
+      <article className="preview-utility">
+        <Header>Utility</Header>
         <div className="preview-section">
         </div>
       </article>

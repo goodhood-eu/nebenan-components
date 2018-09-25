@@ -35,7 +35,7 @@ const action = 'x';
 
 class Inputs extends PureComponent {
   static handleSelect(key, list) {
-    console.warn('Selected', list[key]);
+    console.warn('Selected emoji:', list[key]);
   }
 
   render() {
