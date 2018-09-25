@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-
-const getPercentage = (input) => {
-  let percent = (typeof input === 'number' && input < 1) ? String(input * 100) : String(input);
-  if (!percent.includes('%')) percent += '%';
-  return percent;
-};
+import { getPercentage } from './utils';
 
 const Progress = (props) => {
   const { state, size, type, children, ...cleanProps } = props;
