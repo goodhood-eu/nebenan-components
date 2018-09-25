@@ -7,8 +7,15 @@ import Tooltip from '../../../lib/tooltip';
 import ClickSelect from '../../../lib/click_select';
 import ContentHeader from '../../../lib/content_header';
 import EmailLink from '../../../lib/email_link';
+import PopupLink from '../../../lib/popup_link';
 import Emoji from '../../../lib/emoji';
 import EmojiSuggestions from '../../../lib/emoji_suggestions';
+import TabBar from '../../../lib/tab_bar';
+import FlatTabBar from '../../../lib/flat_tab_bar';
+import LinkHeader from '../../../lib/link_header';
+import Progress from '../../../lib/progress';
+import PhoneNumber from '../../../lib/phone_number';
+
 
 import content from '../../sample_data';
 
@@ -19,6 +26,12 @@ const suggestions = emojiCollection
 
 suggestions.length = 20;
 
+const headerAction = (
+  <span className="ui-button ui-button-small ui-button-primary">Button</span>
+);
+
+const action = 'x';
+
 
 class Inputs extends PureComponent {
   static handleSelect(key, list) {
@@ -26,13 +39,24 @@ class Inputs extends PureComponent {
   }
 
   render() {
-    const headerAction = (
-      <span className="ui-button ui-button-small ui-button-primary">Button</span>
-    );
-
     return (
       <article className="preview-content">
         <Header>Content</Header>
+
+        <div className="preview-section preview-progress">
+          <ul>
+            <li><Progress state={.75} /></li>
+            <li><Progress state="75%" size="small" /></li>
+            <li><Progress state={0} /></li>
+            <li><Progress state="0%" size="small" /></li>
+          </ul>
+          <ul>
+            <li><Progress state={75} type="secondary" /></li>
+            <li><Progress state="75%" type="secondary" size="small" /></li>
+            <li><Progress state={0} type="secondary" /></li>
+            <li><Progress state="0%" type="secondary" size="small" /></li>
+          </ul>
+        </div>
 
         <div className="preview-section">
           <Emoji text={emoji} />
@@ -43,11 +67,43 @@ class Inputs extends PureComponent {
         </div>
 
         <div className="preview-section">
-          <EmojiSuggestions options={suggestions} onSelect={this.constructor.handleSelect} />
+          <Emoji className="preview-single-emoji" text=":poop:" options={{ size: 128 }} />
         </div>
 
         <div className="preview-section">
-          <Emoji className="preview-single-emoji" text=":poop:" options={{ size: 128 }} />
+          <EmojiSuggestions
+            className="ui-card" options={suggestions} onSelect={this.constructor.handleSelect}
+          />
+        </div>
+
+        <div className="preview-section">
+          <div className="ui-card">
+            <TabBar activeIndex={2} items={content.listArray} action={action}>
+              Extra content
+            </TabBar>
+            <div className="ui-card-section">{content.lorem.slice(0, 26)}</div>
+          </div>
+        </div>
+
+        <div className="preview-section">
+          <div className="ui-card">
+            <FlatTabBar activeIndex={0} items={[{ text: 'One' }, { text: 'Two' }]} />
+            <div className="ui-card-section">{content.lorem.slice(0, 26)}</div>
+          </div>
+        </div>
+
+        <div className="preview-section">
+          <LinkHeader to="/">
+            <span className="ui-h3">Link Header</span>
+            Content!
+          </LinkHeader>
+        </div>
+
+        <div className="preview-section">
+          <LinkHeader to="/" reversed>
+            <span className="ui-h3">Link Header</span>
+            Content!
+          </LinkHeader>
         </div>
 
         <div className="preview-section preview-tooltips">
@@ -89,6 +145,15 @@ class Inputs extends PureComponent {
               Email link + full query
             </EmailLink>
           </p>
+        </div>
+
+        <div className="preview-section">
+          <PhoneNumber>0 157 123 45 67</PhoneNumber>
+        </div>
+
+        <div className="preview-section">
+          <p><PopupLink to="https://google.com">Google</PopupLink></p>
+          <p><PopupLink to="/">Local</PopupLink></p>
         </div>
 
       </article>

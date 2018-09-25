@@ -25,6 +25,12 @@ export default {
     { id: 12, url: 'https://www.popworkouts.com/wp-content/uploads/2014/06/Hercules-legs-arms-The-Rock-workout-12-Lobors-of-Hercules-Thracian-Wars.jpg' },
   ],
 
+  listArray: [
+    { text: 'text' },
+    { text: 'Link', href: '/sandbox' },
+    { text: 'Alert', callback: () => global.alert('ACHTUNG!') },
+  ],
+
   slides: [
     {
       header: 'Leonardo',

@@ -41,6 +41,8 @@ const ContentHeader = (props) => {
     );
   }
 
+  if (!titleContent && !descriptionContent && !footerContent) return null;
+
   return (
     <header {...cleanProps} className={className}>
       {titleContent}
