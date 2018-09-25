@@ -1,7 +1,27 @@
-.preview-inputs
-  .preview-section > ul
-    margin-top: 30px
+.preview-content
+  .preview-tooltips > ul
+    margin: 30px 0
+    clearfix()
 
     > li
-      margin-top: 15px
-      display: block
+      margin-top: 10px
+
+      > div
+        margin-top: 10px
+
+      @media $mediaM
+        width: 50%
+        margin-top: 0
+        padding-right: 15px
+        display: block
+        float: left
+
+  .preview-single-emoji img
+    width: 64px
+    height: @width
+
+  .c-emoji_suggestions
+    width: 100%
+    padding: 5px
+
+    pointer-events: auto

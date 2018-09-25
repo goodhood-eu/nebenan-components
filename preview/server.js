@@ -1,5 +1,7 @@
 require('babel-register')({ extensions: ['.es'] });
 const app = require('express')();
+const statis = require('serve-static');
+const morgan = require('morgan');
 
 const React = require('react');
 const { renderToString } = require('react-dom/server');
@@ -63,8 +65,10 @@ const renderApp = (req, res, next) => {
 
 app.set('port', port);
 
-app.use(require('morgan')('dev'));
-app.use(require('serve-static')(`${__dirname}/public`, { redirect: false }));
+const emojis = statis(`${__dirname}/../node_modules/emojione-assets/png/`, { redirect: false });
+app.use(morgan('dev'));
+app.use(statis(`${__dirname}/public`, { redirect: false }));
+app.use('/images/emojis-v4.0.0', emojis);
 
 app.use(renderApp);
 app.get('*', (req, res) => res.send('Unhandled request'));

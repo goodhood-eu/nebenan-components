@@ -72,7 +72,8 @@
     "nebenan-helpers": "^2.0.0",
     "nebenan-ui-kit": "^2.3.0",
     "smartcontent": "^1.2.0",
-    "emojitsu": "^1.1.0",
+    "emojitsu": "^2.0.0",
+    "emojione-assets": "4.0.0",
     "date-fns": "^1.x"
   },
   "peerDependencies": {
