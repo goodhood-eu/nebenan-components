@@ -25,7 +25,7 @@ class Sliders extends PureComponent {
     this.setState({ accordionActiveIndex: index });
   }
 
-  static renderSlide(slide, index) {
+  renderSlide(slide, index) {
     return (
       <div key={index} className="preview-sliders-slide">
         <header className="preview-sliders-slide-header">{slide.header}</header>
@@ -38,7 +38,7 @@ class Sliders extends PureComponent {
     );
   }
 
-  static renderImage(image) {
+  renderImage(image) {
     return (
       <span
         className="preview-sliders-slideshow-image"
@@ -48,8 +48,8 @@ class Sliders extends PureComponent {
   }
 
   render() {
-    const fadingSlideshowItems = content.images.map(this.constructor.renderImage);
-    const slideshowItems = content.slides.map(this.constructor.renderSlide);
+    const fadingSlideshowItems = content.images.map(this.renderImage);
+    const slideshowItems = content.slides.map(this.renderSlide);
     const carouselItems = [];
 
     for (let i = 1; i <= 50; i += 1) {

@@ -1,17 +1,86 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 
 import Header from '../../components/header';
 
-import content from '../../sample_data';
+import FilePicker from '../../../lib/file_picker';
+import Scrollable from '../../../lib/scrollable';
+import ContextMenu from '../../../lib/context_menu';
 
 
 class Inputs extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.menu = createRef();
+    this.handleToggleMenu = this.handleToggleMenu.bind(this);
+  }
+
+  handleToggleMenu() {
+    this.menu.current.toggle();
+  }
+
+  handleSelect(files) {
+    console.info('Selected:', files[0]);
+  }
+
+  handleShow(index) {
+    console.info('Show', index);
+  }
+
+  handleHide(index) {
+    console.info('Hide', index);
+  }
+
   render() {
     return (
       <article className="preview-utility">
         <Header>Utility</Header>
         <div className="preview-section">
+          <FilePicker onSelect={this.handleSelect}>
+            <span className="ui-button ui-button-primary">Upload</span>
+          </FilePicker>
         </div>
+
+        <div className="preview-section">
+          <Scrollable>
+            <img
+              width="95%" alt=""
+              src="http://i1.kym-cdn.com/photos/images/facebook/000/002/110/longcat.jpg"
+            />
+          </Scrollable>
+        </div>
+
+        <div className="preview-section">
+          <ul>
+            <li>
+              <span
+                className="ui-button ui-button-primary ui-button-small"
+                onClick={this.handleToggleMenu}
+              >
+                toggle 1 externally
+              </span>
+            </li>
+            <li>
+              <ContextMenu
+                ref={this.menu}
+                onShow={this.handleShow.bind(this, 1)}
+                onHide={this.handleHide.bind(this, 1)}
+                label="MENU 1"
+              >
+                <p className="preview-context-content">CONTENT 1!</p>
+              </ContextMenu>
+            </li>
+            <li>
+              <ContextMenu
+                onShow={this.handleShow.bind(this, 2)}
+                onHide={this.handleHide.bind(this, 2)}
+                label="MENU 2" defaultState
+              >
+                <p className="preview-context-content">CONTENT 2!</p>
+              </ContextMenu>
+            </li>
+          </ul>
+        </div>
+
       </article>
     );
   }

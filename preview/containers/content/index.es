@@ -34,7 +34,7 @@ const action = 'x';
 
 
 class Inputs extends PureComponent {
-  static handleSelect(key, list) {
+  handleSelect(key, list) {
     console.warn('Selected emoji:', list[key]);
   }
 
@@ -71,9 +71,7 @@ class Inputs extends PureComponent {
         </div>
 
         <div className="preview-section">
-          <EmojiSuggestions
-            className="ui-card" options={suggestions} onSelect={this.constructor.handleSelect}
-          />
+          <EmojiSuggestions className="ui-card" options={suggestions} onSelect={this.handleSelect} />
         </div>
 
         <div className="preview-section">
