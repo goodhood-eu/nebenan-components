@@ -6,10 +6,13 @@ import FilePicker from '../../../lib/file_picker';
 import Scrollable from '../../../lib/scrollable';
 import ContextMenu from '../../../lib/context_menu';
 import ContextList from '../../../lib/context_list';
+import Infinite from '../../../lib/infinite';
 
 import content from '../../sample_data';
 
 const getOption = (key, list) => list[key].title;
+
+const STEP = 30;
 
 
 class Inputs extends PureComponent {
@@ -22,6 +25,12 @@ class Inputs extends PureComponent {
     this.handleListSelect = this.handleListSelect.bind(this);
     this.handleActivateList = this.handleActivateList.bind(this);
     this.handleDeactivateList = this.handleDeactivateList.bind(this);
+    this.handleLoadMore = this.handleLoadMore.bind(this);
+
+    this.state = {
+      loaded: 0,
+      isLoading: false,
+    };
   }
 
   handleToggleMenu() {
@@ -51,6 +60,14 @@ class Inputs extends PureComponent {
 
   handleDeactivateList() {
     this.list.current.deactivate();
+  }
+
+  handleLoadMore() {
+    this.setState({ isLoading: true });
+
+    this.tid = setTimeout((state) => {
+      this.setState({ isLoading: false, loaded: state.loaded + STEP });
+    }, 3000);
   }
 
   render() {
@@ -120,6 +137,8 @@ class Inputs extends PureComponent {
             />
           </ContextMenu>
         </div>
+
+        <Infinite onActive={this.handleLoadMore} loading={this.state.isLoading} />
 
       </article>
     );
