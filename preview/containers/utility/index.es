@@ -5,13 +5,23 @@ import Header from '../../components/header';
 import FilePicker from '../../../lib/file_picker';
 import Scrollable from '../../../lib/scrollable';
 import ContextMenu from '../../../lib/context_menu';
+import ContextList from '../../../lib/context_list';
+
+import content from '../../sample_data';
+
+const getOption = (key, list) => list[key].title;
 
 
 class Inputs extends PureComponent {
   constructor(props) {
     super(props);
     this.menu = createRef();
+    this.list = createRef();
+    this.list_menu = createRef();
     this.handleToggleMenu = this.handleToggleMenu.bind(this);
+    this.handleListSelect = this.handleListSelect.bind(this);
+    this.handleActivateList = this.handleActivateList.bind(this);
+    this.handleDeactivateList = this.handleDeactivateList.bind(this);
   }
 
   handleToggleMenu() {
@@ -28,6 +38,19 @@ class Inputs extends PureComponent {
 
   handleHide(index) {
     console.info('Hide', index);
+  }
+
+  handleListSelect(key, list) {
+    console.warn('List selected:', list[key]);
+    this.list_menu.current.hide();
+  }
+
+  handleActivateList() {
+    this.list.current.activate();
+  }
+
+  handleDeactivateList() {
+    this.list.current.deactivate();
   }
 
   render() {
@@ -79,6 +102,23 @@ class Inputs extends PureComponent {
               </ContextMenu>
             </li>
           </ul>
+        </div>
+
+        <div className="preview-section">
+          <ContextMenu
+            label="Show list"
+            ref={this.list_menu}
+            onShow={this.handleActivateList}
+            onHide={this.handleDeactivateList}
+          >
+            <ContextList
+              className="preview-context-content ui-options"
+              ref={this.list}
+              options={content.content_array}
+              getOption={getOption}
+              onSelect={this.handleListSelect}
+            />
+          </ContextMenu>
         </div>
 
       </article>
