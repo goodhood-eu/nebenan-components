@@ -7,7 +7,7 @@
   "homepage": "https://nebenan.de/",
   "repository": "good-hood-gmbh/nebenan-components",
   "bugs": "https://github.com/good-hood-gmbh/nebenan-components/issues",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "node": "^8.x.x"
   },
@@ -37,7 +37,6 @@
     "chai": "4.2.0",
     "chai-as-promised": "^7.1.1",
     "classnames": "^2.2.6",
-    "date-fns": "^1.x",
     "del": "3.0.0",
     "emojione-assets": "4.0.0",
     "emojitsu": "^2.0.0",
@@ -52,7 +51,7 @@
     "express": "4.16.3",
     "gulp": "4.0.0",
     "gulp-babel": "7.0.1",
-    "gulp-nodemon": "2.2.1",
+    "nodemon": "^1.18.4",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "1.4.0",
     "gulp-stylus": "2.7.0",
@@ -77,15 +76,14 @@
     "vinyl-source-stream": "2.0.0"
   },
   "peerDependencies": {
-    "lodash": "^4.17.10",
-    "react": "^16.4.2",
+    "lodash": "^4.17.11",
+    "react": "^16.5.2",
     "prop-types": "^15.6.2",
     "classnames": "^2.2.6",
     "nebenan-helpers": "^2.0.0",
     "nebenan-ui-kit": "^2.3.0",
     "smartcontent": "^1.2.0",
-    "emojitsu": "^1.1.0",
-    "date-fns": "^1.x",
+    "emojitsu": "^2.0.0",
     "react-router": "3.2.0"
   },
   "dependencies": {
