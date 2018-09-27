@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -8,7 +8,7 @@ import throttle from 'lodash/throttle';
 import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
 
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
-import { scroll, documentOffset, size, offset } from 'nebenan-helpers/lib/dom';
+import { scroll, documentOffset, offset } from 'nebenan-helpers/lib/dom';
 
 import { LoadingSpinner } from '../loading';
 
@@ -23,6 +23,7 @@ class Infinite extends PureComponent {
       'startScroller',
       'checkViewportPosition',
     );
+    this.container = createRef();
   }
 
   componentDidMount() {
@@ -71,15 +72,13 @@ class Infinite extends PureComponent {
   checkViewportPosition() {
     if (!this.isComponentMounted || this.props.loading) return;
     const triggerOffset = this.props.triggerOffset || OFFSET;
-    const globalOffset = this.scroll.get() + size(document.body).height;
+    const globalOffset = this.scroll.get() + global.innerHeight;
 
     let nodeOffsetTop;
-    if (this.props.getScrolledNode) nodeOffsetTop = offset(this.container).top;
-    else nodeOffsetTop = documentOffset(global, this.container).top;
+    if (this.props.getScrolledNode) nodeOffsetTop = offset(this.container.current).top;
+    else nodeOffsetTop = documentOffset(global, this.container.current).top;
 
-    const nodeOffset = nodeOffsetTop + size(this.container).height;
-
-    if (nodeOffset - globalOffset < triggerOffset) {
+    if (nodeOffsetTop - globalOffset < triggerOffset) {
       this.deactivate();
       invoke(this.props.onActive);
     }
@@ -92,10 +91,9 @@ class Infinite extends PureComponent {
     const loadingClassName = classNames('c-infinite-loading', {
       'is-active': loading,
     });
-    const ref = (el) => { this.container = el; };
 
     return (
-      <aside {...cleanProps} className={className} ref={ref}>
+      <aside {...cleanProps} className={className} ref={this.container}>
         <div className={loadingClassName}>{children || <LoadingSpinner />}</div>
       </aside>
     );

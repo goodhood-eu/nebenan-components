@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+
 import React, { PureComponent, createRef } from 'react';
 
 import Header from '../../components/header';
@@ -65,12 +67,16 @@ class Inputs extends PureComponent {
   handleLoadMore() {
     this.setState({ isLoading: true });
 
-    this.tid = setTimeout((state) => {
-      this.setState({ isLoading: false, loaded: state.loaded + STEP });
+    this.tid = setTimeout(() => {
+      this.setState((state) => ({ isLoading: false, loaded: state.loaded + STEP }));
     }, 3000);
   }
 
   render() {
+    const list = Array.from(new Array(this.state.loaded)).map((item, index) => (
+      <li key={index}>{index}</li>
+    ));
+
     return (
       <article className="preview-utility">
         <Header>Utility</Header>
@@ -136,6 +142,10 @@ class Inputs extends PureComponent {
               onSelect={this.handleListSelect}
             />
           </ContextMenu>
+        </div>
+
+        <div className="preview-section">
+          <ul className="ui-card ui-options">{list}</ul>
         </div>
 
         <Infinite onActive={this.handleLoadMore} loading={this.state.isLoading} />
