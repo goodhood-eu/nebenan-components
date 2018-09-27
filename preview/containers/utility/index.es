@@ -52,7 +52,7 @@ class Inputs extends PureComponent {
   }
 
   handleListSelect(key, list) {
-    console.warn('List selected:', list[key]);
+    console.info('List selected:', list[key]);
     this.list_menu.current.hide();
   }
 
@@ -66,6 +66,8 @@ class Inputs extends PureComponent {
 
   handleLoadMore() {
     this.setState({ isLoading: true });
+    const { loaded } = this.state;
+    console.info(`Initiated loading more items: ${loaded}-${loaded + STEP}`);
 
     this.tid = setTimeout(() => {
       this.setState((state) => ({ isLoading: false, loaded: state.loaded + STEP }));
