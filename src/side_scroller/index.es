@@ -7,8 +7,11 @@ import { size } from 'nebenan-helpers/lib/dom';
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
-const SHIFT_PERCENT = .9; // 90% of container width
+import { getPosition } from './utils';
+
+const SHIFT_PERCENT = .75; // 75% of container width
 const ANIMATION_DURATION = 200;
+const ANIMATION_FPS = 90;
 
 
 class SideScroller extends PureComponent {
@@ -61,18 +64,12 @@ class SideScroller extends PureComponent {
 
   startScrollAnimation(target) {
     const node = this.getScrollableNode();
-    const startT = Date.now();
-    const finishT = startT + ANIMATION_DURATION;
-
-    const easing = (pos) => (-Math.cos(pos * Math.PI) / 2) + .5;
-    const getPosition = (start, shift) => start + ((target - start) * easing(shift));
+    let time = 0;
 
     const animateScroll = () => {
-      const { scrollLeft } = node;
-      const now = Date.now();
-      const shift = (now > finishT) ? 1 : (now - startT) / ANIMATION_DURATION;
-      const newValue = getPosition(scrollLeft, shift);
+      const newValue = getPosition(node.scrollLeft, target, time, ANIMATION_DURATION);
 
+      time += 1000 / ANIMATION_FPS;
       node.scrollLeft = newValue;
 
       if (newValue !== target) this.animationId = global.requestAnimationFrame(animateScroll);
