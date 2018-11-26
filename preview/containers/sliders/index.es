@@ -8,6 +8,7 @@ import FadingSlideshow from '../../../lib/fading_slideshow';
 import Carousel from '../../../lib/carousel';
 import Expandable from '../../../lib/expandable';
 import ExpandableCard from '../../../lib/expandable_card';
+import SideScroller from '../../../lib/side_scroller';
 
 import content from '../../sample_data';
 
@@ -65,6 +66,15 @@ class Sliders extends PureComponent {
     return (
       <article className="preview-sliders">
         <Header>Sliders</Header>
+
+        <div className="preview-section">
+          <SideScroller>
+            <img
+              src="https://www.west-crete.com/images/panoramas/house-view.jpg"
+              height="300px" alt=""
+            />
+          </SideScroller>
+        </div>
 
         <div className="preview-section">
           <Accordion

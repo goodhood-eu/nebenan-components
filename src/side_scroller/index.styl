@@ -1,0 +1,46 @@
+.c-side_scroller
+  overflow: hidden
+  position: relative
+
+.c-side_scroller-container
+  // height: 100%
+  margin-bottom: -30px
+  padding-bottom: -(@margin-bottom)
+  box-sizing: content-box
+
+  overflow-x: scroll
+  overflow-y: hidden
+  -webkit-overflow-scrolling: touch
+
+.c-side_scroller-control
+  width: 40px
+  height: 100%
+
+  display: flex
+  align-items: center
+
+  position: absolute
+  top: 0
+  left: 0
+  background: linear-gradient(90deg, $colorSnow 0, transparent 100%)
+  cursor: pointer
+
+  animation: slideScrollerFadeIn 100ms
+
+  i
+    margin: 5px
+    iconSize(16px)
+
+  &.is-right
+    right: 0
+    left: auto
+    background: linear-gradient(90deg, transparent 0, $colorSnow 100%)
+    justify-content: flex-end
+
+
+@keyframes slideScrollerFadeIn
+  from
+    opacity: 0
+
+  to
+    opacity: 1
