@@ -52,7 +52,6 @@
     "express": "^4.16.4",
     "gulp": "4.0.0",
     "gulp-babel": "7.0.1",
-    "gulp-livereload": "^4.0.0",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "1.4.0",
     "gulp-stylus": "2.7.0",
@@ -75,6 +74,7 @@
     "stylint": "1.5.9",
     "stylint-json-reporter": "0.3.1",
     "stylint-stylish": "2.0.0",
+    "tiny-lr": "^1.1.1",
     "vinyl-source-stream": "2.0.0"
   },
   "peerDependencies": {
