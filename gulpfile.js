@@ -45,11 +45,11 @@ gulp.task('watch', (done) => {
   const livereload = require('tiny-lr');
   const nodemon = require('nodemon')(nodemonOptions);
   const reloadPage = () => {
-    livereload.reload('app.js');
+    livereload.changed('app.js');
   };
 
   const reloadStylesheets = () => {
-    livereload.reload('app.css');
+    livereload.changed('app.css');
     return Promise.resolve();
   };
 
