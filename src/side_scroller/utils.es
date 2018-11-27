@@ -5,5 +5,5 @@ export const easeInOutCubic = (pos) => {
 
 export const getPosition = (startPosition, targetPosition, elapsedTime, duration) => {
   const shift = easeInOutCubic(Math.min(elapsedTime / duration, 1));
-  return startPosition + Math.round((targetPosition - startPosition) * shift);
+  return startPosition + Math.floor((targetPosition - startPosition) * shift);
 };

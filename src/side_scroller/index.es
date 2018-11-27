@@ -31,6 +31,9 @@ class SideScroller extends PureComponent {
       'handleLoad',
       'handleScrollLeft',
       'handleScrollRight',
+      'handleSwipeStart',
+      'handleSwipe',
+      'handleSwipeEnd',
     );
   }
 
@@ -47,6 +50,7 @@ class SideScroller extends PureComponent {
   componentWillUnmount() {
     this.stopListeningToResize();
     this.stopScrollAnimation();
+    this.deactivateSwipe();
     this.isComponentMounted = false;
   }
 
@@ -60,6 +64,24 @@ class SideScroller extends PureComponent {
 
   getScrollableNode() {
     return this.container.current;
+  }
+
+  activateSwipe() {
+    if (this.isSwipeActive) return;
+    document.addEventListener('mousemove', this.handleSwipe);
+    document.addEventListener('touchmove', this.handleSwipe);
+    document.addEventListener('mouseup', this.handleSwipeEnd);
+    document.addEventListener('touchend', this.handleSwipeEnd);
+    this.isSwipeActive = true;
+  }
+
+  deactivateSwipe() {
+    if (!this.isSwipeActive) return;
+    document.removeEventListener('mousemove', this.handleSwipe);
+    document.removeEventListener('touchmove', this.handleSwipe);
+    document.removeEventListener('mouseup', this.handleSwipeEnd);
+    document.removeEventListener('touchend', this.handleSwipeEnd);
+    this.isSwipeActive = false;
   }
 
   startScrollAnimation(target) {
@@ -112,7 +134,7 @@ class SideScroller extends PureComponent {
   }
 
   shift(percent) {
-    const shiftAmount = percent * this.containerWidth;
+    const shiftAmount = Math.floor(percent * this.containerWidth);
     const { scrollLeft } = this.getScrollableNode();
     this.startScrollAnimation(scrollLeft + shiftAmount);
   }
@@ -127,6 +149,25 @@ class SideScroller extends PureComponent {
 
   handleScrollRight() {
     this.shift(SHIFT_PERCENT);
+  }
+
+  handleSwipeStart(event) {
+    this.activateSwipe();
+    this.startY = eventCoordinates(event, 'pageY').pageY;
+    this.startPosition = this.state.scrollPosition;
+  }
+
+  handleSwipe(event) {
+    const { pageY } = eventCoordinates(event, 'pageY');
+    const position = this.startPosition + pageY - this.startY;
+    this.setControlPosition(position);
+  }
+
+  handleSwipeEnd() {
+    this.deactivateSwipe();
+    this.startY = null;
+    this.startPosition = null;
+    this.preventClick = true;
   }
 
   renderControls() {
@@ -169,7 +210,13 @@ class SideScroller extends PureComponent {
           className="c-side_scroller-container" ref={this.container} style={containerStyle}
           onScroll={this.updateScroll} onTouchMove={this.updateScroll} onLoad={this.handleLoad}
         >
-          <div ref={this.content}>{this.props.children}</div>
+          <div
+            ref={this.content}
+            onTouchStart={this.handleSwipeStart}
+            onMouseDown={this.handleSwipeStart}
+          >
+            {this.props.children}
+          </div>
         </div>
         {this.renderControls()}
       </article>
