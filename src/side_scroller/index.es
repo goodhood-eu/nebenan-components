@@ -38,6 +38,7 @@ class SideScroller extends PureComponent {
       'handleDragStart',
       'handleDrag',
       'handleDragStop',
+      'handleClickCapture',
     );
   }
 
@@ -141,6 +142,7 @@ class SideScroller extends PureComponent {
     this.startPosition = this.getScrollableNode().scrollLeft;
     this.startX = eventCoordinates(event, 'pageX').pageX;
     this.stopScrollAnimation();
+    this.preventClick = true;
   }
 
   handleDrag(event) {
@@ -153,6 +155,14 @@ class SideScroller extends PureComponent {
 
   handleDragStop() {
     // FIXME: remove if not needed
+  }
+
+  handleClickCapture(event) {
+    if (this.preventClick) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.preventClick = false;
+    }
   }
 
   renderControls() {
@@ -201,6 +211,7 @@ class SideScroller extends PureComponent {
             onDragStart={this.handleDragStart}
             onDrag={this.handleDrag}
             onDragStop={this.handleDragStop}
+            onClickCapture={this.handleClickCapture}
           >
             {this.props.children}
           </Draggable>
