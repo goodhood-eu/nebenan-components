@@ -200,13 +200,13 @@ class SideScroller extends PureComponent {
 
     // Fixes issue with most browsers reducing size of the scrollable element children
     // as if to compensate for scrollbars, even when they are hidden
-    const containerStyle = { height };
+    const style = { height };
 
     return (
       <article {...cleanProps} className={className}>
         <div
-          className="c-side_scroller-container" ref={this.container} style={containerStyle}
-          onScroll={this.updateScroll} onTouchMove={this.updateScroll} onLoad={this.updateSizes}
+          className="c-side_scroller-container" ref={this.container} style={style}
+          onScroll={this.updateScroll} onLoad={this.updateSizes}
         >
           <Draggable
             ref={this.content}
