@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { arrayOf } from 'nebenan-helpers/lib/data';
 
 import Header from '../../components/header';
 
@@ -48,6 +49,10 @@ class Sliders extends PureComponent {
     );
   }
 
+  renderBlock(item, index) {
+    return <li className="preview-sliders-side_scroller-item">{index}</li>;
+  }
+
   render() {
     const fadingSlideshowItems = content.images.map(this.renderImage);
     const slideshowItems = content.slides.map(this.renderSlide);
@@ -73,6 +78,14 @@ class Sliders extends PureComponent {
               src="https://www.west-crete.com/images/panoramas/house-view.jpg"
               height="300px" alt=""
             />
+          </SideScroller>
+        </div>
+
+        <div className="preview-section">
+          <SideScroller>
+            <ul className="preview-sliders-side_scroller-list">
+              {arrayOf(50).map(this.renderBlock)}
+            </ul>
           </SideScroller>
         </div>
 

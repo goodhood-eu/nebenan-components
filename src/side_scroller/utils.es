@@ -3,7 +3,7 @@ export const easeInOutCubic = (pos) => {
   return ((pos - 1) * ((2 * pos) - 2) * ((2 * pos) - 2)) + 1;
 };
 
-export const getPosition = (startPosition, targetPosition, elapsedTime, duration) => {
+export const getAnimationPosition = (startPosition, targetPosition, elapsedTime, duration) => {
   const shift = easeInOutCubic(Math.min(elapsedTime / duration, 1));
   return startPosition + Math.floor((targetPosition - startPosition) * shift);
 };

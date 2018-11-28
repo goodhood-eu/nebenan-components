@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 
-import { size } from 'nebenan-helpers/lib/dom';
+import { size, eventCoordinates } from 'nebenan-helpers/lib/dom';
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
-import { getPosition } from './utils';
+import { DISABLE_SCROLL_DISTANCE } from '../constants/swipe';
+import { getAnimationPosition } from './utils';
+
+import Draggable from '../draggable';
 
 const SHIFT_PERCENT = .75; // 75% of container width
 const ANIMATION_DURATION = 200;
@@ -31,9 +34,10 @@ class SideScroller extends PureComponent {
       'handleLoad',
       'handleScrollLeft',
       'handleScrollRight',
-      'handleSwipeStart',
-      'handleSwipe',
-      'handleSwipeEnd',
+
+      'handleDragStart',
+      'handleDrag',
+      'handleDragStop',
     );
   }
 
@@ -50,7 +54,6 @@ class SideScroller extends PureComponent {
   componentWillUnmount() {
     this.stopListeningToResize();
     this.stopScrollAnimation();
-    this.deactivateSwipe();
     this.isComponentMounted = false;
   }
 
@@ -66,30 +69,12 @@ class SideScroller extends PureComponent {
     return this.container.current;
   }
 
-  activateSwipe() {
-    if (this.isSwipeActive) return;
-    document.addEventListener('mousemove', this.handleSwipe);
-    document.addEventListener('touchmove', this.handleSwipe);
-    document.addEventListener('mouseup', this.handleSwipeEnd);
-    document.addEventListener('touchend', this.handleSwipeEnd);
-    this.isSwipeActive = true;
-  }
-
-  deactivateSwipe() {
-    if (!this.isSwipeActive) return;
-    document.removeEventListener('mousemove', this.handleSwipe);
-    document.removeEventListener('touchmove', this.handleSwipe);
-    document.removeEventListener('mouseup', this.handleSwipeEnd);
-    document.removeEventListener('touchend', this.handleSwipeEnd);
-    this.isSwipeActive = false;
-  }
-
   startScrollAnimation(target) {
     const node = this.getScrollableNode();
     let time = 0;
 
     const animateScroll = () => {
-      const newValue = getPosition(node.scrollLeft, target, time, ANIMATION_DURATION);
+      const newValue = getAnimationPosition(node.scrollLeft, target, time, ANIMATION_DURATION);
 
       time += 1000 / ANIMATION_FPS;
       node.scrollLeft = newValue;
@@ -116,7 +101,7 @@ class SideScroller extends PureComponent {
 
   updateSizes() {
     const { width: containerWidth } = size(this.container.current);
-    const { height } = size(this.content.current);
+    const { height } = size(this.content.current.getNode());
 
     this.containerWidth = containerWidth;
     this.contentWidth = this.getScrollableNode().scrollWidth;
@@ -151,23 +136,23 @@ class SideScroller extends PureComponent {
     this.shift(SHIFT_PERCENT);
   }
 
-  handleSwipeStart(event) {
-    this.activateSwipe();
-    this.startY = eventCoordinates(event, 'pageY').pageY;
-    this.startPosition = this.state.scrollPosition;
+  handleDragStart(event) {
+    event.preventDefault();
+    this.startPosition = this.getScrollableNode().scrollLeft;
+    this.startX = eventCoordinates(event, 'pageX').pageX;
+    this.stopScrollAnimation();
   }
 
-  handleSwipe(event) {
-    const { pageY } = eventCoordinates(event, 'pageY');
-    const position = this.startPosition + pageY - this.startY;
-    this.setControlPosition(position);
+  handleDrag(event) {
+    const diff = this.startX - eventCoordinates(event, 'pageX').pageX;
+    const position = this.startPosition + diff;
+    this.getScrollableNode().scrollLeft = position;
+
+    if (Math.abs(diff) >= DISABLE_SCROLL_DISTANCE) event.preventDefault();
   }
 
-  handleSwipeEnd() {
-    this.deactivateSwipe();
-    this.startY = null;
-    this.startPosition = null;
-    this.preventClick = true;
+  handleDragStop() {
+    // FIXME: remove if not needed
   }
 
   renderControls() {
@@ -210,13 +195,15 @@ class SideScroller extends PureComponent {
           className="c-side_scroller-container" ref={this.container} style={containerStyle}
           onScroll={this.updateScroll} onTouchMove={this.updateScroll} onLoad={this.handleLoad}
         >
-          <div
+          <Draggable
             ref={this.content}
-            onTouchStart={this.handleSwipeStart}
-            onMouseDown={this.handleSwipeStart}
+            className="c-side_scroller-content"
+            onDragStart={this.handleDragStart}
+            onDrag={this.handleDrag}
+            onDragStop={this.handleDragStop}
           >
             {this.props.children}
-          </div>
+          </Draggable>
         </div>
         {this.renderControls()}
       </article>
