@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 
-import { size, eventCoordinates } from 'nebenan-helpers/lib/dom';
+import { size, eventCoordinates, stopEvent } from 'nebenan-helpers/lib/dom';
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
@@ -13,6 +13,7 @@ import { getAnimationPosition } from './utils';
 import Draggable from '../draggable';
 
 const SHIFT_PERCENT = .75; // 75% of container width
+const SHIFT_TOLERANCE = 10; // if within this distance to the end of the element, scroll to the end
 const ANIMATION_DURATION = 200;
 const ANIMATION_FPS = 90;
 
@@ -37,7 +38,6 @@ class SideScroller extends PureComponent {
 
       'handleDragStart',
       'handleDrag',
-      'handleDragStop',
       'handleClickCapture',
     );
   }
@@ -120,9 +120,15 @@ class SideScroller extends PureComponent {
   }
 
   shift(percent) {
-    const shiftAmount = Math.floor(percent * this.containerWidth);
     const { scrollLeft } = this.getScrollableNode();
-    this.startScrollAnimation(scrollLeft + shiftAmount);
+    const shiftAmount = Math.floor(percent * this.containerWidth);
+    const maxScrollPosition = this.contentWidth - this.containerWidth;
+
+    let target = scrollLeft + shiftAmount;
+    if (target + SHIFT_TOLERANCE >= maxScrollPosition) target = maxScrollPosition;
+    if (target - SHIFT_TOLERANCE <= 0) target = 0;
+
+    this.startScrollAnimation(target);
   }
 
   handleLoad() {
@@ -142,7 +148,6 @@ class SideScroller extends PureComponent {
     this.startPosition = this.getScrollableNode().scrollLeft;
     this.startX = eventCoordinates(event, 'pageX').pageX;
     this.stopScrollAnimation();
-    this.preventClick = true;
   }
 
   handleDrag(event) {
@@ -150,17 +155,15 @@ class SideScroller extends PureComponent {
     const position = this.startPosition + diff;
     this.getScrollableNode().scrollLeft = position;
 
-    if (Math.abs(diff) >= DISABLE_SCROLL_DISTANCE) event.preventDefault();
-  }
+    const shift = Math.abs(diff);
 
-  handleDragStop() {
-    // FIXME: remove if not needed
+    if (shift >= DISABLE_SCROLL_DISTANCE) event.preventDefault();
+    if (shift > 0) this.preventClick = true;
   }
 
   handleClickCapture(event) {
     if (this.preventClick) {
-      event.preventDefault();
-      event.stopPropagation();
+      stopEvent(event);
       this.preventClick = false;
     }
   }
@@ -210,7 +213,6 @@ class SideScroller extends PureComponent {
             className="c-side_scroller-content"
             onDragStart={this.handleDragStart}
             onDrag={this.handleDrag}
-            onDragStop={this.handleDragStop}
             onClickCapture={this.handleClickCapture}
           >
             {this.props.children}
