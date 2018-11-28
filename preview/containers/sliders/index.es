@@ -11,6 +11,7 @@ import Carousel from '../../../lib/carousel';
 import Expandable from '../../../lib/expandable';
 import ExpandableCard from '../../../lib/expandable_card';
 import SideScroller from '../../../lib/side_scroller';
+import TabScroller from '../../../lib/tab_scroller';
 
 import content from '../../sample_data';
 
@@ -78,9 +79,19 @@ class Sliders extends PureComponent {
 
     const control = <span className="ui-link">Show stuff</span>;
 
+    const longList = arrayOf(10).reduce((acc) => acc.concat(content.listArray), [])
+
     return (
       <article className="preview-sliders">
         <Header>Sliders</Header>
+
+        <div className="preview-section">
+          <TabScroller activeIndex={2} items={longList} />
+        </div>
+
+        <div className="preview-section">
+          <TabScroller activeIndex={2} items={content.listArray} />
+        </div>
 
         <div className="preview-section">
           <SideScroller>

@@ -210,7 +210,6 @@ class SideScroller extends PureComponent {
         >
           <Draggable
             ref={this.content}
-            className="c-side_scroller-content"
             onDragStart={this.handleDragStart}
             onDrag={this.handleDrag}
             onClickCapture={this.handleClickCapture}
