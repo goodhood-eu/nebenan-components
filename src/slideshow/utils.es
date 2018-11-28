@@ -1,6 +1,6 @@
 import { getMedia, media } from 'nebenan-helpers/lib/dom';
 
-
+export const SWIPE_TRIGGER_DISTANCE = 20;
 export const BOUNDARIES_EXCESS = 40;
 
 export const getItemWidth = (win, sceneWidth, props) => {

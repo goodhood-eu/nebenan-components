@@ -9,10 +9,10 @@ import heartbeat from 'nebenan-helpers/lib/heartbeat';
 import { getPrefixed, eventCoordinates, size } from 'nebenan-helpers/lib/dom';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
-import { DISABLE_SCROLL_DISTANCE, SWIPE_TRIGGER_DISTANCE } from '../constants/swipe';
+import { DISABLE_SCROLL_DISTANCE } from '../constants/swipe';
 
 import {
-  BOUNDARIES_EXCESS,
+  BOUNDARIES_EXCESS, SWIPE_TRIGGER_DISTANCE,
   getItemWidth, getGridPosition, getActiveSection,
   getSectionsCount, isItemWidthChanged, getPositionOptions,
 } from './utils';

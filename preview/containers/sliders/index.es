@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { arrayOf } from 'nebenan-helpers/lib/data';
+import Link from 'react-router/lib/Link';
 
 import Header from '../../components/header';
 
@@ -50,7 +51,16 @@ class Sliders extends PureComponent {
   }
 
   renderBlock(item, index) {
-    return <li className="preview-sliders-side_scroller-item">{index}</li>;
+    const isOdd = Boolean(index % 2);
+
+    let text;
+    if (isOdd) {
+      text = <Link className="preview-sliders-side_scroller-block" to="/">{index}</Link>;
+    } else {
+      text = <span className="preview-sliders-side_scroller-block">{index}</span>;
+    }
+
+    return <li className="preview-sliders-side_scroller-item">{text}</li>;
   }
 
   render() {
