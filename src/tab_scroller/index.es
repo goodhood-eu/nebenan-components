@@ -2,27 +2,32 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
+import { invoke } from 'nebenan-helpers/lib/utils';
+
+import SideScroller from '../side_scroller';
 
 const defaultGetItem = (index, items) => items[index].text;
 
-class TabBar extends PureComponent {
+class TabScroller extends PureComponent {
   constructor(props) {
     super(props);
     this.renderItem = this.renderItem.bind(this);
   }
 
   handleClick(key) {
-    const item = this.props.items[key];
-    if (item.href) this.context.router.push(item.href);
-    if (item.callback) item.callback(key);
+    const { href, callback } = this.props.items[key];
+    if (href) this.context.router.push(href);
+    invoke(callback, key);
   }
 
   renderItem(item, key) {
     const { activeIndex, getItem, items } = this.props;
+    const { href, callback } = items[key];
     const renderer = getItem || defaultGetItem;
 
-    const className = classNames('c-tab_bar-item', {
+    const className = classNames('c-tab_scroller-item', {
       'is-active': key === activeIndex,
+      'is-clickable': Boolean(href || callback),
     });
     const onClick = this.handleClick.bind(this, key);
     const props = { key, className, onClick };
@@ -31,43 +36,26 @@ class TabBar extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-tab_bar', this.props.className);
-    const cleanProps = omit(this.props, 'children', 'action', 'items', 'getItem', 'activeIndex');
-    const { items, action, children } = this.props;
-
-    let list;
-    if (items) list = <ul className="c-tab_bar-list">{items.map(this.renderItem)}</ul>;
-
-    let actionNode;
-    if (action) actionNode = <span className="c-tab_bar-action">{action}</span>;
-
-
-    let content;
-    if (children) content = <span className="c-tab_bar-content">{children}</span>;
+    const className = classNames('c-tab_scroller', this.props.className);
+    const cleanProps = omit(this.props, 'items', 'getItem', 'activeIndex');
 
     return (
-      <article {...cleanProps} className={className}>
-        {actionNode}
-        <div className="c-tab_bar-container">
-          {list}
-          {content}
-        </div>
-      </article>
+      <SideScroller {...cleanProps} className={className}>
+        <ul className="c-tab_scroller-list">{this.props.items.map(this.renderItem)}</ul>
+      </SideScroller>
     );
   }
 }
 
-TabBar.propTypes = {
+TabScroller.propTypes = {
   className: PropTypes.string,
-  action: PropTypes.node,
-  items: PropTypes.array,
+  items: PropTypes.array.isRequired,
   getItem: PropTypes.func,
   activeIndex: PropTypes.number,
-  children: PropTypes.node,
 };
 
-TabBar.contextTypes = {
+TabScroller.contextTypes = {
   router: PropTypes.object,
 };
 
-export default TabBar;
+export default TabScroller;
