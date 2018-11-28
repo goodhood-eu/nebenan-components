@@ -1,0 +1,2 @@
+export const DISABLE_SCROLL_DISTANCE = 10;
+export const SWIPE_TRIGGER_DISTANCE = 20;
