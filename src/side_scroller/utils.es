@@ -4,6 +4,7 @@ export const easeInOutCubic = (pos) => {
 };
 
 export const getAnimationPosition = (startPosition, targetPosition, elapsedTime, duration) => {
-  const shift = easeInOutCubic(Math.min(elapsedTime / duration, 1));
-  return startPosition + Math.floor((targetPosition - startPosition) * shift);
+  const positionInTime = Math.min(elapsedTime / duration, 1);
+  const easing = easeInOutCubic(positionInTime);
+  return startPosition + Math.floor((targetPosition - startPosition) * easing);
 };

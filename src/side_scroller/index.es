@@ -12,8 +12,11 @@ import { getAnimationPosition } from './utils';
 
 import Draggable from '../draggable';
 
-const SHIFT_PERCENT = .75; // 75% of container width
-const SHIFT_TOLERANCE = 10; // if within this distance to the end of the element, scroll to the end
+// How mych % of container width to shift
+const SHIFT_PERCENT = .75;
+// If within this distance of the end of the element, scroll to the end instead
+const SHIFT_TOLERANCE = 10;
+
 const ANIMATION_DURATION = 200;
 const ANIMATION_FPS = 90;
 
@@ -32,6 +35,7 @@ class SideScroller extends PureComponent {
     bindTo(this,
       'updateSizes',
       'updateScroll',
+
       'handleLoad',
       'handleScrollLeft',
       'handleScrollRight',
@@ -92,7 +96,7 @@ class SideScroller extends PureComponent {
 
   reset(done) {
     const complete = () => {
-      this.getScrollableNode().scroll(0);
+      this.getScrollableNode().scrollLeft = 0;
       this.updateSizes();
       done();
     };
@@ -113,8 +117,10 @@ class SideScroller extends PureComponent {
 
   updateScroll() {
     const { scrollLeft } = this.getScrollableNode();
+    const maxScrollPosition = this.contentWidth - this.containerWidth;
+
     const canScrollLeft = scrollLeft > 0;
-    const canScrollRight = this.containerWidth + scrollLeft < this.contentWidth;
+    const canScrollRight = scrollLeft < maxScrollPosition;
 
     this.setState({ canScrollLeft, canScrollRight });
   }
@@ -131,10 +137,6 @@ class SideScroller extends PureComponent {
     this.startScrollAnimation(target);
   }
 
-  handleLoad() {
-    this.updateSizes();
-  }
-
   handleScrollLeft() {
     this.shift(-SHIFT_PERCENT);
   }
@@ -144,21 +146,23 @@ class SideScroller extends PureComponent {
   }
 
   handleDragStart(event) {
+    // Prevents DOM nodes like images from being dragged
     event.preventDefault();
-    this.startPosition = this.getScrollableNode().scrollLeft;
     this.startX = eventCoordinates(event, 'pageX').pageX;
+    this.startPosition = this.getScrollableNode().scrollLeft;
     this.stopScrollAnimation();
   }
 
   handleDrag(event) {
     const diff = this.startX - eventCoordinates(event, 'pageX').pageX;
-    const position = this.startPosition + diff;
-    this.getScrollableNode().scrollLeft = position;
-
     const shift = Math.abs(diff);
+    const newPosition = this.startPosition + diff;
 
+    // Prevents vertical scroll on touch devices
     if (shift >= DISABLE_SCROLL_DISTANCE) event.preventDefault();
     if (shift > 0) this.preventClick = true;
+
+    this.getScrollableNode().scrollLeft = newPosition;
   }
 
   handleClickCapture(event) {
@@ -168,27 +172,23 @@ class SideScroller extends PureComponent {
     }
   }
 
+  renderControl(type, handler) {
+    return (
+      <span className={`c-side_scroller-control is-${type}`} onClick={handler}>
+        <i className={`icon-arrow_${type}`} />
+      </span>
+    );
+  }
+
   renderControls() {
     const { canScrollLeft, canScrollRight } = this.state;
     if (!canScrollLeft && !canScrollRight) return null;
 
     let leftControl;
-    if (canScrollLeft) {
-      leftControl = (
-        <span className="c-side_scroller-control" onClick={this.handleScrollLeft}>
-          <i className="icon-arrow_left" />
-        </span>
-      );
-    }
+    if (canScrollLeft) leftControl = this.renderControl('left', this.handleScrollLeft);
 
     let rightControl;
-    if (canScrollRight) {
-      rightControl = (
-        <span className="c-side_scroller-control is-right" onClick={this.handleScrollRight}>
-          <i className="icon-arrow_right" />
-        </span>
-      );
-    }
+    if (canScrollRight) rightControl = this.renderControl('right', this.handleScrollRight);
 
     return <Fragment>{leftControl}{rightControl}</Fragment>;
   }
@@ -198,7 +198,7 @@ class SideScroller extends PureComponent {
     const cleanProps = omit(this.props, 'children');
     const { height } = this.state;
 
-    // Fixes issue with most browsers reducing height of the scrollable element children
+    // Fixes issue with most browsers reducing size of the scrollable element children
     // as if to compensate for scrollbars, even when they are hidden
     const containerStyle = { height };
 
@@ -206,7 +206,7 @@ class SideScroller extends PureComponent {
       <article {...cleanProps} className={className}>
         <div
           className="c-side_scroller-container" ref={this.container} style={containerStyle}
-          onScroll={this.updateScroll} onTouchMove={this.updateScroll} onLoad={this.handleLoad}
+          onScroll={this.updateScroll} onTouchMove={this.updateScroll} onLoad={this.updateSizes}
         >
           <Draggable
             ref={this.content}
