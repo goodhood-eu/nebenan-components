@@ -37,7 +37,7 @@ describe('ui/slideshow/utils', () => {
     assert.equal(getActiveSection(-20, 10), 2, 'get current section index');
     assert.equal(getActiveSection(-15, 10), 2, 'get section index from limited position');
 
-    assert.equal(getActiveSection(-14, 10), 1, 'get closest section index');
+    assert.equal(getActiveSection(-14, 10), 2, 'get closest section index');
     assert.equal(getActiveSection(-16, 10), 2, 'get closest section index');
   });
 
