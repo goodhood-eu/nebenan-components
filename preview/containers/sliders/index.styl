@@ -34,3 +34,24 @@
 .preview-sliders-slideshow-image
   blockFill()
   backgroundFill()
+
+.preview-sliders-side_scroller-list
+  display: flex
+
+.preview-sliders-side_scroller-item
+  margin-left: 5px
+  display: block
+  flex-shrink: 0
+
+  &:first-child
+    margin-left: 0
+
+.preview-sliders-side_scroller-block
+  width: 50px
+  padding: 15px 0
+  display: block
+  text-align: center
+  background: magenta
+
+  a&:hover
+    color: cyan

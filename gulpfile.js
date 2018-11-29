@@ -42,11 +42,23 @@ gulp.task('build', gulp.series(
 ));
 
 gulp.task('watch', (done) => {
+  const livereload = require('tiny-lr');
   const nodemon = require('nodemon')(nodemonOptions);
+  const reloadPage = () => {
+    livereload.changed('app.js');
+  };
+
+  const reloadStylesheets = () => {
+    livereload.changed('app.css');
+    return Promise.resolve();
+  };
+
+  livereload().listen();
   nodemon.on('log', (log) => { console.log(log.colour); });
+  nodemon.on('start', () => setTimeout(reloadPage, 1500));
 
   gulp.watch(scripts, gulp.series('compile:babel', 'preview:babel'));
-  gulp.watch(stylesheets, gulp.series('compile:styles', 'preview:styles'));
+  gulp.watch(stylesheets, gulp.series('compile:styles', 'preview:styles', reloadStylesheets));
   done();
 });
 
