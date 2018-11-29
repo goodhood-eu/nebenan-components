@@ -12,7 +12,7 @@ import { bindTo } from 'nebenan-helpers/lib/utils';
 import {
   BOUNDARIES_EXCESS, DISABLE_SCROLL_DISTANCE, SWIPE_TRIGGER_DISTANCE,
   getItemWidth, getGridPosition, getActiveSection,
-  getSectionsCount, isItemWidthChanged, getPositionOptions,
+  getSectionsCount, isItemWidthChanged,
 } from './utils';
 
 import Draggable from '../draggable';
@@ -86,11 +86,11 @@ class Slideshow extends PureComponent {
     this.startAutoRotation();
   }
 
-  setPosition(position, options = getPositionOptions()) {
+  setPosition(position) {
     const updater = (state) => ({
       position,
       section: getActiveSection(position, state.sceneWidth),
-      isAnimated: options.animated,
+      isAnimated: true,
     });
 
     let done;
@@ -149,6 +149,7 @@ class Slideshow extends PureComponent {
   }
 
   handleDragStart(event) {
+    event.preventDefault();
     this.startPosition = this.state.position;
     this.startX = eventCoordinates(event, 'pageX').pageX;
     this.stopAutoRotation();

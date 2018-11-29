@@ -34,7 +34,3 @@ export const isItemWidthChanged = (prevProps, props) => {
 
   return false;
 };
-
-export const getPositionOptions = () => ({
-  animated: true,
-});
