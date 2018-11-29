@@ -79,7 +79,7 @@ class Sliders extends PureComponent {
 
     const control = <span className="ui-link">Show stuff</span>;
 
-    const longList = arrayOf(10).reduce((acc) => acc.concat(content.listArray), [])
+    const longList = arrayOf(10).reduce((acc) => acc.concat(content.listArray), []);
 
     return (
       <article className="preview-sliders">

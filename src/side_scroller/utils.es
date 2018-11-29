@@ -1,4 +1,4 @@
-export const easeInOutCubic = (pos) => {
+const easeInOutCubic = (pos) => {
   if (pos < .5) return 4 * (pos ** 3);
   return ((pos - 1) * ((2 * pos) - 2) * ((2 * pos) - 2)) + 1;
 };
