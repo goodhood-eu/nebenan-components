@@ -6,7 +6,7 @@ import clamp from 'lodash/clamp';
 
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
 import heartbeat from 'nebenan-helpers/lib/heartbeat';
-import { getPrefixed, eventCoordinates, size } from 'nebenan-helpers/lib/dom';
+import { getPrefixed, eventCoordinates, size, stopEvent } from 'nebenan-helpers/lib/dom';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
 import { DISABLE_SCROLL_DISTANCE } from '../constants/swipe';
@@ -38,6 +38,7 @@ class Slideshow extends PureComponent {
       'handleDragStart',
       'handleDrag',
       'handleDragStop',
+      'handleClickCapture',
 
       'handleResize',
 
@@ -88,11 +89,12 @@ class Slideshow extends PureComponent {
     this.startAutoRotation();
   }
 
-  setPosition(position) {
+  setPosition(position, options) {
+    const settings = options || { isAnimated: true };
     const updater = (state) => ({
+      ...settings,
       position,
       section: getActiveSection(position, state.sceneWidth),
-      isAnimated: true,
     });
 
     let done;
@@ -162,11 +164,14 @@ class Slideshow extends PureComponent {
     const diff = eventCoordinates(event, 'pageX').pageX - this.startX;
     const minPosition = this.minPosition - BOUNDARIES_EXCESS;
     const position = clamp(this.startPosition + diff, minPosition, BOUNDARIES_EXCESS);
+    const shift = Math.abs(diff);
 
-    this.direction = diff === 0 ? 0 : diff * -1;
-    this.setPosition(position, { animated: false });
+    this.direction = diff * -1;
+    this.setPosition(position, { isAnimated: false });
 
-    if (Math.abs(diff) >= DISABLE_SCROLL_DISTANCE) event.preventDefault();
+    // Prevents vertical scroll on touch devices
+    if (shift >= DISABLE_SCROLL_DISTANCE) event.preventDefault();
+    if (shift > 0) this.preventClick = true;
   }
 
   handleDragStop() {
@@ -179,6 +184,13 @@ class Slideshow extends PureComponent {
     }
 
     this.startAutoRotation();
+  }
+
+  handleClickCapture(event) {
+    if (this.preventClick) {
+      stopEvent(event);
+      this.preventClick = false;
+    }
   }
 
   renderDots() {
@@ -216,6 +228,7 @@ class Slideshow extends PureComponent {
           onDragStart={this.handleDragStart}
           onDrag={this.handleDrag}
           onDragStop={this.handleDragStop}
+          onClickCapture={this.handleClickCapture}
         >
           <ul className="c-slideshow-list">{content}</ul>
         </Draggable>
