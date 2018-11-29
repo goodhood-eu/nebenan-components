@@ -23,7 +23,7 @@ export const getSectionsCount = (sceneWidth, listWidth) => (
 );
 
 export const getActiveSection = (position, sceneWidth) => (
-  Math.round(Math.abs(position / sceneWidth))
+  Math.ceil(Math.abs(position / sceneWidth))
 );
 
 export const isItemWidthChanged = (prevProps, props) => {
@@ -33,7 +33,3 @@ export const isItemWidthChanged = (prevProps, props) => {
 
   return false;
 };
-
-export const getPositionOptions = () => ({
-  animated: true,
-});
