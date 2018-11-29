@@ -7,7 +7,7 @@
   "homepage": "https://nebenan.de/",
   "repository": "good-hood-gmbh/nebenan-components",
   "bugs": "https://github.com/good-hood-gmbh/nebenan-components/issues",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "engines": {
     "node": "^8.x.x"
   },
@@ -74,6 +74,7 @@
     "stylint": "1.5.9",
     "stylint-json-reporter": "0.3.1",
     "stylint-stylish": "2.0.0",
+    "tiny-lr": "^1.1.1",
     "vinyl-source-stream": "2.0.0"
   },
   "peerDependencies": {

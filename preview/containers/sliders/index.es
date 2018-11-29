@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import { arrayOf } from 'nebenan-helpers/lib/data';
+import Link from 'react-router/lib/Link';
 
 import Header from '../../components/header';
 
@@ -8,6 +10,8 @@ import FadingSlideshow from '../../../lib/fading_slideshow';
 import Carousel from '../../../lib/carousel';
 import Expandable from '../../../lib/expandable';
 import ExpandableCard from '../../../lib/expandable_card';
+import SideScroller from '../../../lib/side_scroller';
+import TabScroller from '../../../lib/tab_scroller';
 
 import content from '../../sample_data';
 
@@ -47,6 +51,19 @@ class Sliders extends PureComponent {
     );
   }
 
+  renderBlock(item, index) {
+    const isOdd = Boolean(index % 2);
+
+    let text;
+    if (isOdd) {
+      text = <Link className="preview-sliders-side_scroller-block" to="/">{index}</Link>;
+    } else {
+      text = <span className="preview-sliders-side_scroller-block">{index}</span>;
+    }
+
+    return <li className="preview-sliders-side_scroller-item">{text}</li>;
+  }
+
   render() {
     const fadingSlideshowItems = content.images.map(this.renderImage);
     const slideshowItems = content.slides.map(this.renderSlide);
@@ -62,9 +79,36 @@ class Sliders extends PureComponent {
 
     const control = <span className="ui-link">Show stuff</span>;
 
+    const longList = arrayOf(10).reduce((acc) => acc.concat(content.listArray), []);
+
     return (
       <article className="preview-sliders">
         <Header>Sliders</Header>
+
+        <div className="preview-section">
+          <TabScroller activeIndex={2} items={longList} />
+        </div>
+
+        <div className="preview-section">
+          <TabScroller activeIndex={2} items={content.listArray} />
+        </div>
+
+        <div className="preview-section">
+          <SideScroller>
+            <img
+              src="https://www.west-crete.com/images/panoramas/house-view.jpg"
+              height="300px" alt=""
+            />
+          </SideScroller>
+        </div>
+
+        <div className="preview-section">
+          <SideScroller>
+            <ul className="preview-sliders-side_scroller-list">
+              {arrayOf(50).map(this.renderBlock)}
+            </ul>
+          </SideScroller>
+        </div>
 
         <div className="preview-section">
           <Accordion
