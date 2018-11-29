@@ -149,6 +149,7 @@ class Slideshow extends PureComponent {
   }
 
   handleDragStart(event) {
+    // prevent pictures from dragging
     event.preventDefault();
     this.startPosition = this.state.position;
     this.startX = eventCoordinates(event, 'pageX').pageX;
@@ -160,7 +161,7 @@ class Slideshow extends PureComponent {
     const minPosition = this.minPosition - BOUNDARIES_EXCESS;
     const position = clamp(this.startPosition + diff, minPosition, BOUNDARIES_EXCESS);
 
-    this.direction = this.startPosition - position;
+    this.direction = diff === 0 ? 0 : diff * -1;
     this.setPosition(position, { animated: false });
 
     if (Math.abs(diff) >= DISABLE_SCROLL_DISTANCE) event.preventDefault();

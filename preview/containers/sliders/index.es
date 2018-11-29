@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
+import Link from 'react-router/lib/Link';
 
 import Header from '../../components/header';
 
@@ -26,16 +27,22 @@ class Sliders extends PureComponent {
   }
 
   renderSlide(slide, index) {
-    return (
-      <div key={index} className="preview-sliders-slide">
+    const body = (
+      <Fragment>
         <header className="preview-sliders-slide-header">{slide.header}</header>
         <figure
           style={getBackgroundImageStyle(slide.image)}
           className="preview-sliders-slide-image"
         />
         <article className="preview-sliders-slide-content">{slide.content}</article>
-      </div>
+      </Fragment>
     );
+
+    if (index % 2) {
+      return <Link key={index} className="preview-sliders-slide" to="/">{body}</Link>;
+    }
+
+    return <div key={index} className="preview-sliders-slide">{body}</div>;
   }
 
   renderImage(image) {
