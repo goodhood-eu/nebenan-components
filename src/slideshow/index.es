@@ -194,7 +194,7 @@ class Slideshow extends PureComponent {
   }
 
   renderDots() {
-    if (this.props.items.length <= 1) return null;
+    if (this.sectionsCount <= 1) return null;
 
     return (
       <Dots
