@@ -1,4 +1,4 @@
-require('babel-register')({ extensions: ['.es'] });
+require('@babel/register')({ extensions: ['.es'] });
 const app = require('express')();
 const serveStatic = require('serve-static');
 const morgan = require('morgan');
@@ -8,9 +8,9 @@ const { renderToString } = require('react-dom/server');
 
 const match = require('react-router/lib/match');
 const RouterContext = require('react-router/lib/RouterContext');
-const createRouter = require('./router').default;
-const Error404 = require('./containers/error404').default;
-const MicroHelmet = require('../lib/micro_helmet').default;
+const createRouter = require('./router');
+const Error404 = require('./containers/error404');
+const MicroHelmet = require('../lib/micro_helmet');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 
