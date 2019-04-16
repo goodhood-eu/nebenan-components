@@ -96,6 +96,9 @@ Draggable.propTypes = {
   onDragStart: PropTypes.func.isRequired,
   onDrag: PropTypes.func.isRequired,
   onDragStop: PropTypes.func.isRequired,
+
+  onMouseDown: PropTypes.func,
+  onTouchStart: PropTypes.func,
 };
 
 export default Draggable;

@@ -254,6 +254,7 @@ Slideshow.propTypes = {
   visibleDesktop: PropTypes.number.isRequired,
 
   rotationInterval: PropTypes.number,
+  onChange: PropTypes.func,
 };
 
 export default Slideshow;
