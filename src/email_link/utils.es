@@ -1,4 +1,4 @@
-import { stringify } from 'querystring';
+import { stringify } from 'qs';
 
 const QUERY_KEYS = ['subject', 'body'];
 
