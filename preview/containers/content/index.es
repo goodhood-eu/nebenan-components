@@ -1,5 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { emojiCollection } from 'emojitsu';
+import { bindTo } from 'nebenan-helpers/lib/utils';
 
 import Header from '../../components/header';
 
@@ -34,6 +35,22 @@ const action = 'x';
 
 
 class Inputs extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    bindTo(
+      this,
+      'handleClickSelectCopy',
+    );
+
+    this.clickSelect = createRef();
+  }
+
+  handleClickSelectCopy() {
+    const result = this.clickSelect.current.copyToClipboard();
+    console.warn('ClickSelect content copy:', result);
+  }
+
   handleSelect(key, list) {
     console.warn('Selected emoji:', list[key]);
   }
@@ -117,8 +134,17 @@ class Inputs extends PureComponent {
           </ul>
         </div>
 
-        <div className="preview-section">
-          <ClickSelect className="ui-input">{content.lorem}</ClickSelect>
+        <div className="preview-section preview-click_select">
+          <ClickSelect className="ui-input" ref={this.clickSelect}>
+            {content.lorem}
+          </ClickSelect>
+          <button
+            type="button"
+            className="ui-button ui-button-primary ui-button-small"
+            onClick={this.handleClickSelectCopy}
+          >
+            Copy to clipboard
+          </button>
         </div>
 
         <div className="preview-section">

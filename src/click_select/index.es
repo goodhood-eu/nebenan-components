@@ -10,7 +10,28 @@ class ClickSelect extends PureComponent {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(event) {
+  copyToClipboard() {
+    if (!document.queryCommandSupported) return false;
+
+    this.select();
+    let result;
+
+    try {
+      result = document.execCommand('copy');
+    } catch (err) {
+      result = false;
+    }
+
+    this.unselect();
+    return result;
+  }
+
+  unselect() {
+    const selection = global.getSelection();
+    selection.removeAllRanges();
+  }
+
+  select() {
     // hack: contentEditable makes iOS selection work
     this.container.setAttribute('contentEditable', true);
 
@@ -22,7 +43,10 @@ class ClickSelect extends PureComponent {
     selection.addRange(range);
 
     this.container.setAttribute('contentEditable', false);
+  }
 
+  handleClick(event) {
+    this.select();
     invoke(this.props.onClick, event);
   }
 
