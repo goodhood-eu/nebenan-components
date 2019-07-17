@@ -22,13 +22,7 @@ class ClickSelect extends PureComponent {
       result = false;
     }
 
-    this.unselect();
     return result;
-  }
-
-  unselect() {
-    const selection = global.getSelection();
-    selection.removeAllRanges();
   }
 
   select() {
