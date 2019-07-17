@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { invoke } from 'nebenan-helpers/lib/utils';
 
 
-class ClickSelect extends PureComponent {
+class ClipboardText extends PureComponent {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -45,7 +45,7 @@ class ClickSelect extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-click_select', this.props.className);
+    const className = classNames('c-clipboard_text', this.props.className);
     const ref = (el) => {
       this.container = el;
     };
@@ -53,9 +53,9 @@ class ClickSelect extends PureComponent {
   }
 }
 
-ClickSelect.propTypes = {
+ClipboardText.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default ClickSelect;
+export default ClipboardText;
