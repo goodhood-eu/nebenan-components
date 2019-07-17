@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { emojiCollection } from 'emojitsu';
+import { bindTo } from 'nebenan-helpers/lib/utils';
 
 import Header from '../../components/header';
 
 import Tooltip from '../../../lib/tooltip';
-import ClickSelect from '../../../lib/click_select';
+import ClipboardText from '../../../lib/clipboard_text';
 import ContentHeader from '../../../lib/content_header';
 import EmailLink from '../../../lib/email_link';
 import PopupLink from '../../../lib/popup_link';
@@ -34,6 +35,22 @@ const action = 'x';
 
 
 class Inputs extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    bindTo(
+      this,
+      'handleClipboardTextCopy',
+    );
+
+    this.clipboardText = createRef();
+  }
+
+  handleClipboardTextCopy() {
+    const result = this.clipboardText.current.copyToClipboard();
+    console.warn('ClipboardText content copy:', result);
+  }
+
   handleSelect(key, list) {
     console.warn('Selected emoji:', list[key]);
   }
@@ -117,8 +134,17 @@ class Inputs extends PureComponent {
           </ul>
         </div>
 
-        <div className="preview-section">
-          <ClickSelect className="ui-input">{content.lorem}</ClickSelect>
+        <div className="preview-section preview-clipboard_text">
+          <ClipboardText className="ui-input" ref={this.clipboardText}>
+            {content.lorem}
+          </ClipboardText>
+          <button
+            type="button"
+            className="ui-button ui-button-primary ui-button-small"
+            onClick={this.handleClipboardTextCopy}
+          >
+            Copy to clipboard
+          </button>
         </div>
 
         <div className="preview-section">

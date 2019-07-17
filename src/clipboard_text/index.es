@@ -4,13 +4,28 @@ import classNames from 'classnames';
 import { invoke } from 'nebenan-helpers/lib/utils';
 
 
-class ClickSelect extends PureComponent {
+class ClipboardText extends PureComponent {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(event) {
+  copyToClipboard() {
+    if (!document.queryCommandSupported) return false;
+
+    this.select();
+    let result;
+
+    try {
+      result = document.execCommand('copy');
+    } catch (err) {
+      result = false;
+    }
+
+    return result;
+  }
+
+  select() {
     // hack: contentEditable makes iOS selection work
     this.container.setAttribute('contentEditable', true);
 
@@ -22,12 +37,15 @@ class ClickSelect extends PureComponent {
     selection.addRange(range);
 
     this.container.setAttribute('contentEditable', false);
+  }
 
+  handleClick(event) {
+    this.select();
     invoke(this.props.onClick, event);
   }
 
   render() {
-    const className = classNames('c-click_select', this.props.className);
+    const className = classNames('c-clipboard_text', this.props.className);
     const ref = (el) => {
       this.container = el;
     };
@@ -35,9 +53,9 @@ class ClickSelect extends PureComponent {
   }
 }
 
-ClickSelect.propTypes = {
+ClipboardText.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default ClickSelect;
+export default ClipboardText;
