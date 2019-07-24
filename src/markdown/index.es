@@ -5,16 +5,13 @@ import classNames from 'classnames';
 import marked from 'marked';
 import { invoke } from 'nebenan-helpers/lib/utils';
 
+import { sanitizeText } from './utils';
+
 const EMAIL_LINK_REGEX = /^mailto:/;
 const HTTP_LINK_REGEX = /^https?:/;
 const EXTENSION_REGEX = /\.\w+$/;
 
-const options = {
-  gfm: false,
-  tables: false,
-  breaks: true,
-  sanitize: true,
-};
+const options = { gfm: false };
 
 class Markdown extends PureComponent {
   constructor(props) {
@@ -42,10 +39,11 @@ class Markdown extends PureComponent {
   }
 
   render() {
-    const { inline, text, children } = this.props;
+    const { inline, blockquotes, text, children } = this.props;
     const className = classNames('c-markdown', this.props.className, { 'is-inline': inline });
-    const cleanProps = omit(this.props, 'children', 'text', 'inline');
-    const safeContent = { __html: marked(text, options) };
+    const cleanProps = omit(this.props, 'children', 'text', 'inline', 'blockquotes');
+    const escapedText = sanitizeText(text, blockquotes);
+    const safeContent = { __html: marked(escapedText, options) };
 
     return (
       <span {...cleanProps} className={className} onClick={this.handleClick}>
@@ -62,12 +60,14 @@ Markdown.contextTypes = {
 
 Markdown.defaultProps = {
   inline: false,
+  blockquotes: false,
 };
 
 Markdown.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   inline: PropTypes.bool.isRequired,
+  blockquotes: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };

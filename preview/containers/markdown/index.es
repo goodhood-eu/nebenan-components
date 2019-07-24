@@ -9,10 +9,10 @@ const MarkdownPreview = () => (
   <article className="preview-markdown">
     <Header>Markdown</Header>
     <div className="preview-section">
-      <Markdown text={content} />
+      <Markdown text={content} blockquotes />
     </div>
     <div className="preview-section">
-      <Markdown text="Inline markdown" inline /> to use in sentences
+      <Markdown text="Inline markdown > woo" inline /> to use in sentences
     </div>
   </article>
 );
