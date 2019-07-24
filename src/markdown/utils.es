@@ -1,10 +1,10 @@
 import escapeHtml from 'escape-html';
 
-const REGEX_BLOCKQUITE = '((?:^|\\n|\\s){1})(>)(\\s{1})';
+const REGEX_BLOCKQUITE = '(^|\\n)>(\\s)';
 export const BLOCKQUOTE_TOKEN = '%BLOCKQUOTE%';
 
 export const quotesToTokens = (string) => (
-  string.replace(new RegExp(REGEX_BLOCKQUITE, 'g'), `$1${BLOCKQUOTE_TOKEN}$3`)
+  string.replace(new RegExp(REGEX_BLOCKQUITE, 'g'), `$1${BLOCKQUOTE_TOKEN}$2`)
 );
 export const tokensToQuotes = (string) => string.replace(new RegExp(BLOCKQUOTE_TOKEN, 'g'), '>');
 
