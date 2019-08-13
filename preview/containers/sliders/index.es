@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { arrayOf } from 'nebenan-helpers/lib/data';
-import Link from 'react-router/lib/Link';
+import { Link } from 'react-router-dom';
 
 import Header from '../../components/header';
 
