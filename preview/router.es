@@ -1,5 +1,5 @@
 import React from 'react';
-import Route from 'react-router/lib/Route';
+import { Switch, Route } from 'react-router';
 
 import Error404 from './containers/error404';
 import Index from './containers/index';
@@ -12,8 +12,8 @@ import Misc from './containers/misc';
 import Markdown from './containers/markdown';
 
 export default () => (
-  <div>
-    <Route path="/" component={Index} />
+  <Switch>
+    <Route path="/" component={Index} exact />
 
     <Route path="/meta" component={Meta} />
     <Route path="/sliders" component={Sliders} />
@@ -22,6 +22,6 @@ export default () => (
     <Route path="/utility" component={Utility} />
     <Route path="/misc" component={Misc} />
 
-    <Route path="*" component={Error404} />
-  </div>
+    <Route component={Error404} />
+  </Switch>
 );

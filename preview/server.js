@@ -6,10 +6,8 @@ const morgan = require('morgan');
 const React = require('react');
 const { renderToString } = require('react-dom/server');
 
-const match = require('react-router/lib/match');
-const RouterContext = require('react-router/lib/RouterContext');
+const { StaticRouter } = require('react-router');
 const createRouter = require('./router');
-const Error404 = require('./containers/error404');
 const MicroHelmet = require('../lib/micro_helmet');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -34,33 +32,17 @@ const getHTML = (meta, content) => (`<!DOCTYPE html>
 </html>
 `);
 
-const renderApp = (req, res, next) => {
-  const renderPage = (props) => {
-    const statusCode = props.components.includes(Error404) ? 404 : 200;
-
-    const Component = React.createElement(RouterContext, props);
-    const content = renderToString(Component);
-    const meta = MicroHelmet.rewind();
-
-    res.status(statusCode).send(getHTML(meta, content));
-  };
-
-  const matchPage = (error, redirect, props) => {
-    if (error) {
-      console.log(`Request ${req.url} failed to route:`, error.message);
-      return next();
-    }
-
-    if (redirect) return res.redirect(302, `${redirect.pathname}${redirect.search}`);
-
-    // if there was no props, this request isn't handled by FE explicitly
-    if (!props) return next();
-
-    renderPage(props);
-  };
-
+const renderApp = (req, res) => {
+  const context = {};
   const routes = createRouter();
-  match({ routes, location: req.url }, matchPage);
+  const Component = React.createElement(StaticRouter, { context, location: req.url }, routes);
+  const content = renderToString(Component);
+
+  if (context.url) return res.redirect(302, context.url);
+
+  const meta = MicroHelmet.rewind();
+
+  res.send(getHTML(meta, content));
 };
 
 app.set('port', port);
