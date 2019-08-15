@@ -4,6 +4,7 @@ import omit from 'lodash/omit';
 import classNames from 'classnames';
 import marked from 'marked';
 import { invoke } from 'nebenan-helpers/lib/utils';
+import withHistory from 'nebenan-react-router-utils/lib/withHistory';
 
 import { sanitizeText } from './utils';
 
@@ -31,7 +32,7 @@ class Markdown extends PureComponent {
       event.preventDefault();
       const isSameDomain = href.startsWith(global.location.origin);
 
-      if ((isLocal || isSameDomain) && !hasExtension) this.context.router.push(href);
+      if ((isLocal || isSameDomain) && !hasExtension) this.props.history.push(href);
       else global.open(href);
     }
 
@@ -54,10 +55,6 @@ class Markdown extends PureComponent {
   }
 }
 
-Markdown.contextTypes = {
-  router: PropTypes.object,
-};
-
 Markdown.defaultProps = {
   inline: false,
   blockquotes: false,
@@ -66,10 +63,11 @@ Markdown.defaultProps = {
 Markdown.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
+  history: PropTypes.object.isRequired,
   inline: PropTypes.bool.isRequired,
   blockquotes: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };
 
-export default Markdown;
+export default withHistory(Markdown);

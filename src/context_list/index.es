@@ -24,10 +24,12 @@ class ContextList extends PureComponent {
     this.state = this.getDefaultState(props);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.options !== nextProps.options) {
+  componentDidUpdate(prevProps) {
+    const { options } = this.props;
+
+    if (prevProps.options !== options) {
       const nextState = {
-        keys: Object.keys(nextProps.options),
+        keys: Object.keys(options),
         selected: null,
       };
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { invoke } from 'nebenan-helpers/lib/utils';
+import withHistory from 'nebenan-react-router-utils/lib/withHistory';
 
 import SideScroller from '../side_scroller';
 
@@ -15,8 +16,9 @@ class TabScroller extends PureComponent {
   }
 
   handleClick(key) {
-    const { href, callback } = this.props.items[key];
-    if (href) this.context.router.push(href);
+    const { items, history } = this.props;
+    const { href, callback } = items[key];
+    if (href) history.push(href);
     invoke(callback, key);
   }
 
@@ -52,10 +54,7 @@ TabScroller.propTypes = {
   items: PropTypes.array.isRequired,
   getItem: PropTypes.func,
   activeIndex: PropTypes.number,
+  history: PropTypes.object.isRequired,
 };
 
-TabScroller.contextTypes = {
-  router: PropTypes.object,
-};
-
-export default TabScroller;
+export default withHistory(TabScroller);

@@ -12,8 +12,8 @@ class LoadingBar extends PureComponent {
     this.reset = this.reset.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.active) this.setState({ isActive: true, isComplete: false });
+  componentDidUpdate(prevProps) {
+    if (this.props.active) this.setState({ isActive: true, isComplete: false });
     else if (this.state.isActive) this.setState({ isComplete: true });
 
     this.clear();

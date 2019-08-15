@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
+import withHistory from 'nebenan-react-router-utils/lib/withHistory';
 
 const defaultGetItem = (index, items) => items[index].text;
 
@@ -12,8 +13,9 @@ class TabBar extends PureComponent {
   }
 
   handleClick(key) {
-    const item = this.props.items[key];
-    if (item.href) this.context.router.push(item.href);
+    const { items, history } = this.props;
+    const item = items[key];
+    if (item.href) history.push(item.href);
     if (item.callback) item.callback(key);
   }
 
@@ -64,10 +66,7 @@ TabBar.propTypes = {
   getItem: PropTypes.func,
   activeIndex: PropTypes.number,
   children: PropTypes.node,
+  history: PropTypes.object.isRequired,
 };
 
-TabBar.contextTypes = {
-  router: PropTypes.object,
-};
-
-export default TabBar;
+export default withHistory(TabBar);
