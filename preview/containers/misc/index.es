@@ -8,8 +8,21 @@ import LoadingBar, { LoadingSpinner } from '../../../lib/loading';
 
 
 class Inputs extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = { loading: true };
+  }
+
   static handleDotClick(index) {
     console.warn('Index clicked:', index);
+  }
+
+  componentDidMount() {
+    this._tid = setTimeout(() => this.setState({ loading: false }), 1500);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._tid);
   }
 
   render() {
@@ -17,10 +30,7 @@ class Inputs extends PureComponent {
       <article className="preview-misc">
         <Header>Misc</Header>
 
-        <div className="preview-section">
-          <LoadingBar />
-          <LoadingBar active />
-        </div>
+        <LoadingBar active={this.state.loading} />
 
         <div className="preview-section">
           <LoadingSpinner />

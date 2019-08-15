@@ -49,6 +49,7 @@
     "react/jsx-props-no-spreading": "off",
     "react/no-danger": "off",
     "react/require-default-props": "off",
+    "react/no-did-update-set-state": "off",
     "react/jsx-max-props-per-line": ["error", { "maximum": 3, "when": "multiline" }],
     "react/sort-comp": ["error", {
       "order": [

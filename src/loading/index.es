@@ -13,8 +13,9 @@ class LoadingBar extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.active) this.setState({ isActive: true, isComplete: false });
-    else if (this.state.isActive) this.setState({ isComplete: true });
+    if (!prevProps.active && this.props.active) {
+      this.setState({ isActive: true, isComplete: false });
+    } else if (this.state.isActive) this.setState({ isComplete: true });
 
     this.clear();
     this._tid = setTimeout(this.reset, ANIMATION_DURATION);

@@ -1,4 +1,4 @@
-import React, { PureComponent, createRef, Fragment } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
@@ -190,7 +190,7 @@ class SideScroller extends PureComponent {
     let rightControl;
     if (canScrollRight) rightControl = this.renderControl('right', this.handleScrollRight);
 
-    return <Fragment>{leftControl}{rightControl}</Fragment>;
+    return <>{leftControl}{rightControl}</>;
   }
 
   render() {
