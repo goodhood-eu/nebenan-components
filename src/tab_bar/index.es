@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import withHistory from 'nebenan-react-router-utils/lib/withHistory';
+import withHistory from 'nebenan-react-hocs/lib/history';
 
 const defaultGetItem = (index, items) => items[index].text;
 

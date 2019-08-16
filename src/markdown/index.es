@@ -4,7 +4,7 @@ import omit from 'lodash/omit';
 import classNames from 'classnames';
 import marked from 'marked';
 import { invoke } from 'nebenan-helpers/lib/utils';
-import withHistory from 'nebenan-react-router-utils/lib/withHistory';
+import withHistory from 'nebenan-react-hocs/lib/history';
 
 import { sanitizeText } from './utils';
 

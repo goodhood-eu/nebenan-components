@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { invoke } from 'nebenan-helpers/lib/utils';
-import withHistory from 'nebenan-react-router-utils/lib/withHistory';
+import withHistory from 'nebenan-react-hocs/lib/history';
 
 import SideScroller from '../side_scroller';
 
