@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import withHistory from 'nebenan-react-hocs/lib/history';
+import withHistory, { historyPropTypes } from 'nebenan-react-hocs/lib/history';
 
 const defaultGetItem = (index, items) => items[index].text;
 
@@ -34,7 +34,15 @@ class TabBar extends PureComponent {
 
   render() {
     const className = classNames('c-tab_bar', this.props.className);
-    const cleanProps = omit(this.props, 'children', 'action', 'items', 'getItem', 'activeIndex');
+    const cleanProps = omit(
+      this.props,
+      ...Object.keys(historyPropTypes),
+      'children',
+      'action',
+      'items',
+      'getItem',
+      'activeIndex',
+    );
     const { items, action, children } = this.props;
 
     let list;
@@ -60,13 +68,13 @@ class TabBar extends PureComponent {
 }
 
 TabBar.propTypes = {
+  ...historyPropTypes,
   className: PropTypes.string,
   action: PropTypes.node,
   items: PropTypes.array,
   getItem: PropTypes.func,
   activeIndex: PropTypes.number,
   children: PropTypes.node,
-  history: PropTypes.object.isRequired,
 };
 
 export default withHistory(TabBar);

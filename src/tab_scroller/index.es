@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { invoke } from 'nebenan-helpers/lib/utils';
-import withHistory from 'nebenan-react-hocs/lib/history';
+import withHistory, { historyPropTypes } from 'nebenan-react-hocs/lib/history';
 
 import SideScroller from '../side_scroller';
 
@@ -39,7 +39,13 @@ class TabScroller extends PureComponent {
 
   render() {
     const className = classNames('c-tab_scroller', this.props.className);
-    const cleanProps = omit(this.props, 'items', 'getItem', 'activeIndex');
+    const cleanProps = omit(
+      this.props,
+      ...Object.keys(historyPropTypes),
+      'items',
+      'getItem',
+      'activeIndex',
+    );
 
     return (
       <SideScroller {...cleanProps} className={className}>
@@ -50,11 +56,11 @@ class TabScroller extends PureComponent {
 }
 
 TabScroller.propTypes = {
+  ...historyPropTypes,
   className: PropTypes.string,
   items: PropTypes.array.isRequired,
   getItem: PropTypes.func,
   activeIndex: PropTypes.number,
-  history: PropTypes.object.isRequired,
 };
 
 export default withHistory(TabScroller);

@@ -4,7 +4,7 @@ import omit from 'lodash/omit';
 import classNames from 'classnames';
 import marked from 'marked';
 import { invoke } from 'nebenan-helpers/lib/utils';
-import withHistory from 'nebenan-react-hocs/lib/history';
+import withHistory, { historyPropTypes } from 'nebenan-react-hocs/lib/history';
 
 import { sanitizeText } from './utils';
 
@@ -42,7 +42,14 @@ class Markdown extends PureComponent {
   render() {
     const { inline, blockquotes, text, children } = this.props;
     const className = classNames('c-markdown', this.props.className, { 'is-inline': inline });
-    const cleanProps = omit(this.props, 'children', 'text', 'inline', 'blockquotes');
+    const cleanProps = omit(
+      this.props,
+      ...Object.keys(historyPropTypes),
+      'children',
+      'text',
+      'inline',
+      'blockquotes',
+    );
     const escapedText = sanitizeText(text, blockquotes);
     const safeContent = { __html: marked(escapedText, options) };
 
@@ -61,9 +68,9 @@ Markdown.defaultProps = {
 };
 
 Markdown.propTypes = {
+  ...historyPropTypes,
   className: PropTypes.string,
   children: PropTypes.node,
-  history: PropTypes.object.isRequired,
   inline: PropTypes.bool.isRequired,
   blockquotes: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
