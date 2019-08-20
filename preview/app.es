@@ -1,10 +1,14 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
 
-import Router from 'react-router/lib/Router';
-import browserHistory from 'react-router/lib/browserHistory';
+import { BrowserRouter } from 'react-router-dom';
 
 import createRouter from './router';
 
 const routes = createRouter();
-hydrate(<Router history={browserHistory} routes={routes} />, document.getElementById('main'));
+const Component = (
+  <BrowserRouter>
+    {routes}
+  </BrowserRouter>
+);
+hydrate(Component, document.getElementById('main'));

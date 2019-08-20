@@ -1,6 +1,6 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { arrayOf } from 'nebenan-helpers/lib/data';
-import Link from 'react-router/lib/Link';
+import { Link } from 'react-router-dom';
 
 import Header from '../../components/header';
 
@@ -31,14 +31,14 @@ class Sliders extends PureComponent {
 
   renderSlide(slide, index) {
     const body = (
-      <Fragment>
+      <>
         <header className="preview-sliders-slide-header">{slide.header}</header>
         <figure
           style={getBackgroundImageStyle(slide.image)}
           className="preview-sliders-slide-image"
         />
         <article className="preview-sliders-slide-content">{slide.content}</article>
-      </Fragment>
+      </>
     );
 
     if (index % 2) {

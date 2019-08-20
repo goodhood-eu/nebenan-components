@@ -4,6 +4,7 @@ import omit from 'lodash/omit';
 import classNames from 'classnames';
 import marked from 'marked';
 import { invoke } from 'nebenan-helpers/lib/utils';
+import withHistory, { historyPropTypes } from 'nebenan-react-hocs/lib/history';
 
 import { sanitizeText } from './utils';
 
@@ -31,7 +32,7 @@ class Markdown extends PureComponent {
       event.preventDefault();
       const isSameDomain = href.startsWith(global.location.origin);
 
-      if ((isLocal || isSameDomain) && !hasExtension) this.context.router.push(href);
+      if ((isLocal || isSameDomain) && !hasExtension) this.props.history.push(href);
       else global.open(href);
     }
 
@@ -41,7 +42,14 @@ class Markdown extends PureComponent {
   render() {
     const { inline, blockquotes, text, children } = this.props;
     const className = classNames('c-markdown', this.props.className, { 'is-inline': inline });
-    const cleanProps = omit(this.props, 'children', 'text', 'inline', 'blockquotes');
+    const cleanProps = omit(
+      this.props,
+      ...Object.keys(historyPropTypes),
+      'children',
+      'text',
+      'inline',
+      'blockquotes',
+    );
     const escapedText = sanitizeText(text, blockquotes);
     const safeContent = { __html: marked(escapedText, options) };
 
@@ -54,16 +62,13 @@ class Markdown extends PureComponent {
   }
 }
 
-Markdown.contextTypes = {
-  router: PropTypes.object,
-};
-
 Markdown.defaultProps = {
   inline: false,
   blockquotes: false,
 };
 
 Markdown.propTypes = {
+  ...historyPropTypes,
   className: PropTypes.string,
   children: PropTypes.node,
   inline: PropTypes.bool.isRequired,
@@ -72,4 +77,4 @@ Markdown.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default Markdown;
+export default withHistory(Markdown);

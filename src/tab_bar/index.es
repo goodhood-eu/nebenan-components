@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
+import withHistory, { historyPropTypes } from 'nebenan-react-hocs/lib/history';
 
 const defaultGetItem = (index, items) => items[index].text;
 
@@ -12,8 +13,9 @@ class TabBar extends PureComponent {
   }
 
   handleClick(key) {
-    const item = this.props.items[key];
-    if (item.href) this.context.router.push(item.href);
+    const { items, history } = this.props;
+    const item = items[key];
+    if (item.href) history.push(item.href);
     if (item.callback) item.callback(key);
   }
 
@@ -32,7 +34,15 @@ class TabBar extends PureComponent {
 
   render() {
     const className = classNames('c-tab_bar', this.props.className);
-    const cleanProps = omit(this.props, 'children', 'action', 'items', 'getItem', 'activeIndex');
+    const cleanProps = omit(
+      this.props,
+      ...Object.keys(historyPropTypes),
+      'children',
+      'action',
+      'items',
+      'getItem',
+      'activeIndex',
+    );
     const { items, action, children } = this.props;
 
     let list;
@@ -58,6 +68,7 @@ class TabBar extends PureComponent {
 }
 
 TabBar.propTypes = {
+  ...historyPropTypes,
   className: PropTypes.string,
   action: PropTypes.node,
   items: PropTypes.array,
@@ -66,8 +77,4 @@ TabBar.propTypes = {
   children: PropTypes.node,
 };
 
-TabBar.contextTypes = {
-  router: PropTypes.object,
-};
-
-export default TabBar;
+export default withHistory(TabBar);

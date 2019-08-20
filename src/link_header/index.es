@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import Link from 'react-router/lib/Link';
+import { Link } from 'react-router-dom';
 
 
 const LinkHeader = (props) => {
