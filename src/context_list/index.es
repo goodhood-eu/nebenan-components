@@ -21,29 +21,19 @@ class ContextList extends PureComponent {
       'renderOption',
     );
 
-    this.state = this.getDefaultState(props);
+    this.state = this.getDefaultState();
   }
 
   componentDidUpdate(prevProps) {
-    const { options } = this.props;
-
-    if (prevProps.options !== options) {
-      const nextState = {
-        keys: Object.keys(options),
-        selected: null,
-      };
-
-      this.setState(nextState);
-    }
+    if (prevProps.options !== this.props.options) this.setState({ selected: null });
   }
 
   componentWillUnmount() {
     this.deactivate();
   }
 
-  getDefaultState(props) {
+  getDefaultState() {
     return {
-      keys: Object.keys(props.options),
       isActive: false,
       selected: null,
     };
@@ -68,13 +58,14 @@ class ContextList extends PureComponent {
   }
 
   selectNext(done) {
-    const updater = (state) => {
-      const defaultSelected = state.keys[0];
+    const updater = (state, props) => {
+      const keys = Object.keys(props.options);
+      const defaultSelected = keys[0];
       let newSelected = defaultSelected;
 
       if (state.selected !== null) {
-        const index = Math.max(0, state.keys.indexOf(state.selected));
-        newSelected = state.keys[index + 1] || defaultSelected;
+        const index = Math.max(0, keys.indexOf(state.selected));
+        newSelected = keys[index + 1] || defaultSelected;
       }
 
       return { selected: newSelected };
@@ -84,13 +75,14 @@ class ContextList extends PureComponent {
   }
 
   selectPrevious(done) {
-    const updater = (state) => {
-      const defaultSelected = state.keys[state.keys.length - 1];
+    const updater = (state, props) => {
+      const keys = Object.keys(props.options);
+      const defaultSelected = keys[keys.length - 1];
       let newSelected = defaultSelected;
 
       if (state.selected !== null) {
-        const index = Math.max(0, state.keys.indexOf(state.selected));
-        newSelected = state.keys[index - 1] || defaultSelected;
+        const index = Math.max(0, keys.indexOf(state.selected));
+        newSelected = keys[index - 1] || defaultSelected;
       }
 
       return { selected: newSelected };
@@ -154,15 +146,14 @@ class ContextList extends PureComponent {
   }
 
   render() {
-    const { isActive, keys } = this.state;
     const className = classNames('c-context_list', this.props.className, {
-      'is-active': isActive,
+      'is-active': this.state.isActive,
     });
     const cleanProps = omit(this.props, 'className', 'options', 'getOption', 'onSelect');
 
     return (
       <ul {...cleanProps} className={className} onMouseLeave={this.handleMouseLeave}>
-        {keys.map(this.renderOption)}
+        {Object.keys(this.props.options).map(this.renderOption)}
       </ul>
     );
   }
