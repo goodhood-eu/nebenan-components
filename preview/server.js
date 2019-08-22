@@ -8,8 +8,10 @@ const { renderToString } = require('react-dom/server');
 
 const { StaticRouter } = require('react-router');
 const createRouter = require('./router');
-const MicroHelmet = require('../lib/micro_helmet');
+const MicroHelmetProvider = require('../lib/micro_helmet/provider');
 
+
+const { createElement: e } = React;
 const port = parseInt(process.env.PORT, 10) || 3000;
 
 const getHTML = (meta, content) => (`<!DOCTYPE html>
@@ -33,16 +35,18 @@ const getHTML = (meta, content) => (`<!DOCTYPE html>
 `);
 
 const renderApp = (req, res) => {
-  const context = {};
+  const helmetContext = {};
+  const routerContext = {};
   const routes = createRouter();
-  const Component = React.createElement(StaticRouter, { context, location: req.url }, routes);
-  const content = renderToString(Component);
 
-  if (context.url) return res.redirect(302, context.url);
+  const Component = e(StaticRouter, { context: routerContext, location: req.url }, routes);
+  const App = e(MicroHelmetProvider, { context: helmetContext }, Component);
 
-  const meta = MicroHelmet.rewind();
+  const content = renderToString(App);
 
-  res.send(getHTML(meta, content));
+  if (routerContext.url) return res.redirect(302, routerContext.url);
+
+  res.send(getHTML(helmetContext.meta, content));
 };
 
 app.set('port', port);
