@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unused-prop-types */
+
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import MicroHelmetContext from './context';
@@ -9,27 +11,8 @@ class MicroHelmet extends PureComponent {
   }
 
   render() {
-    const {
-      title,
-      defaultTitle,
-      titleTemplate,
-      description,
-      image,
-      robots,
-      canonical,
-    } = this.props;
-
     if (this.removeMetaProps) this.removeMetaProps();
-
-    this.removeMetaProps = this.context.addMetaProps({
-      title,
-      defaultTitle,
-      titleTemplate,
-      description,
-      image,
-      robots,
-      canonical,
-    });
+    this.removeMetaProps = this.context.addMetaProps(this.props);
 
     return null;
   }
