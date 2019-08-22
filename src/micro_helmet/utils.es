@@ -7,13 +7,13 @@ const proxyProps = [
   'canonical',
 ];
 
-export const collectMetaProps = (acc, props) => ({ ...acc, ...props });
+export const collectProps = (acc, props) => ({ ...acc, ...props });
 
-export const parseMetaProps = (metaProps) => {
-  const { title, titleTemplate, defaultTitle } = metaProps;
+export const parseProps = (props) => {
+  const { title, titleTemplate, defaultTitle } = props;
 
   const result = proxyProps.reduce((acc, prop) => {
-    if (metaProps[prop]) acc[prop] = metaProps[prop];
+    if (props[prop]) acc[prop] = props[prop];
     return acc;
   }, {});
 

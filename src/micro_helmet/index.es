@@ -7,12 +7,12 @@ import MicroHelmetContext from './context';
 
 class MicroHelmet extends PureComponent {
   componentWillUnmount() {
-    if (this.removeMetaProps) this.removeMetaProps();
+    if (this.removeProps) this.removeProps();
   }
 
   render() {
-    if (this.removeMetaProps) this.removeMetaProps();
-    this.removeMetaProps = this.context.addMetaProps(this.props);
+    if (this.removeProps) this.removeProps();
+    this.removeProps = this.context.addProps(this.props);
 
     return null;
   }

@@ -46,7 +46,7 @@ const renderApp = (req, res) => {
 
   if (routerContext.url) return res.redirect(302, routerContext.url);
 
-  res.send(getHTML(helmetContext.meta, content));
+  res.send(getHTML(helmetContext.value, content));
 };
 
 app.set('port', port);

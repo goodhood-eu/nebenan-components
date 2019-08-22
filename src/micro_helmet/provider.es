@@ -1,33 +1,33 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from './context';
-import { parseMetaProps, collectMetaProps } from './utils';
+import { parseProps, collectProps } from './utils';
 
 
 class MicroHelmetProvider extends PureComponent {
   constructor(props) {
     super(props);
-    this.metaProps = [];
+    this.propsArray = [];
   }
 
   generateContext() {
     const { context } = this.props;
-    context.meta = parseMetaProps(this.metaProps.reduce(collectMetaProps, {}));
+    context.value = parseProps(this.propsArray.reduce(collectProps, {}));
     if (process.browser) this.onChangeInBrowser();
   }
 
-  addMetaProps(props) {
-    this.metaProps.push(props);
+  addProps(props) {
+    this.propsArray.push(props);
     this.generateContext();
 
     return () => {
-      this.metaProps = this.metaProps.filter((item) => item !== props);
+      this.propsArray = this.propsArray.filter((item) => item !== props);
       this.generateContext();
     };
   }
 
   onChangeInBrowser() {
-    const { title } = this.props.context.meta;
+    const { title } = this.props.context.value;
     if (title && title !== document.title) document.title = title;
   }
 
