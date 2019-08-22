@@ -18,11 +18,14 @@ class MicroHelmetProvider extends PureComponent {
 
     bindTo(
       this,
+      'getProps',
       'addProps',
     );
 
     this.propsArray = [];
     this.staticContext = this.getDefaultContext();
+
+    if (props.context) props.context.getProps = this.getProps;
   }
 
   componentDidMount() {
@@ -34,24 +37,24 @@ class MicroHelmetProvider extends PureComponent {
     return { addProps };
   }
 
-  generateContext() {
-    const { context } = this.props;
-    context.value = parseProps(Object.assign({}, ...this.propsArray));
-    if (!isServerEnv) this.updateBrowserTitle();
+  getProps() {
+    return parseProps(Object.assign({}, ...this.propsArray));
   }
 
   addProps(props) {
     this.propsArray.push(props);
-    this.generateContext();
+    this.updateBrowserTitle();
 
     return () => {
       this.propsArray = this.propsArray.filter((item) => item !== props);
-      this.generateContext();
+      this.updateBrowserTitle();
     };
   }
 
   updateBrowserTitle() {
-    const { title } = this.props.context.value;
+    if (isServerEnv) return;
+
+    const { title } = this.getProps();
     if (title && title !== document.title) document.title = title;
   }
 
@@ -59,10 +62,6 @@ class MicroHelmetProvider extends PureComponent {
     return <Provider value={this.staticContext}>{this.props.children}</Provider>;
   }
 }
-
-MicroHelmetProvider.defaultProps = {
-  context: {},
-};
 
 MicroHelmetProvider.propTypes = {
   context: PropTypes.object,
