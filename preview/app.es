@@ -3,7 +3,7 @@ import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import createRouter from './router';
-import MicroHelmetProvider from '../lib/micro_helmet/provider';
+import { Provider as MicroHelmetProvider } from '../lib/micro_helmet';
 
 
 const routes = createRouter();

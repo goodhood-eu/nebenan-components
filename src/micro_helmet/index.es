@@ -2,16 +2,17 @@
 
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { invoke } from 'nebenan-helpers/lib/utils';
 import MicroHelmetContext from './context';
 
 
 class MicroHelmet extends PureComponent {
   componentWillUnmount() {
-    if (this.removeProps) this.removeProps();
+    invoke(this.removeProps);
   }
 
   render() {
-    if (this.removeProps) this.removeProps();
+    invoke(this.removeProps);
     this.removeProps = this.context.addProps(this.props);
 
     return null;
@@ -30,4 +31,5 @@ MicroHelmet.propTypes = {
   canonical: PropTypes.string,
 };
 
+export { default as Provider } from './provider';
 export default MicroHelmet;

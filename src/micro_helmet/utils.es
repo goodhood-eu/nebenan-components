@@ -7,8 +7,6 @@ const proxyProps = [
   'canonical',
 ];
 
-export const collectProps = (acc, props) => ({ ...acc, ...props });
-
 export const parseProps = (props) => {
   const { title, titleTemplate, defaultTitle } = props;
 

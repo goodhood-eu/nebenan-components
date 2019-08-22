@@ -8,7 +8,7 @@ const { renderToString } = require('react-dom/server');
 
 const { StaticRouter } = require('react-router');
 const createRouter = require('./router');
-const MicroHelmetProvider = require('../lib/micro_helmet/provider');
+const { Provider: MicroHelmetProvider } = require('../lib/micro_helmet');
 
 
 const { createElement: e } = React;
