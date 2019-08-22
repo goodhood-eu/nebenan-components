@@ -3,7 +3,7 @@ const app = require('express')();
 const serveStatic = require('serve-static');
 const morgan = require('morgan');
 
-const React = require('react');
+const { createElement: e } = require('react');
 const { renderToString } = require('react-dom/server');
 
 const { StaticRouter } = require('react-router');
@@ -11,7 +11,6 @@ const createRouter = require('./router');
 const { Provider: MicroHelmetProvider } = require('../lib/micro_helmet');
 
 
-const { createElement: e } = React;
 const port = parseInt(process.env.PORT, 10) || 3000;
 
 const getHTML = (meta, content) => (`<!DOCTYPE html>
