@@ -1,45 +1,27 @@
-// A mixture of https://github.com/nfl/react-helmet and https://github.com/gaearon/react-document-title
 /* eslint-disable react/no-unused-prop-types */
 
-import { Children } from 'react';
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import withSideEffect from 'react-side-effect';
+import { invoke } from 'nebenan-helpers/lib/utils';
+import MicroHelmetContext from './context';
 
-const stringRegex = /%s/g;
-const proxyProps = [
-  'title',
-  'description',
-  'image',
-  'robots',
-  'canonical',
-];
 
-const parseProps = (headProps) => {
-  const { title, titleTemplate, defaultTitle } = headProps;
+class MicroHelmet extends PureComponent {
+  componentWillUnmount() {
+    invoke(this.removeProps);
+  }
 
-  const result = proxyProps.reduce((acc, prop) => {
-    if (headProps[prop]) acc[prop] = headProps[prop];
-    return acc;
-  }, {});
+  render() {
+    invoke(this.removeProps);
+    this.removeProps = this.context.addProps(this.props);
 
-  if (title && titleTemplate) result.title = titleTemplate.replace(stringRegex, title);
-  else if (!title && defaultTitle) result.title = defaultTitle;
+    return null;
+  }
+}
 
-  return result;
-};
-
-const reducePropsToState = (propsList) => parseProps(propsList.reduce((acc, headProps) => (
-  Object.assign(acc, headProps)
-), {}));
-
-const handleStateChangeOnClient = ({ title }) => {
-  if (title && title !== document.title) document.title = title;
-};
-
-const MicroHelmet = ({ children }) => (children ? Children.only(children) : null);
+MicroHelmet.contextType = MicroHelmetContext;
 
 MicroHelmet.propTypes = {
-  children: PropTypes.node,
   title: PropTypes.string,
   defaultTitle: PropTypes.string,
   titleTemplate: PropTypes.string,
@@ -49,4 +31,5 @@ MicroHelmet.propTypes = {
   canonical: PropTypes.string,
 };
 
-export default withSideEffect(reducePropsToState, handleStateChangeOnClient)(MicroHelmet);
+export { default as Provider } from './provider';
+export default MicroHelmet;
