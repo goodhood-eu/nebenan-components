@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
+import { withRouter } from 'react-router';
 import { invoke } from 'nebenan-helpers/lib/utils';
-import withHistory, { historyPropTypes } from 'nebenan-react-hocs/lib/history';
+import { historyPropTypes } from 'nebenan-react-hocs/lib/history';
 
 import SideScroller from '../side_scroller';
 
@@ -63,4 +64,4 @@ TabScroller.propTypes = {
   activeIndex: PropTypes.number,
 };
 
-export default withHistory(TabScroller);
+export default withRouter(TabScroller);

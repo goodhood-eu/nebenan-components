@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
-import withHistory, { historyPropTypes } from 'nebenan-react-hocs/lib/history';
+import { withRouter } from 'react-router';
+import { historyPropTypes } from 'nebenan-react-hocs/lib/history';
 
 const defaultGetItem = (index, items) => items[index].text;
 
@@ -77,4 +78,4 @@ TabBar.propTypes = {
   children: PropTypes.node,
 };
 
-export default withHistory(TabBar);
+export default withRouter(TabBar);

@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import omit from 'lodash/omit';
 import classNames from 'classnames';
 import marked from 'marked';
 import { invoke } from 'nebenan-helpers/lib/utils';
-import withHistory, { historyPropTypes } from 'nebenan-react-hocs/lib/history';
+import { historyPropTypes } from 'nebenan-react-hocs/lib/history';
 
 import { sanitizeText } from './utils';
 
@@ -77,4 +78,4 @@ Markdown.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default withHistory(Markdown);
+export default withRouter(Markdown);
