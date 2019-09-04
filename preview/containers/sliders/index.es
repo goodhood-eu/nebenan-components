@@ -51,6 +51,7 @@ class Sliders extends PureComponent {
   renderImage(image) {
     return (
       <span
+        key={image.url}
         className="preview-sliders-slideshow-image"
         style={getBackgroundImageStyle(image.url)}
       />
@@ -67,7 +68,7 @@ class Sliders extends PureComponent {
       text = <span className="preview-sliders-side_scroller-block">{index}</span>;
     }
 
-    return <li className="preview-sliders-side_scroller-item">{text}</li>;
+    return <li className="preview-sliders-side_scroller-item" key={index}>{text}</li>;
   }
 
   render() {
