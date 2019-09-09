@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { withRouter } from 'react-router';
 import { invoke } from 'nebenan-helpers/lib/utils';
+import { stripOriginFromUrl } from 'nebenan-helpers/lib/routes';
 import { historyPropTypes } from 'nebenan-react-hocs/lib/history';
 
 import SideScroller from '../side_scroller';
@@ -19,7 +20,7 @@ class TabScroller extends PureComponent {
   handleClick(key) {
     const { items, history } = this.props;
     const { href, callback } = items[key];
-    if (href) history.push(href);
+    if (href) history.push(stripOriginFromUrl(href, global.location.origin));
     invoke(callback, key);
   }
 

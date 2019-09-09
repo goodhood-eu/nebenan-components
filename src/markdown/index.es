@@ -5,6 +5,7 @@ import omit from 'lodash/omit';
 import classNames from 'classnames';
 import marked from 'marked';
 import { invoke } from 'nebenan-helpers/lib/utils';
+import { stripOriginFromUrl } from 'nebenan-helpers/lib/routes';
 import { historyPropTypes } from 'nebenan-react-hocs/lib/history';
 
 import { sanitizeText } from './utils';
@@ -32,8 +33,9 @@ class Markdown extends PureComponent {
     if (isLink && href && !isEmail) {
       event.preventDefault();
       const isSameDomain = href.startsWith(global.location.origin);
+      const path = stripOriginFromUrl(href, global.location.origin);
 
-      if ((isLocal || isSameDomain) && !hasExtension) this.props.history.push(href);
+      if ((isLocal || isSameDomain) && !hasExtension) this.props.history.push(path);
       else global.open(href);
     }
 

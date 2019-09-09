@@ -4,8 +4,11 @@ import classNames from 'classnames';
 import omit from 'lodash/omit';
 import { withRouter } from 'react-router';
 import { historyPropTypes } from 'nebenan-react-hocs/lib/history';
+import { invoke } from 'nebenan-helpers/lib/utils';
+import { stripOriginFromUrl } from 'nebenan-helpers/lib/routes';
 
 const defaultGetItem = (index, items) => items[index].text;
+
 
 class TabBar extends PureComponent {
   constructor(props) {
@@ -15,9 +18,9 @@ class TabBar extends PureComponent {
 
   handleClick(key) {
     const { items, history } = this.props;
-    const item = items[key];
-    if (item.href) history.push(item.href);
-    if (item.callback) item.callback(key);
+    const { href, callback } = items[key];
+    if (href) history.push(stripOriginFromUrl(href, global.location.origin));
+    invoke(callback, key);
   }
 
   renderItem(item, key) {
