@@ -7,7 +7,7 @@
   "homepage": "https://nebenan.de/",
   "repository": "good-hood-gmbh/nebenan-components",
   "bugs": "https://github.com/good-hood-gmbh/nebenan-components/issues",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "engines": {
     "node": "^10.x.x"
   },
@@ -99,7 +99,7 @@
     "react": "^16.9.0",
     "classnames": "^2.2.6",
     "nebenan-helpers": "^3.6.0 || ^4.0.0",
-    "nebenan-react-hocs": "^5.0.1",
+    "nebenan-react-hocs": "^5.2.1",
     "nebenan-ui-kit": "^2.5.0",
     "smartcontent": "^3.5.0",
     "emojitsu": "^3.0.0",
