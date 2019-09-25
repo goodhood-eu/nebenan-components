@@ -63,6 +63,7 @@ class Scrollable extends PureComponent {
     this.deactivateSwipe();
     this.stopListeningToResize();
     this.isComponentMounted = false;
+    this.updateScrollPosition.cancel();
   }
 
   getDefaultState() {

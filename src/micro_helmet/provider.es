@@ -32,6 +32,10 @@ class MicroHelmetProvider extends PureComponent {
     this.updateBrowserTitle = debounce(this.updateBrowserTitle, BROWSER_UPDATE_LIMIT);
   }
 
+  componentWillUnmount() {
+    this.updateBrowserTitle.cancel();
+  }
+
   getDefaultContext() {
     const { addProps } = this;
     return { addProps };
