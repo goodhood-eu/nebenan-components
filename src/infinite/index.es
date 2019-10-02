@@ -41,6 +41,7 @@ class Infinite extends PureComponent {
   componentWillUnmount() {
     this.deactivate();
     this.isComponentMounted = false;
+    this.handleScroll.cancel();
   }
 
   startScroller() {
