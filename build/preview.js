@@ -64,7 +64,7 @@ gulp.task('preview:styles', () => (
     .pipe(gulp.dest(PUBLIC_FOLDER))
 ));
 
-gulp.task('linkify', () => (
+gulp.task('preview:linkify', () => (
   gulp.src(`${__dirname}/../node_modules/nebenan-ui-kit/fonts/`)
     .pipe(gulp.symlink(`${PUBLIC_FOLDER}/fonts/nebenan-ui-kit`))
 ));
@@ -72,5 +72,5 @@ gulp.task('linkify', () => (
 gulp.task('preview', gulp.series(
   'preview:clean',
   gulp.parallel('preview:babel', 'preview:styles'),
-  'linkify',
+  'preview:linkify',
 ));

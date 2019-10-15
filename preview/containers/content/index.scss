@@ -1,6 +1,6 @@
 .preview-content {
   .preview-tooltips > ul {
-    @include clearfix();
+    @include legacy-clearfix();
     margin: 30px 0;
 
     > li {
