@@ -1,12 +1,15 @@
 build/
 !lib/
-!style.css
 preview/
+!src/
 test/
 .babelrc
+.browserslistrc
 .eslintignore
 .eslintrc
 .gitignore
 .npmignore
-.stylintrc
+.stylelintignore
+.stylelintrc
 gulpfile.js
+!style.css
