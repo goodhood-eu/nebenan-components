@@ -29,8 +29,8 @@ const scripts = [
 ];
 
 const stylesheets = [
-  'src/**/*.styl',
-  'preview/**/*.styl',
+  'src/**/*.scss',
+  'preview/**/*.scss',
 ];
 
 
@@ -44,9 +44,7 @@ gulp.task('build', gulp.series(
 gulp.task('watch', (done) => {
   const livereload = require('tiny-lr');
   const nodemon = require('nodemon')(nodemonOptions);
-  const reloadPage = () => {
-    livereload.changed('app.js');
-  };
+  const reloadPage = () => { livereload.changed('app.js'); };
 
   const reloadStylesheets = () => {
     livereload.changed('app.css');
