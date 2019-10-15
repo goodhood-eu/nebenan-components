@@ -1,0 +1,14 @@
+.c-file_picker {
+  display: inline-block;
+  overflow: hidden; // fixes Firefox glitch with invisible inputs breaking layout
+  position: relative;
+}
+
+// standard label click fails on iOS
+.c-file_picker-input {
+  @import block-fill();
+  z-index: 1;
+  opacity: 0;
+
+  cursor: pointer;
+}

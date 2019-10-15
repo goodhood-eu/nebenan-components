@@ -1,0 +1,22 @@
+.c-dots {
+  display: block;
+  text-align: center;
+
+  > li {
+    @include block-round(15px);
+
+    margin-left: 10px;
+    display: inline-block;
+    cursor: pointer;
+    background-color: $color-gray-05;
+    border: 2px solid $color-gray-00;
+
+    &.is-active {
+      background: $color-green-02;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

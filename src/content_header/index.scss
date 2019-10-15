@@ -1,0 +1,21 @@
+.c-content_header-description {
+  margin-top: 5px;
+  display: block;
+}
+
+.c-content_header-controls {
+  @include legacy-clearfix;
+  margin: 10px 0;
+}
+
+.c-content_header-action {
+  float: right;
+}
+
+.c-content_header.has-action .c-content_header-content {
+  > a:only-child,
+  > .ui-link:only-child {
+    margin-top: 5px;
+    display: inline-block;
+  }
+}

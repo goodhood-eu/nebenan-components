@@ -1,0 +1,34 @@
+.c-accordion {
+  overflow: hidden;
+  background: $color-gray-09;
+  box-shadow: $shadow-bottom-default;
+  border-radius: $border-radius-s;
+}
+
+.c-accordion-item {
+  border-top: $border-light;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  &.is-active .c-accordion-item-title {
+    background-color: $color-green-05;
+  }
+}
+
+.c-accordion-item-title {
+  padding: 15px;
+  cursor: pointer;
+  color: $color-gray-00;
+  font-weight: $font-weight-l;
+
+  i {
+    float: right;
+    color: $color-gray-02;
+  }
+}
+
+.c-accordion-item-content {
+  padding: 15px;
+}
