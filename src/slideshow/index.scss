@@ -1,0 +1,25 @@
+.c-slideshow {
+  overflow-x: hidden;
+
+  &.is-animated .c-slideshow-draggable {
+    transition: transform $transition;
+  }
+
+  .c-dots {
+    margin-top: 10px;
+  }
+}
+
+.c-slideshow-draggable {
+  display: inline-block;
+}
+
+.c-slideshow-list {
+  @include cursor-draggable();
+  display: flex;
+  flex-shrink: 0;
+
+  > li {
+    padding: 5px;
+  }
+}

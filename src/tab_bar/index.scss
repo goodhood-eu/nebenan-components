@@ -1,0 +1,71 @@
+.c-tab_bar {
+  @include legacy-clearfix();
+
+  background: $color-gray-08;
+  border-radius: $border-radius-m $border-radius-m 0 0;
+  box-shadow: inset 0 -3px 3px -3px rgba($color-gray-00, .2);
+
+  & + .ui-card-section {
+    border-top: none;
+  }
+}
+
+.c-tab_bar-list {
+  display: inline-block;
+}
+
+.c-tab_bar-item {
+  padding: 15px 5px;
+
+  display: inline-block;
+  position: relative;
+
+  font-size: 10px;
+  font-weight: $font-weight-l;
+  text-transform: uppercase;
+  color: $color-gray-02;
+  cursor: pointer;
+
+  @media ($media-m) {
+    padding: 15px;
+    font-size: $font-size-m;
+  }
+
+  &:first-child {
+    border-radius: $border-radius-m 0 0 0;
+  }
+
+  &.is-active {
+    position: relative;
+    color: $color-gray-09;
+    background: $color-green-02;
+
+    &::after {
+      margin-top: 11px;
+      margin-left: -7px;
+
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      z-index: 1;
+      border: 7px solid transparent;
+      border-bottom-color: $color-gray-09;
+    }
+  }
+}
+
+.c-tab_bar-content {
+  padding: 15px;
+  display: inline-block;
+}
+
+.c-tab_bar-action {
+  padding: 15px;
+  float: right;
+
+  i {
+    @include icon-size(12px);
+    color: $color-gray-02;
+  }
+}
