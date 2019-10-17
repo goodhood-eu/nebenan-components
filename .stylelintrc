@@ -1,3 +1,6 @@
 {
-  "extends": "stylelint-config-nebenan"
+  "extends": "stylelint-config-nebenan",
+  "rules": {
+    "scss/at-mixin-argumentless-call-parentheses": "never"
+  }
 }

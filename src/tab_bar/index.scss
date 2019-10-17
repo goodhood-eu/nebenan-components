@@ -1,5 +1,5 @@
 .c-tab_bar {
-  @include legacy-clearfix();
+  @include legacy-clearfix;
 
   background: $color-gray-08;
   border-radius: $border-radius-m $border-radius-m 0 0;

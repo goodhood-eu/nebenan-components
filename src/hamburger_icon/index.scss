@@ -1,0 +1,45 @@
+.c-hamburger_icon {
+  $icon-size: 24px;
+
+  width: $icon-size;
+  height: $icon-size;
+  display: inline-block;
+  position: relative;
+
+  i {
+    @include block-fill(100%, 2px);
+    background: $color-gray-09;
+    transition: transform $transition, opacity $transition;
+    pointer-events: none;
+  }
+
+  .c-hamburger_icon-1 {
+    top: 5px;
+    transform-origin: left center;
+  }
+
+  .c-hamburger_icon-2 {
+    top: (($icon-size / 2) - 1px);
+  }
+
+  .c-hamburger_icon-3 {
+    top: auto;
+    bottom: 5px;
+    transform-origin: left center;
+  }
+
+  &.is-active {
+    .c-hamburger_icon-2 {
+      transform: translateX(-146%);
+      opacity: 0;
+    }
+
+    .c-hamburger_icon-1 {
+      transform: translate(3px, -2px) rotateZ(45deg);
+    }
+
+    .c-hamburger_icon-3 {
+      transform: translate(3px, 3px) rotateZ(-45deg);
+    }
+  }
+}

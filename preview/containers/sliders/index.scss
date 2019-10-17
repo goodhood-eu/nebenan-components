@@ -37,8 +37,8 @@
 }
 
 .preview-sliders-slideshow-image {
-  @include block-fill();
-  @include background-fill();
+  @include block-fill;
+  @include background-fill;
 }
 
 .preview-sliders-side_scroller-list {

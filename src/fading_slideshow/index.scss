@@ -15,7 +15,7 @@
 }
 
 .c-fading_slideshow-item {
-  @include block-fill();
+  @include block-fill;
 
   opacity: 0;
   transition: opacity 1s ease;

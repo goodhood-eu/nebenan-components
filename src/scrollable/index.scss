@@ -1,0 +1,43 @@
+$scrollable-control-width: 8px;
+
+.c-scrollable {
+  overflow: hidden;
+  position: relative;
+}
+
+.c-scrollable-container {
+  height: 100%;
+  margin-right: -30px;
+  padding-right: 30px;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.c-scrollable-control {
+  width: $scrollable-control-width;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: rgba($color-dark-alpha, .15);
+  border-radius: ($scrollable-control-width / 2);
+
+  opacity: 0;
+  transition: opacity $transition;
+
+  i {
+    width: $scrollable-control-width;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba($color-dark-alpha, .4);
+    border-radius: ($scrollable-control-width / 2);
+  }
+
+  &.is-active {
+    opacity: 1;
+  }
+}

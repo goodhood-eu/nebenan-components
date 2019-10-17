@@ -15,7 +15,7 @@
 }
 
 .c-slideshow-list {
-  @include cursor-draggable();
+  @include cursor-draggable;
   display: flex;
   flex-shrink: 0;
 

@@ -1,0 +1,66 @@
+.c-loading-bar {
+  width: 100%;
+  height: 2px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  i {
+    @include block-fill;
+    transform: translateX(-100%);
+    background: $color-green-02;
+  }
+
+  &.is-active i {
+    transition: transform $transition;
+    transform: translateX(-30%);
+  }
+
+  &.is-complete i {
+    transform: translateX(0);
+  }
+}
+
+.c-loading-spinner {
+  $size: 20px;
+  $min-scale: .2;
+  $max-scale: 1;
+  $duration: 1s;
+
+  width: ($size * 3);
+  display: inline-block;
+
+  @keyframes pulse-loader-size {
+    0% {
+      transform: scale($min-scale);
+    }
+
+    50% {
+      transform: scale($max-scale);
+    }
+
+    100% {
+      transform: scale($min-scale);
+    }
+  }
+
+  &::before,
+  &::after {
+    content: '';
+  }
+
+  &::before,
+  &::after,
+  i {
+    @include block-round($size);
+    background: $color-gray-03;
+    animation: $duration $easing infinite pulse-loader-size;
+  }
+
+  i {
+    animation-delay: ($duration / 2);
+    transform: scale($min-scale);
+  }
+}
