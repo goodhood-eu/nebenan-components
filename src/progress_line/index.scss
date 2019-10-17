@@ -1,0 +1,18 @@
+.c-progress_line {
+  height: 2px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.c-progress_line-step {
+  margin-left: 2px;
+  flex-grow: 1;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &.is-active {
+    background: $color-blue-00;
+  }
+}

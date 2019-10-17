@@ -24,11 +24,17 @@
     display: flex;
     justify-content: space-between;
 
-    ul {
+    > ul {
       width: 45%;
-    }
 
-    li {
+      > li {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .preview-progress_line {
+    > ul > li {
       margin-top: 10px;
     }
   }

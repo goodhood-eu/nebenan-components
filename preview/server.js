@@ -50,10 +50,13 @@ const renderApp = (req, res) => {
 
 app.set('port', port);
 
-const emojis = serveStatic(`${__dirname}/../node_modules/emojione-assets/png/`, { redirect: false });
+const emojis = serveStatic(`${__dirname}/../node_modules/emoji-assets/png/`, { redirect: false });
+const fonts = serveStatic(`${__dirname}/../node_modules/nebenan-ui-kit/fonts/`, { redirect: false });
 app.use(morgan('dev'));
+
+app.use('/images/emojis-5.0.2', emojis);
+app.use('/fonts/nebenan-ui-kit', fonts);
 app.use(serveStatic(`${__dirname}/public`, { redirect: false }));
-app.use('/images/emojis-v4.0.0', emojis);
 
 app.use(renderApp);
 app.get('*', (req, res) => res.send('Unhandled request'));

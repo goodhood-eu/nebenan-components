@@ -48,7 +48,7 @@
     "classnames": "^2.2.6",
     "date-fns": "^2.5.0",
     "del": "^5.1.0",
-    "emojione-assets": "^4.5.0",
+    "emoji-assets": "^5.0.2",
     "emojitsu": "^3.0.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.15.1",
