@@ -11,8 +11,9 @@ $tooltip-arrow-size: 5px;
     position: absolute;
     z-index: 1;
 
-    background: $color-gray-01;
+    background: $color-gray-00;
     border-radius: $border-radius-m;
+    box-shadow: $shadow-bottom-default;
 
     font-size: 12px;
     line-height: 16px;
@@ -45,7 +46,7 @@ $tooltip-arrow-size: 5px;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border-bottom-color: $color-gray-01;
+    border-bottom-color: $color-gray-00;
   }
 }
 
@@ -59,7 +60,7 @@ $tooltip-arrow-size: 5px;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border-top-color: $color-gray-01;
+    border-top-color: $color-gray-00;
   }
 }
 
@@ -73,7 +74,7 @@ $tooltip-arrow-size: 5px;
     top: 50%;
     right: 100%;
     transform: translateY(-50%);
-    border-right-color: $color-gray-01;
+    border-right-color: $color-gray-00;
   }
 }
 
@@ -87,6 +88,6 @@ $tooltip-arrow-size: 5px;
     top: 50%;
     left: 100%;
     transform: translateY(-50%);
-    border-left-color: $color-gray-01;
+    border-left-color: $color-gray-00;
   }
 }
