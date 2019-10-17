@@ -1,0 +1,45 @@
+.c-logo {
+  display: inline-block;
+
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+
+  @at-root a#{&} {
+    color: inherit;
+  }
+
+  i {
+    @include icon-size(30px);
+    vertical-align: middle;
+  }
+
+  .c-logo-wrap {
+    margin-top: -5px;
+    margin-left: 5px;
+    display: inline-block;
+    position: relative;
+
+    > i {
+      width: 80px;
+      height: 1px;
+
+      &::before {
+        font-size: 80px;
+        line-height: 1px;
+      }
+    }
+
+    > em {
+      position: absolute;
+      top: 18px;
+      left: 3px;
+
+      font-style: normal;
+      font-size: 8px;
+      line-height: 8px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  }
+}
