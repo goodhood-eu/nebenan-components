@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/header';
 
 export default () => (
-  <article>
+  <article className="preview-index">
     <Header noLink>Index</Header>
     <div className="preview-section">
       <ul className="ui-options">

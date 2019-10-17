@@ -1,0 +1,28 @@
+.c-tab_scroller {
+  background: $color-gray-09;
+}
+
+.c-tab_scroller-list {
+  display: flex;
+}
+
+.c-tab_scroller-item {
+  padding: 15px 15px 10px;
+  display: inline-block;
+
+  font-size: $font-size-m;
+  font-weight: $font-weight-l;
+  text-transform: uppercase;
+  color: $color-gray-03;
+  border-bottom: 5px solid transparent;
+  white-space: nowrap;
+
+  &.is-clickable {
+    cursor: pointer;
+  }
+
+  &.is-active {
+    color: $color-gray-00;
+    border-bottom-color: $color-green-02;
+  }
+}

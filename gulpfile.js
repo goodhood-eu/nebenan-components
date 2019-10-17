@@ -29,8 +29,8 @@ const scripts = [
 ];
 
 const stylesheets = [
-  'src/**/*.styl',
-  'preview/**/*.styl',
+  'src/**/*.scss',
+  'preview/**/*.scss',
 ];
 
 
@@ -39,17 +39,16 @@ gulp.task('build', gulp.series(
   'preview:clean',
   gulp.parallel('compile:babel', 'compile:styles'),
   gulp.parallel('preview:babel', 'preview:styles'),
+  'preview:linkify',
 ));
 
 gulp.task('watch', (done) => {
   const livereload = require('tiny-lr');
   const nodemon = require('nodemon')(nodemonOptions);
-  const reloadPage = () => {
-    livereload.changed('app.js');
-  };
+  const reloadPage = () => { livereload.changed('script.js'); };
 
   const reloadStylesheets = () => {
-    livereload.changed('app.css');
+    livereload.changed('style.css');
     return Promise.resolve();
   };
 

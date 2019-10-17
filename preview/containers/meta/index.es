@@ -20,7 +20,10 @@ const Meta = () => {
       <Header>Meta</Header>
       <p>Check window title</p>
 
-      <p>Try to change window title: <input value={title} onChange={handleInputChange} /></p>
+      <p>
+        Try to change window title:
+        <input className="ui-input" value={title} onChange={handleInputChange} />
+      </p>
 
       <MicroHelmet title="Parent title" />
       <div>

@@ -1,0 +1,45 @@
+.c-progress {
+  height: 20px;
+
+  overflow: hidden;
+  position: relative;
+
+  border-radius: $border-radius-m;
+  background: $color-gray-05;
+
+  color: $color-gray-09;
+  font-size: $font-size-s;
+  line-height: 20px;
+  text-align: right;
+}
+
+.c-progress-state {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transition: width $transition;
+
+  em {
+    padding: 0 5px;
+    font-style: normal;
+  }
+}
+
+.c-progress-small {
+  height: 10px;
+  border-radius: 5px;
+
+  .c-progress-state {
+    @include text-invisible;
+  }
+}
+
+.c-progress-primary .c-progress-state {
+  background: $color-green-02;
+}
+
+.c-progress-secondary .c-progress-state {
+  background: $color-base-01;
+}
