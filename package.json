@@ -100,10 +100,11 @@
   },
   "peerDependencies": {
     "@babel/runtime": "^7.6.3",
+    "classnames": "^2.2.6",
+    "date-fns": "^2.5.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
-    "classnames": "^2.2.6",
     "nebenan-helpers": "^3.6.0 || ^4.1.0",
     "nebenan-react-hocs": "^5.2.1",
     "nebenan-ui-kit": "^3.0.0-beta.3",
