@@ -1,5 +1,8 @@
 .c-logo {
+  height: 30px;
   display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
 
   cursor: pointer;
   text-align: left;
@@ -9,31 +12,34 @@
     color: inherit;
   }
 
-  i {
+  > i {
     @include icon-size(30px);
-    vertical-align: middle;
+    display: block;
+    float: left;
   }
 
   .c-logo-wrap {
-    margin-top: -5px;
-    margin-left: 5px;
-    display: inline-block;
-    position: relative;
+    margin-left: 7px;
+    padding-top: 7px;
+    display: block;
+    float: left;
 
     > i {
       width: 80px;
-      height: 1px;
+      height: 14px;
+      display: block;
 
       &::before {
         font-size: 80px;
-        line-height: 1px;
+        line-height: 14px;
       }
     }
 
     > em {
-      position: absolute;
-      top: 18px;
-      left: 3px;
+      margin-top: 1px;
+      margin-left: 2.5px;
+
+      display: block;
 
       font-style: normal;
       font-size: 8px;

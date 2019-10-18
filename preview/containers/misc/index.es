@@ -58,13 +58,13 @@ class Inputs extends PureComponent {
 
         <div className="preview-section">
           <Logo />
-        </div>
-
-        <div className="preview-section">
           <Logo>amazing subtitle</Logo>
+          <Logo to="/" />
         </div>
 
-        <div className="preview-section">
+        <div className="preview-section preview-dark">
+          <Logo />
+          <Logo>Für nette Leute</Logo>
           <Logo to="/" />
         </div>
 
