@@ -10,7 +10,7 @@ import Logo from '../../../lib/logo';
 import LoadingBar, { LoadingSpinner } from '../../../lib/loading';
 
 const todayDate = (new Date()).toISOString();
-const greatDate = (new Date(11, 10, 2011)).toISOString();
+const greatDate = (new Date('1988-05-27T23:37:00')).toISOString();
 
 
 class Inputs extends PureComponent {
