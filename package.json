@@ -12,7 +12,8 @@
     "node": "^10.x.x"
   },
   "scripts": {
-    "reinstall": "rm -rf node_modules package-lock.json && npm install",
+    "reinstall": "rm -rf node_modules package-lock.json && npm install && npm decache",
+    "decache": "find ./build -type f -name '.browserify-cache.json' -delete || echo \"\\033[0;32mAlready decached!\\033[0m\"",
     "check": "npm run test && npm run lint && echo \"\\033[0;32mReady to publish\\033[0m\"",
     "gulp": "gulp",
     "compile": "NODE_ENV=production npm run gulp compile",
