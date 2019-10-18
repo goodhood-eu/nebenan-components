@@ -60,12 +60,16 @@ class Inputs extends PureComponent {
           <Logo />
           <Logo>amazing subtitle</Logo>
           <Logo to="/" />
+          <Logo compact />
+          <Logo compact to="/" />
         </div>
 
         <div className="preview-section preview-dark">
           <Logo />
           <Logo>Für nette Leute</Logo>
           <Logo to="/" />
+          <Logo compact />
+          <Logo compact to="/" />
         </div>
 
         <div className="preview-section">

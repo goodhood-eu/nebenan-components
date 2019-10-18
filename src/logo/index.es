@@ -4,21 +4,20 @@ import classNames from 'classnames';
 
 
 const Logo = (props) => {
-  const { to, localeName, children, ...cleanProps } = props;
+  const { compact, to, localeName, children, ...cleanProps } = props;
   const className = classNames('c-logo', props.className);
 
-  let subtitle;
-  if (children) subtitle = <em>{children}</em>;
-
-  const content = (
-    <>
-      <i className="icon-logo" />
+  let text;
+  if (!compact) {
+    text = (
       <span className="c-logo-wrap">
         <i className={`icon-logo_type_${localeName}`} />
-        {subtitle}
+        {children && <em>{children}</em>}
       </span>
-    </>
-  );
+    );
+  }
+
+  const content = <><i className="icon-logo" />{text}</>;
 
   if (to) return <a {...cleanProps} className={className} href={to}>{content}</a>;
 
@@ -26,11 +25,13 @@ const Logo = (props) => {
 };
 
 Logo.defaultProps = {
+  compact: false,
   localeName: 'de_de',
 };
 
 Logo.propTypes = {
   className: PropTypes.string,
+  compact: PropTypes.bool.isRequired,
   to: PropTypes.node,
   localeName: PropTypes.node.isRequired,
   children: PropTypes.node,
