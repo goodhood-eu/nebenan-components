@@ -15,6 +15,7 @@ import TabBar from '../../../lib/tab_bar';
 import FlatTabBar from '../../../lib/flat_tab_bar';
 import LinkHeader from '../../../lib/link_header';
 import Progress from '../../../lib/progress';
+import ProgressLine from '../../../lib/progress_line';
 import PhoneNumber from '../../../lib/phone_number';
 
 
@@ -31,7 +32,7 @@ const headerAction = (
   <span className="ui-button ui-button-small ui-button-primary">Button</span>
 );
 
-const action = 'x';
+const action = <i className="icon-cross ui-link" />;
 
 
 class Inputs extends PureComponent {
@@ -72,6 +73,15 @@ class Inputs extends PureComponent {
             <li><Progress state="75%" type="secondary" size="small" /></li>
             <li><Progress state={0} type="secondary" /></li>
             <li><Progress state="0%" type="secondary" size="small" /></li>
+          </ul>
+        </div>
+
+        <div className="preview-section preview-progress_line">
+          <ul>
+            <li><ProgressLine /></li>
+            <li><ProgressLine steps={3} current={1} /></li>
+            <li><ProgressLine steps={10} current={4} /></li>
+            <li><ProgressLine steps={10} current={9} /></li>
           </ul>
         </div>
 

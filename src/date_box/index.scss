@@ -1,0 +1,34 @@
+.c-date_box {
+  &.is-disabled {
+    background: $color-gray-02;
+    color: $color-gray-09;
+  }
+
+  strong {
+    padding-top: 12px;
+    display: block;
+    font-size: 17px;
+    line-height: 17px;
+  }
+
+  small {
+    display: block;
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: $font-weight-l;
+    text-transform: uppercase;
+  }
+
+  &.ui-iconbox-label-large {
+    strong {
+      padding-top: 21px;
+      font-size: 26px;
+      line-height: 26px;
+    }
+
+    small {
+      font-size: 12px;
+      line-height: 12px;
+    }
+  }
+}

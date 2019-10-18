@@ -7,12 +7,13 @@
   "homepage": "https://nebenan.de/",
   "repository": "good-hood-gmbh/nebenan-components",
   "bugs": "https://github.com/good-hood-gmbh/nebenan-components/issues",
-  "version": "8.0.0-beta.0",
+  "version": "8.0.0-beta.1",
   "engines": {
     "node": "^10.x.x"
   },
   "scripts": {
-    "reinstall": "rm -rf node_modules package-lock.json && npm install",
+    "reinstall": "rm -rf node_modules package-lock.json && npm install && npm run decache",
+    "decache": "find ./build -type f -name '.browserify-cache.json' -delete || echo \"\\033[0;32mAlready decached!\\033[0m\"",
     "check": "npm run test && npm run lint && echo \"\\033[0;32mReady to publish\\033[0m\"",
     "gulp": "gulp",
     "compile": "NODE_ENV=production npm run gulp compile",
@@ -48,7 +49,7 @@
     "classnames": "^2.2.6",
     "date-fns": "^2.5.0",
     "del": "^5.1.0",
-    "emojione-assets": "^4.5.0",
+    "emoji-assets": "^5.0.2",
     "emojitsu": "^3.0.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.15.1",
@@ -100,10 +101,11 @@
   },
   "peerDependencies": {
     "@babel/runtime": "^7.6.3",
+    "classnames": "^2.2.6",
+    "date-fns": "^2.5.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
-    "classnames": "^2.2.6",
     "nebenan-helpers": "^3.6.0 || ^4.1.0",
     "nebenan-react-hocs": "^5.2.1",
     "nebenan-ui-kit": "^3.0.0-beta.3",

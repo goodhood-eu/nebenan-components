@@ -1,0 +1,16 @@
+.c-icon_box {
+  @include text-center(i);
+
+  &.is-disabled {
+    background: $color-gray-02;
+    color: $color-gray-09;
+  }
+
+  i {
+    @include icon-size(22px);
+  }
+
+  &.ui-iconbox-label-large i {
+    @include icon-size(32px);
+  }
+}
