@@ -2,7 +2,7 @@ import React from 'react';
 
 import Header from '../../components/header';
 
-import content from '../../sample_markdown.es';
+import content from '../../sample_markdown';
 import Markdown from '../../../lib/markdown';
 
 const MarkdownPreview = () => (

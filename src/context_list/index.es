@@ -25,7 +25,7 @@ class ContextList extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.options !== this.props.options) this.setState({ selected: null });
+    if (prevProps.options !== this.props.options) this.reset();
   }
 
   componentWillUnmount() {
@@ -41,6 +41,10 @@ class ContextList extends PureComponent {
 
   isActive() {
     return this._isActive;
+  }
+
+  reset() {
+    this.setState({ selected: null });
   }
 
   activate() {

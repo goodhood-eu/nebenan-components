@@ -13,9 +13,8 @@ class LoadingBar extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (!prevProps.active && this.props.active) {
-      this.setState({ isActive: true, isComplete: false });
-    } else if (this.state.isActive) this.setState({ isComplete: true });
+    if (!prevProps.active && this.props.active) this.setActive();
+    else if (this.state.isActive) this.setComplete();
 
     this.clear();
     this._tid = setTimeout(this.reset, ANIMATION_DURATION);
@@ -30,6 +29,14 @@ class LoadingBar extends PureComponent {
       isActive: props.active,
       isComplete: false,
     };
+  }
+
+  setActive() {
+    this.setState({ isActive: true, isComplete: false });
+  }
+
+  setComplete() {
+    this.setState({ isComplete: true });
   }
 
   clear() {
