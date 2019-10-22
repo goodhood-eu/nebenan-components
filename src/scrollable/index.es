@@ -13,7 +13,7 @@ import {
   eventCoordinates,
 } from 'nebenan-helpers/lib/dom';
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
-import { bindTo } from 'nebenan-helpers/lib/utils';
+import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
 
 const UPDATE_RATE = 20;
 const MIN_SCROLLER_HEIGHT = 20;
@@ -63,7 +63,7 @@ class Scrollable extends PureComponent {
     this.deactivateSwipe();
     this.stopListeningToResize();
     this.isComponentMounted = false;
-    if (this.updateScrollPosition) this.updateScrollPosition.cancel();
+    invoke(this.updateScrollPosition.cancel);
   }
 
   getDefaultState() {

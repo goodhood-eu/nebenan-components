@@ -65,7 +65,7 @@ class Infinite extends PureComponent {
     if (!this.isComponentMounted || !this.isActive) return;
 
     this.scrolledNode.removeEventListener('scroll', this.handleScroll);
-    this.handleScroll.cancel();
+    invoke(this.handleScroll.cancel);
     this.stopListeningToResize();
     this.isActive = false;
   }

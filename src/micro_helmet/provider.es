@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
-import { bindTo } from 'nebenan-helpers/lib/utils';
+import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
 
 import { Provider } from './context';
 import { parseProps } from './utils';
@@ -33,7 +33,7 @@ class MicroHelmetProvider extends PureComponent {
   }
 
   componentWillUnmount() {
-    if (this.updateBrowserTitle) this.updateBrowserTitle.cancel();
+    invoke(this.updateBrowserTitle.cancel);
   }
 
   getDefaultContext() {
