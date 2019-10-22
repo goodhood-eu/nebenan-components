@@ -33,7 +33,7 @@ class MicroHelmetProvider extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.updateBrowserTitle.cancel();
+    if (this.updateBrowserTitle) this.updateBrowserTitle.cancel();
   }
 
   getDefaultContext() {
