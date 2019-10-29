@@ -32,20 +32,6 @@
   width: ($size * 3);
   display: inline-block;
 
-  @keyframes pulse-loader-size {
-    0% {
-      transform: scale($min-scale);
-    }
-
-    50% {
-      transform: scale($max-scale);
-    }
-
-    100% {
-      transform: scale($min-scale);
-    }
-  }
-
   &::before,
   &::after {
     content: '';
@@ -62,5 +48,19 @@
   i {
     animation-delay: ($duration / 2);
     transform: scale($min-scale);
+  }
+
+  @keyframes pulse-loader-size {
+    0% {
+      transform: scale($min-scale);
+    }
+
+    50% {
+      transform: scale($max-scale);
+    }
+
+    100% {
+      transform: scale($min-scale);
+    }
   }
 }

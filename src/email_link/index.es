@@ -8,7 +8,7 @@ const EmailLink = (props) => {
 
   const query = getQuery(props);
 
-  let uri = `mailto:${to}`;
+  let uri = `mailto:${to || ''}`;
   if (query) uri += `?${query}`;
 
   return <a {...cleanProps} href={uri}>{children}</a>;
@@ -17,7 +17,7 @@ const EmailLink = (props) => {
 EmailLink.propTypes = {
   children: PropTypes.node,
 
-  to: PropTypes.string.isRequired,
+  to: PropTypes.string,
   subject: PropTypes.string,
   body: PropTypes.string,
 };

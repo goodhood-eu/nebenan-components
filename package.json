@@ -7,7 +7,7 @@
   "homepage": "https://nebenan.de/",
   "repository": "good-hood-gmbh/nebenan-components",
   "bugs": "https://github.com/good-hood-gmbh/nebenan-components/issues",
-  "version": "8.0.2",
+  "version": "8.1.0",
   "scripts": {
     "reinstall": "rm -rf node_modules package-lock.json && npm install && npm run decache",
     "decache": "find ./build -type f -name '.browserify-cache.json' -delete || echo \"\\033[0;32mAlready decached!\\033[0m\"",
@@ -68,7 +68,7 @@
     "morgan": "^1.9.1",
     "nebenan-helpers": "^4.1.1",
     "nebenan-react-hocs": "^5.2.2",
-    "nebenan-ui-kit": "^3.0.1",
+    "nebenan-ui-kit": "^3.1.1",
     "node-sass-glob-importer": "^5.3.2",
     "nodemon": "^1.19.4",
     "normalize.css": "^8.0.1",
@@ -87,7 +87,7 @@
     "sinon": "^7.3.1",
     "smartcontent": "^3.8.1",
     "stylelint": "^11.1.1",
-    "stylelint-config-nebenan": "^1.4.1",
+    "stylelint-config-nebenan": "^1.4.2",
     "terser": "^4.3.9",
     "tiny-lr": "^1.1.1",
     "vinyl-source-stream": "^2.0.0"
