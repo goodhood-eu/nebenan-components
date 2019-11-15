@@ -73,6 +73,22 @@ class Inputs extends PureComponent {
         </div>
 
         <div className="preview-section">
+          <Logo localeName="fr_fr" />
+          <Logo localeName="fr_fr">amazing subtitle</Logo>
+          <Logo localeName="fr_fr" to="/" />
+          <Logo localeName="fr_fr" compact />
+          <Logo localeName="fr_fr" compact to="/" />
+        </div>
+
+        <div className="preview-section preview-dark">
+          <Logo localeName="fr_fr" />
+          <Logo localeName="fr_fr">Für nette Leute</Logo>
+          <Logo localeName="fr_fr" to="/" />
+          <Logo localeName="fr_fr" compact />
+          <Logo localeName="fr_fr" compact to="/" />
+        </div>
+
+        <div className="preview-section">
           <Dots count={10} active={3} onItemClick={this.constructor.handleDotClick} />
         </div>
 
