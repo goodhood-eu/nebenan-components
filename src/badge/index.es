@@ -17,6 +17,10 @@ const Badge = (props) => {
   );
 };
 
+Badge.defaultProps = {
+  type: BADGE_BASE,
+};
+
 Badge.propTypes = {
   type: PropTypes.oneOf([
     BADGE_GOLD,
