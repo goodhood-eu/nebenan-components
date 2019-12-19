@@ -10,7 +10,13 @@ import DateBox, { TYPE_LARGE as DATE_TYPE_LARGE } from '../../../lib/date_box';
 import Logo from '../../../lib/logo';
 import LoadingBar, { LoadingSpinner } from '../../../lib/loading';
 
-import { BADGE_GOLD, BADGE_BASE, BADGE_BLUE } from '../../../lib/badge/constants';
+import {
+  BADGE_GOLD_GREEN,
+  BADGE_GOLD_BLUE,
+  BADGE_GREEN,
+  BADGE_BLUE,
+  BADGE_PURPLE,
+} from '../../../lib/badge/constants';
 
 const todayDate = (new Date()).toISOString();
 const greatDate = (new Date('1988-05-27T23:37:00')).toISOString();
@@ -105,9 +111,11 @@ class Inputs extends PureComponent {
         </div>
 
         <div className="preview-section">
-          <Badge type={BADGE_BASE} />
+          <Badge type={BADGE_GREEN} />
           <Badge type={BADGE_BLUE} />
-          <Badge type={BADGE_GOLD} />
+          <Badge type={BADGE_GOLD_GREEN} />
+          <Badge type={BADGE_GOLD_BLUE} />
+          <Badge type={BADGE_PURPLE} />
         </div>
       </article>
     );

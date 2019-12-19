@@ -2,30 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  BADGE_GOLD,
-  BADGE_BASE,
+  BADGE_GOLD_GREEN,
+  BADGE_GOLD_BLUE,
+  BADGE_GREEN,
   BADGE_BLUE,
+  BADGE_PURPLE,
 } from './constants';
 
 const Badge = (props) => {
   const { type, ...cleanProps } = props;
 
-  const url = `/images/badges/badge-${type}.svg`;
+  const url = `"./images/badge-${type}.svg"`;
 
   return (
-    <img src={url} alt="" {...cleanProps} />
+    <span className="c-badge" style={{ backgroundImage: `url(${url})` }} {...cleanProps} />
   );
 };
 
 Badge.defaultProps = {
-  type: BADGE_BASE,
+  type: BADGE_GREEN,
 };
 
 Badge.propTypes = {
   type: PropTypes.oneOf([
-    BADGE_GOLD,
-    BADGE_BASE,
+    BADGE_GOLD_GREEN,
+    BADGE_GOLD_BLUE,
+    BADGE_GREEN,
     BADGE_BLUE,
+    BADGE_PURPLE,
   ]),
 };
 
