@@ -12,7 +12,7 @@ import {
 const Badge = (props) => {
   const { type, ...cleanProps } = props;
 
-  const url = `"./images/badge-${type}.svg"`;
+  const url = `"/images/badge-${type}.svg"`;
 
   return (
     <span className="c-badge" style={{ backgroundImage: `url(${url})` }} {...cleanProps} />
@@ -33,4 +33,5 @@ Badge.propTypes = {
   ]),
 };
 
+export * from './constants';
 export default Badge;

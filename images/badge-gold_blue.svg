@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <g fill="none">
-    <circle cx="8" cy="8" r="8" fill="#0090A1"/>
-    <polygon fill="#E9D53B" points="8 11 4.473 12.854 5.147 8.927 2.294 6.146 6.237 5.573 8 2 9.763 5.573 13.706 6.146 10.853 8.927 11.527 12.854"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+<circle cx="8" cy="8" r="8" fill="#0090A1"/>
+<polygon points="8 11 4.473 12.854 5.147 8.927 2.294 6.146 6.237 5.573 8 2 9.763 5.573 13.706 6.146 10.853 8.927 11.527 12.854" fill="#E9D53B"/>
 </svg>

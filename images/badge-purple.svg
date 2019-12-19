@@ -1,37 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="55" viewBox="0 0 58 55">
-  <defs>
-    <filter id="badge-a" width="166.7%" height="166.7%" x="-33.3%" y="-29.2%" filterUnits="objectBoundingBox">
-      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
-      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
-      <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0"/>
-      <feMerge>
-        <feMergeNode in="shadowMatrixOuter1"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <polygon id="badge-c" points="24 45.492 19.832 47.635 16.649 44.196 12 44.785 10.185 40.464 5.615 39.427 5.388 34.746 1.447 32.208 2.835 27.732 0 24 2.835 20.268 1.447 15.792 5.388 13.254 5.615 8.573 10.185 7.536 12 3.215 16.649 3.804 19.832 .365 24 2.508 28.168 .365 31.351 3.804 36 3.215 37.815 7.536 42.385 8.573 42.612 13.254 46.553 15.792 45.165 20.268 48 24 45.165 27.732 46.553 32.208 42.612 34.746 42.385 39.427 37.815 40.464 36 44.785 31.351 44.196 28.168 47.635"/>
-    <filter id="badge-b" width="129.2%" height="127.6%" x="-14.6%" y="-9.7%" filterUnits="objectBoundingBox">
-      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
-      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
-      <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
-      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0"/>
-    </filter>
-    <linearGradient id="badge-f" x1="50%" x2="50%" y1="0%" y2="100%">
-      <stop offset="0%" stop-color="#FFF"/>
-      <stop offset="100%" stop-color="#E1E1DE"/>
-    </linearGradient>
-    <polygon id="badge-e" points="24 31.916 16.947 34.458 17.185 26.964 12.587 21.042 19.788 18.953 24 12.75 28.212 18.953 35.413 21.042 30.815 26.964 31.053 34.458"/>
-    <filter id="badge-d" width="153.4%" height="148.8%" x="-26.7%" y="-20.8%" filterUnits="objectBoundingBox">
-      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
-      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
-      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0"/>
-    </filter>
-  </defs>
-  <g fill="none" filter="url(#badge-a)" transform="translate(5 2)">
-    <use fill="#000" filter="url(#badge-b)" xlink:href="#badge-c"/>
-    <path fill="#9E6EAA" fill-rule="evenodd" stroke="#6B3B77" stroke-linejoin="square" stroke-width="2" d="M27.94949,46.3986707 L30.9659535,43.1388001 L35.3721032,43.6970605 L37.0917103,39.6020928 L41.4230729,38.619694 L41.6384135,34.1835428 L45.3725628,31.7789767 L44.0576638,27.5367073 L46.7442063,24 L44.0576638,20.4632927 L45.3725628,16.2210233 L41.6384135,13.8164572 L41.4230729,9.38030599 L37.0917103,8.39790725 L35.3721032,4.30293954 L30.9659535,4.86119995 L27.94949,1.60132928 L24,3.63291439 L20.05051,1.60132928 L17.0340465,4.86119995 L12.6278968,4.30293954 L10.9082897,8.39790725 L6.57692714,9.38030599 L6.36158646,13.8164572 L2.62743716,16.2210233 L3.94233619,20.4632927 L1.25579368,24 L3.94233619,27.5367073 L2.62743716,31.7789767 L6.36158646,34.1835428 L6.57692714,38.619694 L10.9082897,39.6020928 L12.6278968,43.6970605 L17.0340465,43.1388001 L20.05051,46.3986707 L24,44.3670856 L27.94949,46.3986707 Z"/>
-    <circle cx="24" cy="24" r="17" fill="#854A95" stroke="#6B3B77" stroke-width="2"/>
-    <use fill="#000" filter="url(#badge-d)" xlink:href="#badge-e"/>
-    <use fill="url(#badge-f)" xlink:href="#badge-e"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 58 55" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<filter id="f" x="-33.3%" y="-29.2%" width="166.7%" height="166.7%">
+<feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+<feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+<feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0"/>
+<feMerge>
+<feMergeNode in="shadowMatrixOuter1"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+</filter>
+<polygon id="d" points="24 45.492 19.832 47.635 16.649 44.196 12 44.785 10.185 40.464 5.615 39.427 5.388 34.746 1.447 32.208 2.835 27.732 0 24 2.835 20.268 1.447 15.792 5.388 13.254 5.615 8.573 10.185 7.536 12 3.215 16.649 3.804 19.832 0.365 24 2.508 28.168 0.365 31.351 3.804 36 3.215 37.815 7.536 42.385 8.573 42.612 13.254 46.553 15.792 45.165 20.268 48 24 45.165 27.732 46.553 32.208 42.612 34.746 42.385 39.427 37.815 40.464 36 44.785 31.351 44.196 28.168 47.635"/>
+<filter id="e" x="-14.6%" y="-9.7%" width="129.2%" height="127.6%">
+<feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+<feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+<feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+<feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0"/>
+</filter>
+<linearGradient id="b" x1="50%" x2="50%" y2="100%">
+<stop stop-color="#FFF" offset="0"/>
+<stop stop-color="#E1E1DE" offset="1"/>
+</linearGradient>
+<polygon id="a" points="24 31.916 16.947 34.458 17.185 26.964 12.587 21.042 19.788 18.953 24 12.75 28.212 18.953 35.413 21.042 30.815 26.964 31.053 34.458"/>
+<filter id="c" x="-26.7%" y="-20.8%" width="153.4%" height="148.8%">
+<feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+<feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+<feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0"/>
+</filter>
+</defs>
+<g transform="translate(5 2)" filter="url(#f)">
+<use filter="url(#e)" xlink:href="#d"/>
+<path d="m27.949 46.399 3.0165-3.2599 4.4061 0.55826 1.7196-4.095 4.3314-0.9824 0.21534-4.4362 3.7341-2.4046-1.3149-4.2423 2.6865-3.5367-2.6865-3.5367 1.3149-4.2423-3.7341-2.4046-0.21534-4.4362-4.3314-0.9824-1.7196-4.095-4.4061 0.55826-3.0165-3.2599-3.9495 2.0316-3.9495-2.0316-3.0165 3.2599-4.4061-0.55826-1.7196 4.095-4.3314 0.9824-0.21534 4.4362-3.7341 2.4046 1.3149 4.2423-2.6865 3.5367 2.6865 3.5367-1.3149 4.2423 3.7341 2.4046 0.21534 4.4362 4.3314 0.9824 1.7196 4.095 4.4061-0.55826 3.0165 3.2599 3.9495-2.0316 3.9495 2.0316z" fill="#9E6EAA" fill-rule="evenodd" stroke="#6B3B77" stroke-linejoin="square" stroke-width="2"/>
+<circle cx="24" cy="24" r="17" fill="#854A95" stroke="#6B3B77" stroke-width="2"/>
+<use filter="url(#c)" xlink:href="#a"/>
+<use fill="url(#b)" xlink:href="#a"/>
+</g>
 </svg>
