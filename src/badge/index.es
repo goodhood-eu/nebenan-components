@@ -13,7 +13,7 @@ import {
 const Badge = (props) => {
   const { type, ...cleanProps } = props;
 
-  const url = `/images/badges/badge-${type}.svg`;
+  const url = `/images/components/badge-${type}.svg`;
   const style = { backgroundImage: `url('${url}')` };
 
   return (

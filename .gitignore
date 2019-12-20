@@ -35,4 +35,5 @@ node_modules/*
 lib/
 style.css
 preview/public/
+!preview/public/images/*
 build/.browserify-cache.json
