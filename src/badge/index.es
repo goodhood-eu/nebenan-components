@@ -9,13 +9,19 @@ import {
   BADGE_PURPLE,
 } from './constants';
 
+
 const Badge = (props) => {
   const { type, ...cleanProps } = props;
 
-  const url = `"/images/badge-${type}.svg"`;
+  const url = `/images/badges/badge-${type}.svg`;
+  const style = { backgroundImage: `url('${url}')` };
 
   return (
-    <span className="c-badge" style={{ backgroundImage: `url(${url})` }} {...cleanProps} />
+    <span
+      {...cleanProps}
+      className="c-badge"
+      style={style}
+    />
   );
 };
 
