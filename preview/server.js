@@ -57,7 +57,6 @@ app.use(morgan('dev'));
 app.use('/images/emojis-5.0.2', emojis);
 app.use('/fonts/nebenan-ui-kit', fonts);
 app.use(serveStatic(`${__dirname}/public`, { redirect: false }));
-app.use(serveStatic(`${__dirname}/../assets`, { redirect: false }));
 
 app.use(renderApp);
 app.get('*', (req, res) => res.send('Unhandled request'));
