@@ -12,6 +12,7 @@ import Expandable from '../../../lib/expandable';
 import ExpandableCard from '../../../lib/expandable_card';
 import SideScroller from '../../../lib/side_scroller';
 import TabScroller from '../../../lib/tab_scroller';
+import Slider from '../../../lib/slider';
 
 import content from '../../sample_data';
 
@@ -143,6 +144,10 @@ class Sliders extends PureComponent {
 
         <div className="preview-section">
           <Expandable control={control}>This is more stuff</Expandable>
+        </div>
+
+        <div className="preview-section">
+          <Slider label="Testing slider" />
         </div>
       </article>
     );
