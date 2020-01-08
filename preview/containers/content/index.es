@@ -17,6 +17,7 @@ import LinkHeader from '../../../lib/link_header';
 import Progress from '../../../lib/progress';
 import ProgressLine from '../../../lib/progress_line';
 import PhoneNumber from '../../../lib/phone_number';
+import Autocomplete from '../../../src/autocomplete';
 
 
 import content from '../../sample_data';
@@ -38,10 +39,14 @@ const action = <i className="icon-cross ui-link" />;
 class Inputs extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      suggestions: [],
+    };
 
     bindTo(
       this,
       'handleClipboardTextCopy',
+      'handleAutocomplete',
     );
 
     this.clipboardText = createRef();
@@ -54,6 +59,12 @@ class Inputs extends PureComponent {
 
   handleSelect(key, list) {
     console.warn('Selected emoji:', list[key]);
+  }
+
+  handleAutocomplete(value) {
+    console.info('Got autocomplete input:', value);
+    const autocompleteSuggestions = (value && value.length) ? Array.from(value) : [];
+    this.setState({ suggestions: autocompleteSuggestions });
   }
 
   render() {
@@ -188,6 +199,15 @@ class Inputs extends PureComponent {
         <div className="preview-section">
           <p><PopupLink to="https://google.com">Google</PopupLink></p>
           <p><PopupLink to="/">Local</PopupLink></p>
+        </div>
+
+        <div className="preview-section">
+          <Autocomplete
+            label="Autocomplete" name="autocomplete"
+            placeholder="2, 140" options={this.state.suggestions}
+            onInput={this.handleAutocomplete}
+            error="Required between 2 and 140 chars" required
+          />
         </div>
 
       </article>

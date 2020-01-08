@@ -19,13 +19,14 @@ const defaultGetValue = (key, options) => options[key];
 class Autocomplete extends PureComponent {
   constructor(props) {
     super(props);
-    bindTo(
+    bindTo(this,
       'show',
       'hide',
       'handleGlobalClick',
       'handleSelect',
       'handleUpdate',
     );
+    this.els = {};
   }
 
   componentDidMount() {
@@ -44,6 +45,10 @@ class Autocomplete extends PureComponent {
   componentWillUnmount() {
     this.hide();
     this.isComponentMounted = false;
+  }
+
+  setEl(name) {
+    return (el) => { this.els[name] = el; };
   }
 
   getNestedRef() {
