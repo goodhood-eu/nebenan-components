@@ -11,8 +11,8 @@ import Emoji from '../emoji';
 
 import { getOption } from './utils';
 
-import { TAG_LIMIT } from '../constants/misc';
-import { SEARCH_CHANGE_RATE } from '../constants/times';
+export const TAG_LIMIT = 34;
+export const SEARCH_CHANGE_RATE = 300;
 
 
 class TagCloud extends InputComponent {

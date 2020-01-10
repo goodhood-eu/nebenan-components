@@ -29,10 +29,6 @@ class Autocomplete extends PureComponent {
     this.els = {};
   }
 
-  componentDidMount() {
-    this.isComponentMounted = true;
-  }
-
   componentDidUpdate(prevProps) {
     const { options } = this.props;
 
@@ -44,7 +40,7 @@ class Autocomplete extends PureComponent {
 
   componentWillUnmount() {
     this.hide();
-    this.isComponentMounted = false;
+    this.isUnmounted = true;
   }
 
   setEl(name) {
@@ -76,7 +72,7 @@ class Autocomplete extends PureComponent {
   }
 
   handleGlobalClick(event) {
-    if (!this.isComponentMounted) return;
+    if (this.isUnmounted) return;
     if (!this.els.container.contains(event.target)) this.hide();
   }
 

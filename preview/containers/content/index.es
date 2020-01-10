@@ -92,7 +92,7 @@ class Inputs extends PureComponent {
 
   handleAutocomplete(value) {
     console.info('Got autocomplete input:', value);
-    const autocompleteSuggestions = (value && value.length) ? Array.from(value) : [];
+    const autocompleteSuggestions = (value && value.length) ? value.split('') : [];
     this.setState({ suggestions: autocompleteSuggestions });
   }
 
