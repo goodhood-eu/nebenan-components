@@ -83,7 +83,8 @@ class Inputs extends PureComponent {
   }
 
   handleTagsPickerSelect(tag) {
-    const value = this.inputRef.current.getValue().concat([tag]);
+    const inputValue = this.inputRef.current.getValue();
+    const value = inputValue ? inputValue.concat([tag]) : [];
     const stateUpdate = (prevState) => ({ extraItems: prevState.extraItems.concat([tag]) });
     const callback = () => this.setState(stateUpdate);
 

@@ -32,11 +32,6 @@ class Autocomplete extends PureComponent {
     this.input = createRef();
   }
 
-  componentDidMount() {
-    console.log(this.container, 'dm container');
-  }
-
-
   componentDidUpdate(prevProps) {
     const { options } = this.props;
 
