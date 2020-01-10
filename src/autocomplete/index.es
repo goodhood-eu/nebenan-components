@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 import classNames from 'classnames';
@@ -26,8 +26,16 @@ class Autocomplete extends PureComponent {
       'handleSelect',
       'handleUpdate',
     );
-    this.els = {};
+
+    this.container = createRef();
+    this.list = createRef();
+    this.input = createRef();
   }
+
+  componentDidMount() {
+    console.log(this.container, 'dm container');
+  }
+
 
   componentDidUpdate(prevProps) {
     const { options } = this.props;
@@ -43,18 +51,14 @@ class Autocomplete extends PureComponent {
     this.isUnmounted = true;
   }
 
-  setEl(name) {
-    return (el) => { this.els[name] = el; };
-  }
-
   getNestedRef() {
-    return this.els.input;
+    return this.input.current;
   }
 
   show() {
     if (this._isActive) return;
 
-    this.els.list.activate();
+    this.list.current.activate();
     this.stopListeningToKeys = keymanager('esc', this.hide);
     this.stopListeningToClicks = eventproxy('click', this.handleGlobalClick);
 
@@ -64,7 +68,7 @@ class Autocomplete extends PureComponent {
   hide() {
     if (!this._isActive) return;
 
-    this.els.list.deactivate();
+    this.list.current.deactivate();
     this.stopListeningToKeys();
     this.stopListeningToClicks();
 
@@ -73,7 +77,7 @@ class Autocomplete extends PureComponent {
 
   handleGlobalClick(event) {
     if (this.isUnmounted) return;
-    if (!this.els.container.contains(event.target)) this.hide();
+    if (!this.container.current.contains(event.target)) this.hide();
   }
 
   handleSelect(key) {
@@ -84,12 +88,12 @@ class Autocomplete extends PureComponent {
     const complete = () => {
       this._isSelected = false;
       this.hide();
-      this.els.input.validate();
+      this.input.current.validate();
       invoke(onSelect, value, key);
     };
 
     this._isSelected = true;
-    this.els.input.setValue(value, complete);
+    this.input.current.setValue(value, complete);
   }
 
   handleUpdate(value) {
@@ -107,7 +111,7 @@ class Autocomplete extends PureComponent {
     return (
       <div className="c-autocomplete-content ui-card">
         <ContextList
-          ref={this.setEl('list')} className="ui-options"
+          ref={this.list} className="ui-options"
           options={options} getOption={getOption}
           onSelect={this.handleSelect}
         />
@@ -133,9 +137,9 @@ class Autocomplete extends PureComponent {
     );
 
     return (
-      <article ref={this.setEl('container')} className={className}>
+      <article ref={this.container} className={className}>
         <Input
-          {...cleanProps} ref={this.setEl('input')} autoComplete="off"
+          {...cleanProps} ref={this.input} autoComplete="off"
           onUpdate={this.handleUpdate}
         >
           {this.renderList()}

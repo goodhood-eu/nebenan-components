@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import omit from 'lodash/omit';
@@ -18,18 +18,14 @@ class TagsPicker extends PureComponent {
     bindTo(this,
       'handleSelect',
     );
-    this.els = {};
-  }
-
-  setEl(name) {
-    return (el) => { this.els[name] = el; };
+    this.tagInput = createRef();
   }
 
   handleSelect(tag) {
     if (this.itemsHash[tag]) return;
 
     this.props.onSelect(tag);
-    this.els.tagInput.reset();
+    this.tagInput.current.reset();
   }
 
   render() {
@@ -58,7 +54,7 @@ class TagsPicker extends PureComponent {
     return (
       <TagCloud {...cleanProps} ref={forwardedRef} items={items} className={className}>
         <TagInput
-          ref={this.setEl('tagInput')}
+          ref={this.tagInput}
           placeholder={placeholder}
           options={options}
           onSelect={this.handleSelect}
