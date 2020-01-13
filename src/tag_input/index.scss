@@ -5,10 +5,11 @@
 }
 
 .c-tag_input-add_button {
-  margin: 10px 14px;
+  margin: 0 14px;
 
   position: absolute;
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   right: 0;
 
   cursor: pointer;
