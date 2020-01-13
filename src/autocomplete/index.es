@@ -101,10 +101,11 @@ class Autocomplete extends PureComponent {
   }
 
   renderList() {
-    const { options, getOption, listChildren } = this.props;
+    const { options, getOption, listChildren, listTopChildren } = this.props;
 
     return (
       <div className="c-autocomplete-content ui-card">
+        {listTopChildren}
         <ContextList
           ref={this.list} className="ui-options"
           options={options} getOption={getOption}
@@ -116,9 +117,9 @@ class Autocomplete extends PureComponent {
   }
 
   render() {
-    const { listChildren, options } = this.props;
+    const { listChildren, listTopChildren, options } = this.props;
     const className = classNames('c-autocomplete', this.props.className, {
-      'is-active': (listChildren || (options && options.length)),
+      'is-active': (listChildren || listTopChildren || (options && options.length)),
     });
     const cleanProps = omit(this.props,
       'children',
@@ -128,6 +129,7 @@ class Autocomplete extends PureComponent {
       'onSelect',
       'getValue',
       'listChildren',
+      'listTopChildren',
       'className',
     );
 
@@ -155,6 +157,7 @@ Autocomplete.propTypes = {
   ]),
   getOption: PropTypes.func,
   listChildren: PropTypes.node,
+  listTopChildren: PropTypes.node,
   getValue: PropTypes.func,
 
   onSelect: PropTypes.func,
