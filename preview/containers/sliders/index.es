@@ -147,7 +147,7 @@ class Sliders extends PureComponent {
         </div>
 
         <div className="preview-section">
-          <Slider label="Testing slider" />
+          <Slider label="Default slider" />
           <Slider label="Slider with min-max values and step 2" min={4} max={20} step={2} />
         </div>
       </article>
