@@ -101,25 +101,27 @@ class Autocomplete extends PureComponent {
   }
 
   renderList() {
-    const { options, getOption, listFooter, listHeader } = this.props;
+    const { options, getOption, renderChildList } = this.props;
+
+    const contextList = (
+      <ContextList
+        ref={this.list} className="ui-options"
+        options={options} getOption={getOption}
+        onSelect={this.handleSelect}
+      />
+    );
 
     return (
       <div className="c-autocomplete-content ui-card">
-        {listHeader}
-        <ContextList
-          ref={this.list} className="ui-options"
-          options={options} getOption={getOption}
-          onSelect={this.handleSelect}
-        />
-        {listFooter}
+        {renderChildList ? renderChildList(contextList) : contextList}
       </div>
     );
   }
 
   render() {
-    const { listFooter, listHeader, options } = this.props;
+    const { renderChildList, options } = this.props;
     const className = classNames('c-autocomplete', this.props.className, {
-      'is-active': (listFooter || listHeader || (options && options.length)),
+      'is-active': (renderChildList || (options && options.length)),
     });
     const cleanProps = omit(this.props,
       'children',
@@ -128,9 +130,8 @@ class Autocomplete extends PureComponent {
       'onInput',
       'onSelect',
       'getValue',
-      'listFooter',
-      'listHeader',
       'className',
+      'renderChildList',
     );
 
     return (
@@ -156,8 +157,7 @@ Autocomplete.propTypes = {
     PropTypes.object,
   ]),
   getOption: PropTypes.func,
-  listFooter: PropTypes.node,
-  listHeader: PropTypes.node,
+  renderChildList: PropTypes.func,
   getValue: PropTypes.func,
 
   onSelect: PropTypes.func,
