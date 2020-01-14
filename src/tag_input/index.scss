@@ -1,0 +1,16 @@
+.c-tag_input {
+  .ui-input {
+    padding-right: 95px;
+  }
+}
+
+.c-tag_input-add_button {
+  margin: 0 14px;
+
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+
+  cursor: pointer;
+}

@@ -1,6 +1,9 @@
 import React, { PureComponent, createRef } from 'react';
+import uniq from 'lodash/uniq';
 import { emojiCollection } from 'emojitsu';
 import { bindTo } from 'nebenan-helpers/lib/utils';
+
+import { getMergedRef } from 'nebenan-react-hocs/lib/proxy_ref';
 
 import Header from '../../components/header';
 
@@ -17,14 +20,27 @@ import LinkHeader from '../../../lib/link_header';
 import Progress from '../../../lib/progress';
 import ProgressLine from '../../../lib/progress_line';
 import PhoneNumber from '../../../lib/phone_number';
+import Autocomplete from '../../../src/autocomplete';
+import TagCloud from '../../../src/tag_cloud';
+import TagsPicker from '../../../src/tags_picker';
 
 
 import content from '../../sample_data';
+
+const tags = [
+  'edible',
+  'deadpan',
+  'whisper',
+  'loss',
+  'stream',
+  'frantic',
+];
 
 const emoji = 'Hello 👩🏿😎🙈🏳️‍🌈👨‍👨‍👧‍👦';
 const suggestions = emojiCollection
   .filter(({ suggest, category }) => (suggest && category === 'people'))
   .map(({ shortname }) => shortname);
+
 
 suggestions.length = 20;
 
@@ -38,13 +54,24 @@ const action = <i className="icon-cross ui-link" />;
 class Inputs extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      suggestions: [],
+      extraItems: [],
+    };
 
     bindTo(
       this,
       'handleClipboardTextCopy',
+      'handleAutocomplete',
+      'handleAutocomplete2',
+      'handleTagsPickerSelect',
     );
 
     this.clipboardText = createRef();
+  }
+
+  getMergedRefFn() {
+    return getMergedRef(this.props.forwardedRef, (ref) => { this.inputRef = ref; });
   }
 
   handleClipboardTextCopy() {
@@ -54,6 +81,21 @@ class Inputs extends PureComponent {
 
   handleSelect(key, list) {
     console.warn('Selected emoji:', list[key]);
+  }
+
+  handleTagsPickerSelect(tag) {
+    const inputValue = this.inputRef.current.getValue();
+    const value = inputValue ? inputValue.concat([tag]) : [tag];
+    const stateUpdate = (prevState) => ({ extraItems: prevState.extraItems.concat([tag]) });
+    const callback = () => this.setState(stateUpdate);
+
+    this.inputRef.current.setValue(value, callback);
+  }
+
+  handleAutocomplete(value) {
+    console.info('Got autocomplete input:', value);
+    const autocompleteSuggestions = (value && value.length) ? value.split('') : [];
+    this.setState({ suggestions: autocompleteSuggestions });
   }
 
   render() {
@@ -188,6 +230,39 @@ class Inputs extends PureComponent {
         <div className="preview-section">
           <p><PopupLink to="https://google.com">Google</PopupLink></p>
           <p><PopupLink to="/">Local</PopupLink></p>
+        </div>
+
+        <div className="preview-section">
+          <Autocomplete
+            label="Autocomplete" name="autocomplete"
+            placeholder="2, 140" options={this.state.suggestions}
+            onInput={this.handleAutocomplete}
+            error="Required between 2 and 140 chars" required
+            renderList={(listComponent) => <div style={{ background: 'lightgreen' }}>{listComponent}</div>}
+          />
+        </div>
+
+        <div className="preview-section">
+          <TagCloud
+            label="Required tag cloud" name="tags_1"
+            items={tags} error="Select at least one tag" required
+          />
+          <TagCloud
+            label="Multiple selected validation" name="tags_2"
+            items={tags} error="Select at least 3 tags"
+            validate="isLength:3" multiple
+          />
+        </div>
+
+        <div className="preview-section">
+          <TagsPicker
+            multiple
+            ref={this.getMergedRefFn()}
+            items={uniq([...tags, ...this.state.extraItems])}
+            onSelect={this.handleTagsPickerSelect}
+            addMessage="plz add"
+            errorMessage="Dammit, there's an error"
+          />
         </div>
 
       </article>
