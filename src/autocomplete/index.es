@@ -53,7 +53,7 @@ class Autocomplete extends PureComponent {
   show() {
     if (this._isActive) return;
 
-    this.list.current.activate();
+    if (this.list.current) this.list.current.activate();
     this.stopListeningToKeys = keymanager('esc', this.hide);
     this.stopListeningToClicks = eventproxy('click', this.handleGlobalClick);
 
@@ -63,7 +63,7 @@ class Autocomplete extends PureComponent {
   hide() {
     if (!this._isActive) return;
 
-    this.list.current.deactivate();
+    if (this.list.current) this.list.current.deactivate();
     this.stopListeningToKeys();
     this.stopListeningToClicks();
 
@@ -103,25 +103,23 @@ class Autocomplete extends PureComponent {
   renderOptions() {
     const { options, getOption, renderList } = this.props;
 
-    const contextList = (
-      <ContextList
-        ref={this.list} className="ui-options"
-        options={options} getOption={getOption}
-        onSelect={this.handleSelect}
-      />
-    );
+    let contextList;
+    if (options && options.length) {
+      contextList = (
+        <ContextList
+          ref={this.list} className="ui-options"
+          options={options} getOption={getOption}
+          onSelect={this.handleSelect}
+        />
+      );
+    }
 
-    const renderContextList = options && options.length ? contextList : null;
-
-    return renderList ? renderList(contextList) : renderContextList;
+    return renderList ? renderList(contextList) : contextList;
   }
 
   render() {
-    const { options } = this.props;
-    const optionsNode = this.renderOptions();
-    const className = classNames('c-autocomplete', this.props.className, {
-      'is-active': (optionsNode || (options && options.length)),
-    });
+    const options = this.renderOptions();
+
     const cleanProps = omit(this.props,
       'children',
       'options',
@@ -133,6 +131,10 @@ class Autocomplete extends PureComponent {
       'renderList',
     );
 
+    const className = classNames('c-autocomplete', this.props.className, {
+      'is-active': options,
+    });
+
     return (
       <article ref={this.container} className={className}>
         <Input
@@ -140,7 +142,7 @@ class Autocomplete extends PureComponent {
           onUpdate={this.handleUpdate}
         >
           <div className="c-autocomplete-content ui-card">
-            {optionsNode}
+            {options}
           </div>
           {this.props.children}
         </Input>

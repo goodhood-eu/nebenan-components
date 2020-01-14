@@ -85,7 +85,7 @@ class Inputs extends PureComponent {
 
   handleTagsPickerSelect(tag) {
     const inputValue = this.inputRef.current.getValue();
-    const value = inputValue ? inputValue.concat([tag]) : [];
+    const value = inputValue ? inputValue.concat([tag]) : [tag];
     const stateUpdate = (prevState) => ({ extraItems: prevState.extraItems.concat([tag]) });
     const callback = () => this.setState(stateUpdate);
 
@@ -256,6 +256,7 @@ class Inputs extends PureComponent {
 
         <div className="preview-section">
           <TagsPicker
+            multiple
             ref={this.getMergedRefFn()}
             items={uniq([...tags, ...this.state.extraItems])}
             onSelect={this.handleTagsPickerSelect}
