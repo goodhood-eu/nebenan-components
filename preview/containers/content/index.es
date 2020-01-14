@@ -56,7 +56,6 @@ class Inputs extends PureComponent {
     super(props);
     this.state = {
       suggestions: [],
-      suggestions2: [],
       extraItems: [],
     };
 
@@ -97,12 +96,6 @@ class Inputs extends PureComponent {
     console.info('Got autocomplete input:', value);
     const autocompleteSuggestions = (value && value.length) ? value.split('') : [];
     this.setState({ suggestions: autocompleteSuggestions });
-  }
-
-  handleAutocomplete2(value) {
-    console.info('Got autocomplete input:', value);
-    const autocompleteSuggestions = (value && value.length) ? value.split('') : [];
-    this.setState({ suggestions2: autocompleteSuggestions });
   }
 
   render() {
@@ -241,17 +234,11 @@ class Inputs extends PureComponent {
 
         <div className="preview-section">
           <Autocomplete
-            label="Default Autocomplete" name="autocomplete"
+            label="Autocomplete" name="autocomplete"
             placeholder="2, 140" options={this.state.suggestions}
             onInput={this.handleAutocomplete}
             error="Required between 2 and 140 chars" required
-          />
-          <Autocomplete
-            label="Autocomplete with non-default list" name="autocomplete"
-            placeholder="Type in me" options={this.state.suggestions2}
-            onInput={this.handleAutocomplete2}
-            error="Required between 2 and 140 chars" required
-            renderChildList={(data) => <div style={{ background: 'lightgreen' }}>{data}</div>}
+            renderList={(listComponent) => <div style={{ background: 'lightgreen' }}>{listComponent}</div>}
           />
         </div>
 
