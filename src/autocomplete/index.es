@@ -101,25 +101,25 @@ class Autocomplete extends PureComponent {
   }
 
   renderList() {
-    const { options, getOption, listChildren, listTopChildren } = this.props;
+    const { options, getOption, listFooter, listHeader } = this.props;
 
     return (
       <div className="c-autocomplete-content ui-card">
-        {listTopChildren}
+        {listHeader}
         <ContextList
           ref={this.list} className="ui-options"
           options={options} getOption={getOption}
           onSelect={this.handleSelect}
         />
-        {listChildren}
+        {listFooter}
       </div>
     );
   }
 
   render() {
-    const { listChildren, listTopChildren, options } = this.props;
+    const { listFooter, listHeader, options } = this.props;
     const className = classNames('c-autocomplete', this.props.className, {
-      'is-active': (listChildren || listTopChildren || (options && options.length)),
+      'is-active': (listFooter || listHeader || (options && options.length)),
     });
     const cleanProps = omit(this.props,
       'children',
@@ -128,8 +128,8 @@ class Autocomplete extends PureComponent {
       'onInput',
       'onSelect',
       'getValue',
-      'listChildren',
-      'listTopChildren',
+      'listFooter',
+      'listHeader',
       'className',
     );
 
@@ -156,8 +156,8 @@ Autocomplete.propTypes = {
     PropTypes.object,
   ]),
   getOption: PropTypes.func,
-  listChildren: PropTypes.node,
-  listTopChildren: PropTypes.node,
+  listFooter: PropTypes.node,
+  listHeader: PropTypes.node,
   getValue: PropTypes.func,
 
   onSelect: PropTypes.func,
