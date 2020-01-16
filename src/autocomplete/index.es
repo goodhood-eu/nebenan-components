@@ -122,7 +122,7 @@ class Autocomplete extends PureComponent {
     const options = this.renderOptions();
     const content = renderContent ? renderContent(options) : options;
 
-    return content ? <div className="ui-card">{content}</div> : null;
+    return content ? <div className="ui-card c-autocomplete-content">{content}</div> : null;
   }
 
   render() {
