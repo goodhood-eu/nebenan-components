@@ -1,12 +1,4 @@
 .c-autocomplete {
-  .c-context_list {
-    display: none;
-
-    &.is-active {
-      display: block;
-    }
-  }
-
   .c-input-container {
     position: relative;
   }
@@ -22,8 +14,4 @@
   position: absolute;
   z-index: 1;
   -webkit-overflow-scrolling: touch;
-}
-
-.c-autocomplete.is-active .c-autocomplete-content {
-  display: block;
 }

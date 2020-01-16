@@ -238,7 +238,7 @@ class Inputs extends PureComponent {
             placeholder="2, 140" options={this.state.suggestions}
             onInput={this.handleAutocomplete}
             error="Required between 2 and 140 chars" required
-            renderList={(listComponent) => <div style={{ background: 'lightgreen' }}>{listComponent}</div>}
+            renderContent={(contextList) => <div style={{ background: 'lightgreen' }}>{contextList}</div>}
           />
         </div>
 
