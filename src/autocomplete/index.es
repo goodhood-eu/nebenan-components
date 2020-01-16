@@ -138,8 +138,8 @@ class Autocomplete extends PureComponent {
     return (
       <article ref={this.container} className={className}>
         <Input
-          {...cleanProps} ref={this.input} autoComplete="off"
-          onUpdate={this.handleUpdate}
+          {...cleanProps} ref={this.input}
+          onUpdate={this.handleUpdate} disableAutoComplete
         >
           <div className="c-autocomplete-content ui-card">
             {options}
