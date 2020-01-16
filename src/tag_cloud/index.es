@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import { bindTo, invoke } from 'nebenan-helpers/lib/utils';
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
@@ -99,7 +99,7 @@ class TagCloud extends InputComponent {
       else isActive = value === currentValue;
     }
 
-    const className = classNames('c-tag_cloud-item ui-tag', {
+    const className = clsx('c-tag_cloud-item ui-tag', {
       'ui-tag-secondary': !isActive,
       'ui-tag-primary': isActive,
     });
@@ -116,7 +116,7 @@ class TagCloud extends InputComponent {
 
   render() {
     const { readOnly, radio, label, items, children } = this.props;
-    const className = classNames('c-tag_cloud', this.props.className, {
+    const className = clsx('c-tag_cloud', this.props.className, {
       'is-locked': readOnly,
       'is-radio': radio,
     });

@@ -1,6 +1,6 @@
 import React, { Children, PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 import clamp from 'lodash/clamp';
 
@@ -210,7 +210,7 @@ class Slideshow extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-slideshow', this.props.className, { 'is-animated': this.state.isAnimated });
+    const className = clsx('c-slideshow', this.props.className, { 'is-animated': this.state.isAnimated });
     const cleanProps = omit(this.props, 'items', 'visibleMobile', 'visibleTablet', 'visibleDesktop', 'rotationInterval');
     const { items } = this.props;
 

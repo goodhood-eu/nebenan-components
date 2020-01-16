@@ -1,6 +1,6 @@
 import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 
 import { size, eventCoordinates, stopEvent } from 'nebenan-helpers/lib/dom';
@@ -194,7 +194,7 @@ class SideScroller extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-side_scroller', this.props.className);
+    const className = clsx('c-side_scroller', this.props.className);
     const cleanProps = omit(this.props, 'children');
     const { height } = this.state;
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { shortnamesToUnicode, render } from 'emojitsu';
 
 import { shortenString } from 'smartcontent/lib/strings';
 
 
 const Emoji = (props) => {
-  const className = classNames('c-emoji', props.className);
+  const className = clsx('c-emoji', props.className);
   const { limit, text, options, ...cleanProps } = props;
 
   const content = typeof limit === 'number' ? shortenString(text, limit) : text;

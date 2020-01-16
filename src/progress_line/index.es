@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { arrayOf } from 'nebenan-helpers/lib/data';
 
 const ProgressLine = (props) => {
   const { steps, current, ...cleanProps } = props;
-  const className = classNames('c-progress_line', props.className);
+  const className = clsx('c-progress_line', props.className);
 
   const chunks = arrayOf(steps).map((index) => (
-    <li key={index} className={classNames('c-progress_line-step', { 'is-active': index <= current })} />
+    <li key={index} className={clsx('c-progress_line-step', { 'is-active': index <= current })} />
   ));
 
   return (

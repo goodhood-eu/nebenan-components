@@ -1,7 +1,7 @@
 import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import keymanager from 'nebenan-helpers/lib/keymanager';
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
@@ -131,7 +131,7 @@ class Autocomplete extends PureComponent {
       'renderList',
     );
 
-    const className = classNames('c-autocomplete', this.props.className, {
+    const className = clsx('c-autocomplete', this.props.className, {
       'is-active': options,
     });
 

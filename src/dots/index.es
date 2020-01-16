@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 
 import { bindTo } from 'nebenan-helpers/lib/utils';
@@ -16,7 +16,7 @@ class Dots extends PureComponent {
   }
 
   renderItem(item, key) {
-    const className = classNames({ 'is-active': this.props.active === key });
+    const className = clsx({ 'is-active': this.props.active === key });
     const { onItemClick } = this.props;
 
     let onClick;
@@ -26,7 +26,7 @@ class Dots extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-dots', this.props.className);
+    const className = clsx('c-dots', this.props.className);
     const cleanProps = omit(this.props, 'active', 'count', 'onItemClick');
 
     const items = arrayOf(this.props.count).map(this.renderItem);

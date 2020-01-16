@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import Expandable from '../expandable';
 
 
 const ExpandableCard = (props) => {
   const { children, title, ...cleanProps } = props;
-  const className = classNames('c-expandable_card', props.className);
+  const className = clsx('c-expandable_card', props.className);
 
   const control = (
     <span className="c-expandable_card-control">

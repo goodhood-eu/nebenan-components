@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 const PhoneNumber = (props) => {
-  const className = classNames('vcard', props.className);
+  const className = clsx('vcard', props.className);
   const { children, ...cleanProps } = props;
 
   return <span {...cleanProps} className={className}><span className="tel">{children}</span></span>;

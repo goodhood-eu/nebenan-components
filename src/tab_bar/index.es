@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 import { withRouter } from 'react-router';
 import { historyPropTypes } from 'nebenan-react-hocs/lib/history';
@@ -27,7 +27,7 @@ class TabBar extends PureComponent {
     const { activeIndex, getItem, items } = this.props;
     const renderer = getItem || defaultGetItem;
 
-    const className = classNames('c-tab_bar-item', {
+    const className = clsx('c-tab_bar-item', {
       'is-active': key === activeIndex,
     });
     const onClick = this.handleClick.bind(this, key);
@@ -37,7 +37,7 @@ class TabBar extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-tab_bar', this.props.className);
+    const className = clsx('c-tab_bar', this.props.className);
     const cleanProps = omit(
       this.props,
       ...Object.keys(historyPropTypes),

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import parseDate from 'date-fns/parseISO';
 import formatDate from 'date-fns/format';
@@ -11,7 +11,7 @@ export const TYPE_LARGE = 'large';
 
 const DateBox = (props) => {
   const { date, locale, active, type, ...cleanProps } = props;
-  const className = classNames('c-date_box ui-iconbox-label', props.className, {
+  const className = clsx('c-date_box ui-iconbox-label', props.className, {
     'is-disabled': !active,
     'ui-iconbox-label-large': type === TYPE_LARGE,
   });

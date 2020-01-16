@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
 
@@ -47,7 +47,7 @@ class TagInput extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-tag_input', this.props.className);
+    const className = clsx('c-tag_input', this.props.className);
     const { forwardedRef, errorMessage, addMessage, ...props } = this.props;
 
     return (

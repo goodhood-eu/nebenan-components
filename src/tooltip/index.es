@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import { arrayToHash } from 'nebenan-helpers/lib/data';
 
@@ -10,7 +10,7 @@ const knownTypes = arrayToHash(['left', 'right', 'top', 'bottom']);
 const Tooltip = (props) => {
   const { type, text, children, ...cleanProps } = props;
   const selectedType = knownTypes[type] ? type : 'top';
-  const className = classNames(`c-tooltip c-tooltip-${selectedType}`, props.className);
+  const className = clsx(`c-tooltip c-tooltip-${selectedType}`, props.className);
 
   return (
     <span {...cleanProps} className={className}>

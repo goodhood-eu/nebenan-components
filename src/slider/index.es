@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
@@ -134,7 +134,7 @@ class Slider extends InputComponent {
       'getLabel',
       'onUpdate',
     );
-    const className = classNames('c-slider', this.props.className, {
+    const className = clsx('c-slider', this.props.className, {
       'is-error': this.isErrorActive(),
     });
     const style = getPrefixed({ transform: `translateX(${percent * trackWidth}px)` });

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import Markdown from '../markdown';
 
 
 const ContentHeader = (props) => {
   const { action, title, description, children, ...cleanProps } = props;
-  const className = classNames('c-content_header', props.className, {
+  const className = clsx('c-content_header', props.className, {
     'has-action': action,
   });
 

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 
 class Expandable extends PureComponent {
@@ -17,7 +17,7 @@ class Expandable extends PureComponent {
   render() {
     const { isActive } = this.state;
     const { children, defaultState, control, onUpdate, ...cleanProps } = this.props;
-    const className = classNames('c-expandable', this.props.className, {
+    const className = clsx('c-expandable', this.props.className, {
       'is-active': isActive,
     });
 

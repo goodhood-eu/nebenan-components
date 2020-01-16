@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 import { withRouter } from 'react-router';
 import { invoke } from 'nebenan-helpers/lib/utils';
@@ -29,7 +29,7 @@ class TabScroller extends PureComponent {
     const { href, callback } = items[key];
     const renderer = getItem || defaultGetItem;
 
-    const className = classNames('c-tab_scroller-item', {
+    const className = clsx('c-tab_scroller-item', {
       'is-active': key === activeIndex,
       'is-clickable': Boolean(href || callback),
     });
@@ -40,7 +40,7 @@ class TabScroller extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-tab_scroller', this.props.className);
+    const className = clsx('c-tab_scroller', this.props.className);
     const cleanProps = omit(
       this.props,
       ...Object.keys(historyPropTypes),

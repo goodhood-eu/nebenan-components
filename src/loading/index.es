@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 
 const ANIMATION_DURATION = 400;
@@ -49,7 +49,7 @@ class LoadingBar extends PureComponent {
 
   render() {
     const { isActive, isComplete } = this.state;
-    const className = classNames('c-loading-bar', this.props.className, {
+    const className = clsx('c-loading-bar', this.props.className, {
       'is-active': isActive,
       'is-complete': isComplete,
     });
