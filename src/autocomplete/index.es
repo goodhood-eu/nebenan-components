@@ -20,7 +20,6 @@ class Autocomplete extends PureComponent {
   constructor(props) {
     super(props);
     bindTo(this,
-      'show',
       'hide',
       'handleGlobalClick',
       'handleSelect',
@@ -33,12 +32,12 @@ class Autocomplete extends PureComponent {
   }
 
   componentDidUpdate() {
-    if (this._isWithContent) this.show();
-    else this.hide();
+    if (this._isWithContent) this.activate();
+    else this.deactivate();
   }
 
   componentWillUnmount() {
-    this.hide();
+    this.deactivate();
     this.isUnmounted = true;
   }
 
@@ -46,7 +45,7 @@ class Autocomplete extends PureComponent {
     return this.input.current;
   }
 
-  show() {
+  activate() {
     if (this._isActive) return;
 
     if (this.list.current) this.list.current.activate();
@@ -56,14 +55,17 @@ class Autocomplete extends PureComponent {
     this._isActive = true;
   }
 
-  hide() {
+  deactivate() {
     if (!this._isActive) return;
 
     this.stopListeningToKeys();
     this.stopListeningToClicks();
-    invoke(this.props.onHide);
 
     this._isActive = false;
+  }
+
+  hide() {
+    invoke(this.props.onHide);
   }
 
   handleGlobalClick(event) {
@@ -181,7 +183,6 @@ const methods = [
   'reset',
   'focus',
   'blur',
-  'show',
   'hide',
 ];
 export default mergeMethods(methods, Autocomplete);
