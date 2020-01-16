@@ -27,8 +27,6 @@ class Autocomplete extends PureComponent {
       'handleUpdate',
     );
 
-    this.state = this.getDefaultState();
-
     this.container = createRef();
     this.list = createRef();
     this.input = createRef();
@@ -55,10 +53,9 @@ class Autocomplete extends PureComponent {
   show() {
     if (this._isActive) return;
 
-    if (this.list.current) this.list.current.show();
+    if (this.list.current) this.list.current.activate();
     this.stopListeningToKeys = keymanager('esc', this.hide);
     this.stopListeningToClicks = eventproxy('click', this.handleGlobalClick);
-    this.setState({ isActive: true });
 
     this._isActive = true;
   }
@@ -68,7 +65,7 @@ class Autocomplete extends PureComponent {
 
     this.stopListeningToKeys();
     this.stopListeningToClicks();
-    this.setState({ isActive: false });
+    invoke(this.props.onHide);
 
     this._isActive = false;
   }
@@ -126,25 +123,22 @@ class Autocomplete extends PureComponent {
   }
 
   render() {
-    const { isActive } = this.state;
     const cleanProps = omit(this.props,
       'children',
       'options',
       'getOption',
-      'onInput',
-      'onSelect',
       'getValue',
       'className',
       'renderContent',
+      'onInput',
+      'onSelect',
+      'onHide',
     );
 
     const className = classNames('c-autocomplete', this.props.className);
 
-    // Always render content to show/hide it on update
     const content = this.renderContent();
     this._isWithContent = Boolean(content);
-
-    const contentNode = isActive ? content : null;
 
     return (
       <article ref={this.container} className={className}>
@@ -154,7 +148,7 @@ class Autocomplete extends PureComponent {
           disableAutoComplete
           onUpdate={this.handleUpdate}
         >
-          {contentNode}
+          {content}
           {this.props.children}
         </Input>
       </article>
@@ -177,6 +171,7 @@ Autocomplete.propTypes = {
   onSelect: PropTypes.func,
   onUpdate: PropTypes.func,
   onInput: PropTypes.func,
+  onHide: PropTypes.func,
 };
 
 const methods = [

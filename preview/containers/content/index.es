@@ -63,7 +63,7 @@ class Inputs extends PureComponent {
       this,
       'handleClipboardTextCopy',
       'handleAutocomplete',
-      'handleAutocomplete2',
+      'handleAutocompleteHide',
       'handleTagsPickerSelect',
     );
 
@@ -96,6 +96,11 @@ class Inputs extends PureComponent {
     console.info('Got autocomplete input:', value);
     const autocompleteSuggestions = (value && value.length) ? value.split('') : [];
     this.setState({ suggestions: autocompleteSuggestions });
+  }
+
+  handleAutocompleteHide() {
+    console.info('Autocomplete hide');
+    this.setState({ suggestions: [] });
   }
 
   render() {
@@ -239,6 +244,7 @@ class Inputs extends PureComponent {
             onInput={this.handleAutocomplete}
             error="Required between 2 and 140 chars" required
             renderContent={(contextList) => <div style={{ background: 'lightgreen' }}>{contextList}</div>}
+            onHide={this.handleAutocompleteHide}
           />
         </div>
 
