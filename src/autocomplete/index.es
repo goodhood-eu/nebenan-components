@@ -46,10 +46,6 @@ class Autocomplete extends PureComponent {
     return this.input.current;
   }
 
-  getDefaultState() {
-    return { isActive: false };
-  }
-
   show() {
     if (this._isActive) return;
 
