@@ -42,7 +42,7 @@ class Autocomplete extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.deactivate();
+    this.hide();
     this.isUnmounted = true;
   }
 
