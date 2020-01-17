@@ -26,14 +26,19 @@ class Autocomplete extends PureComponent {
       'handleUpdate',
     );
 
+    this.state = this.getDefaultState();
+
     this.container = createRef();
     this.list = createRef();
     this.input = createRef();
   }
 
-  componentDidUpdate() {
-    if (this._isWithContent) this.activate();
-    else this.deactivate();
+  componentDidUpdate(prevProps) {
+    const { options } = this.props;
+
+    if (options !== prevProps.options) {
+      this.show();
+    }
   }
 
   componentWillUnmount() {
@@ -41,31 +46,33 @@ class Autocomplete extends PureComponent {
     this.isUnmounted = true;
   }
 
+  getDefaultState() {
+    return { isActive: false };
+  }
+
   getNestedRef() {
     return this.input.current;
   }
 
-  activate() {
+  show() {
     if (this._isActive) return;
 
     if (this.list.current) this.list.current.activate();
     this.stopListeningToKeys = keymanager('esc', this.hide);
     this.stopListeningToClicks = eventproxy('click', this.handleGlobalClick);
 
+    this.setState({ isActive: true });
     this._isActive = true;
   }
 
-  deactivate() {
+  hide() {
     if (!this._isActive) return;
 
     this.stopListeningToKeys();
     this.stopListeningToClicks();
 
+    this.setState({ isActive: false });
     this._isActive = false;
-  }
-
-  hide() {
-    invoke(this.props.onHide);
   }
 
   handleGlobalClick(event) {
@@ -113,6 +120,9 @@ class Autocomplete extends PureComponent {
 
   renderContent() {
     const { renderContent } = this.props;
+    const { isActive } = this.state;
+
+    if (!isActive) return null;
 
     const options = this.renderOptions();
     const content = renderContent ? renderContent(options) : options;
@@ -130,13 +140,9 @@ class Autocomplete extends PureComponent {
       'renderContent',
       'onInput',
       'onSelect',
-      'onHide',
     );
 
     const className = classNames('c-autocomplete', this.props.className);
-
-    const content = this.renderContent();
-    this._isWithContent = Boolean(content);
 
     return (
       <article ref={this.container} className={className}>
@@ -146,7 +152,7 @@ class Autocomplete extends PureComponent {
           disableAutoComplete
           onUpdate={this.handleUpdate}
         >
-          {content}
+          {this.renderContent()}
           {this.props.children}
         </Input>
       </article>
@@ -169,7 +175,6 @@ Autocomplete.propTypes = {
   onSelect: PropTypes.func,
   onUpdate: PropTypes.func,
   onInput: PropTypes.func,
-  onHide: PropTypes.func,
 };
 
 const methods = [
@@ -183,6 +188,7 @@ const methods = [
   'reset',
   'focus',
   'blur',
+  'show',
   'hide',
 ];
 export default mergeMethods(methods, Autocomplete);
