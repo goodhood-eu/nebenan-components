@@ -63,7 +63,6 @@ class Inputs extends PureComponent {
       this,
       'handleClipboardTextCopy',
       'handleAutocomplete',
-      'handleAutocomplete2',
       'handleTagsPickerSelect',
     );
 
@@ -238,7 +237,15 @@ class Inputs extends PureComponent {
             placeholder="2, 140" options={this.state.suggestions}
             onInput={this.handleAutocomplete}
             error="Required between 2 and 140 chars" required
-            renderList={(listComponent) => <div style={{ background: 'lightgreen' }}>{listComponent}</div>}
+            renderContent={
+              (contextList) => (
+                <>
+                  <header>Header</header>
+                  {contextList}
+                  <footer>Footer</footer>
+                </>
+              )
+            }
           />
         </div>
 
