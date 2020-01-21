@@ -43,7 +43,6 @@ class Autocomplete extends PureComponent {
 
   componentWillUnmount() {
     this.hide();
-    this.isUnmounted = true;
   }
 
   getDefaultState() {
@@ -76,7 +75,6 @@ class Autocomplete extends PureComponent {
   }
 
   handleGlobalClick(event) {
-    if (this.isUnmounted) return;
     if (!this.container.current.contains(event.target)) this.hide();
   }
 
@@ -127,7 +125,8 @@ class Autocomplete extends PureComponent {
     const options = this.renderOptions();
     const content = renderContent ? renderContent(options) : options;
 
-    return content ? <div className="ui-card c-autocomplete-content">{content}</div> : null;
+    if (!content) return null;
+    return <div className="ui-card c-autocomplete-content">{content}</div>;
   }
 
   render() {
