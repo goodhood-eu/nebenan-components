@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import { renderShortname } from 'emojitsu';
 
@@ -29,7 +29,7 @@ class EmojiSuggestions extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-emoji_suggestions', this.props.className);
+    const className = clsx('c-emoji_suggestions', this.props.className);
     const ref = (el) => { this.list = el; };
     return <ContextList {...this.props} {...{ className, ref }} getOption={this.renderOption} />;
   }

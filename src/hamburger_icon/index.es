@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 
 const HamburgerIcon = (props) => {
   const { active, ...cleanProps } = props;
-  const className = classNames('c-hamburger_icon', props.className, { 'is-active': active });
+  const className = clsx('c-hamburger_icon', props.className, { 'is-active': active });
 
   return (
     <span {...cleanProps} className={className}>

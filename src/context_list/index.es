@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 
 import { arrayToHash } from 'nebenan-helpers/lib/data';
@@ -138,7 +138,7 @@ class ContextList extends PureComponent {
   }
 
   renderOption(key) {
-    const className = classNames('c-context_list-item', {
+    const className = clsx('c-context_list-item', {
       'is-selected': this.state.selected === key,
     });
     const getOption = this.props.getOption || defaultGetOption;
@@ -150,7 +150,7 @@ class ContextList extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-context_list', this.props.className, {
+    const className = clsx('c-context_list', this.props.className, {
       'is-active': this.state.isActive,
     });
     const cleanProps = omit(this.props, 'className', 'options', 'getOption', 'onSelect');

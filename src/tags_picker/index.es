@@ -1,6 +1,6 @@
 import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 
 import { arrayToHash } from 'nebenan-helpers/lib/data';
@@ -29,7 +29,7 @@ class TagsPicker extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-tags_picker', this.props.className);
+    const className = clsx('c-tags_picker', this.props.className);
     const cleanProps = omit(this.props,
       'children',
 

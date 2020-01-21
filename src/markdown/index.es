@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import omit from 'lodash/omit';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import marked from 'marked';
 import { invoke } from 'nebenan-helpers/lib/utils';
 import { stripOriginFromUrl } from 'nebenan-helpers/lib/routes';
@@ -44,7 +44,7 @@ class Markdown extends PureComponent {
 
   render() {
     const { inline, blockquotes, text, children } = this.props;
-    const className = classNames('c-markdown', this.props.className, { 'is-inline': inline });
+    const className = clsx('c-markdown', this.props.className, { 'is-inline': inline });
     const cleanProps = omit(
       this.props,
       ...Object.keys(historyPropTypes),

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 
 
@@ -17,8 +17,8 @@ class Accordion extends PureComponent {
 
   renderItem(item, index) {
     const isActive = index === this.props.activeIndex;
-    const className = classNames('c-accordion-item', { 'is-active': isActive });
-    const iconClassname = classNames({ 'icon-arrow_down': !isActive, 'icon-arrow_up': isActive });
+    const className = clsx('c-accordion-item', { 'is-active': isActive });
+    const iconClassname = clsx({ 'icon-arrow_down': !isActive, 'icon-arrow_up': isActive });
 
     let content;
     if (isActive) content = <div className="c-accordion-item-content">{item.content}</div>;
@@ -34,7 +34,7 @@ class Accordion extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-accordion', this.props.className);
+    const className = clsx('c-accordion', this.props.className);
     const cleanProps = omit(this.props, 'activeIndex', 'items', 'onChange');
 
     return <ul {...cleanProps} className={className}>{this.props.items.map(this.renderItem)}</ul>;

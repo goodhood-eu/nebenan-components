@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import { getPercentage } from './utils';
 
@@ -8,7 +8,7 @@ const Progress = (props) => {
   const { state, size, type, children, ...cleanProps } = props;
   const percent = getPercentage(state);
 
-  const className = classNames(`c-progress c-progress-${type}`, props.className, {
+  const className = clsx(`c-progress c-progress-${type}`, props.className, {
     'c-progress-small': size === 'small',
   });
 

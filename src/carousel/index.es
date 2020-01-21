@@ -1,6 +1,6 @@
 import React, { PureComponent, Children, createRef } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import clamp from 'lodash/clamp';
 
 import eventproxy from 'nebenan-helpers/lib/eventproxy';
@@ -89,7 +89,7 @@ class Carousel extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-carousel', this.props.className, { 'is-animated': this.state.isAnimated });
+    const className = clsx('c-carousel', this.props.className, { 'is-animated': this.state.isAnimated });
     const { children, ...cleanProps } = this.props;
     const items = Children.map(children, this.renderItem);
 

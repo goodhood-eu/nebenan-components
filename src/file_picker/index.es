@@ -1,7 +1,7 @@
 import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 
 class FilePicker extends PureComponent {
@@ -26,7 +26,7 @@ class FilePicker extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-file_picker', this.props.className);
+    const className = clsx('c-file_picker', this.props.className);
     const cleanProps = omit(this.props, 'onSelect', 'children', 'className');
 
     return (

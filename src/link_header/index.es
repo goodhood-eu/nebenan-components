@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import { Link } from 'react-router-dom';
 
 
 const LinkHeader = (props) => {
   const { children, to, reversed, ...cleanProps } = props;
-  const className = classNames('c-link_header', props.className, {
+  const className = clsx('c-link_header', props.className, {
     'is-reversed': reversed,
   });
 
   if (!to) return <span {...cleanProps} className={className}>{children}</span>;
 
-  const iconClass = classNames({
+  const iconClass = clsx({
     'icon-arrow_right': !reversed,
     'icon-arrow_left': reversed,
   });

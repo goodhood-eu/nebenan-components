@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 
 const Logo = (props) => {
   const { compact, to, localeName, children, ...cleanProps } = props;
-  const className = classNames('c-logo', props.className);
+  const className = clsx('c-logo', props.className);
 
   let text;
   if (!compact) {

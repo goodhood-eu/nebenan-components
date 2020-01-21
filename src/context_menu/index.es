@@ -1,7 +1,7 @@
 import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import keymanager from 'nebenan-helpers/lib/keymanager';
 import { bindTo } from 'nebenan-helpers/lib/utils';
@@ -68,7 +68,7 @@ class ContextMenu extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-context_menu', this.props.className, {
+    const className = clsx('c-context_menu', this.props.className, {
       'is-active': this.state.isActive,
     });
 

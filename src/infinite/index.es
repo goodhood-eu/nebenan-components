@@ -1,6 +1,6 @@
 import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import omit from 'lodash/omit';
 import throttle from 'lodash/throttle';
@@ -88,8 +88,8 @@ class Infinite extends PureComponent {
   render() {
     const { loading, children } = this.props;
     const cleanProps = omit(this.props, 'triggerOffset', 'loading', 'onActive', 'getScrolledNode');
-    const className = classNames('c-infinite', this.props.className);
-    const loadingClassName = classNames('c-infinite-loading', {
+    const className = clsx('c-infinite', this.props.className);
+    const loadingClassName = clsx('c-infinite-loading', {
       'is-active': loading,
     });
 

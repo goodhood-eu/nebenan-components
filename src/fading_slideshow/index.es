@@ -1,6 +1,6 @@
 import React, { PureComponent, Children } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 import clamp from 'lodash/clamp';
 
@@ -65,14 +65,14 @@ class FadingSlideshow extends PureComponent {
   }
 
   renderItem(item, index) {
-    const className = classNames('c-fading_slideshow-item', {
+    const className = clsx('c-fading_slideshow-item', {
       'is-active': this.state.activeItemIndex === index,
     });
     return <span className={className}>{item}</span>;
   }
 
   render() {
-    const className = classNames('c-fading_slideshow', this.props.className);
+    const className = clsx('c-fading_slideshow', this.props.className);
 
     const { children, items } = this.props;
     const cleanProps = omit(this.props, 'children', 'items', 'defaultItemIndex', 'rotationInterval');

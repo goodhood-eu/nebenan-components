@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import omit from 'lodash/omit';
 
 import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
@@ -159,7 +159,7 @@ class DraggableBox extends PureComponent {
 
   render() {
     const { active, x, y } = this.state;
-    const className = classNames('c-draggable_box', this.props.className, {
+    const className = clsx('c-draggable_box', this.props.className, {
       'is-active': active,
     });
     const cleanProps = omit(this.props, 'children', 'onMoveStart', 'onMove', 'onMoveEnd');

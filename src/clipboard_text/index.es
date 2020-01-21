@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { invoke } from 'nebenan-helpers/lib/utils';
 
 
@@ -45,7 +45,7 @@ class ClipboardText extends PureComponent {
   }
 
   render() {
-    const className = classNames('c-clipboard_text', this.props.className);
+    const className = clsx('c-clipboard_text', this.props.className);
     const ref = (el) => {
       this.container = el;
     };
