@@ -1,0 +1,13 @@
+.c-phone_link-desktop {
+  display: none;
+
+  @media ($media-m) {
+    display: inline;
+  }
+}
+
+.c-phone_link-mobile {
+  @media ($media-m) {
+    display: none;
+  }
+}
