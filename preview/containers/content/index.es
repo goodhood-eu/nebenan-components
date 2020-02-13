@@ -20,9 +20,10 @@ import LinkHeader from '../../../lib/link_header';
 import Progress from '../../../lib/progress';
 import ProgressLine from '../../../lib/progress_line';
 import PhoneNumber from '../../../lib/phone_number';
-import Autocomplete from '../../../src/autocomplete';
-import TagCloud from '../../../src/tag_cloud';
-import TagsPicker from '../../../src/tags_picker';
+import PhoneLink from '../../../lib/phone_link';
+import Autocomplete from '../../../lib/autocomplete';
+import TagCloud from '../../../lib/tag_cloud';
+import TagsPicker from '../../../lib/tags_picker';
 
 
 import content from '../../sample_data';
@@ -224,6 +225,10 @@ class Inputs extends PureComponent {
 
         <div className="preview-section">
           <PhoneNumber>0 157 123 45 67</PhoneNumber>
+        </div>
+
+        <div className="preview-section">
+          <PhoneLink to="0 157 123 45 67">0 157 123 45 67</PhoneLink>
         </div>
 
         <div className="preview-section">
