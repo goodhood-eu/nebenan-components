@@ -1,39 +1,27 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-
 import { renderShortname } from 'emojitsu';
 
 import ContextList from '../context_list';
 
 
-class EmojiSuggestions extends PureComponent {
-  componentDidMount() {
-    this.list.activate();
-  }
+const renderOption = (key, list) => {
+  const shortname = list[key];
+  const safeContent = { __html: renderShortname(shortname, { single: true }) };
 
-  componentWillUnmount() {
-    this.list.deactivate();
-  }
+  return (
+    <small className="c-emoji_suggestions-option">
+      <span dangerouslySetInnerHTML={safeContent} />
+      {shortname}
+    </small>
+  );
+};
 
-  renderOption(key, list) {
-    const shortname = list[key];
-    const safeContent = { __html: renderShortname(shortname, { single: true }) };
-
-    return (
-      <small className="c-emoji_suggestions-option">
-        <span dangerouslySetInnerHTML={safeContent} />
-        {shortname}
-      </small>
-    );
-  }
-
-  render() {
-    const className = clsx('c-emoji_suggestions', this.props.className);
-    const ref = (el) => { this.list = el; };
-    return <ContextList {...this.props} {...{ className, ref }} getOption={this.renderOption} />;
-  }
-}
+const EmojiSuggestions = (props) => {
+  const className = clsx('c-emoji_suggestions', props.className);
+  return <ContextList {...props} defaultActive className={className} getOption={renderOption} />;
+};
 
 EmojiSuggestions.propTypes = {
   className: PropTypes.string,
