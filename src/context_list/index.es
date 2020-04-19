@@ -24,6 +24,10 @@ class ContextList extends PureComponent {
     this.state = this.getDefaultState();
   }
 
+  componentDidMount() {
+    if (this.props.defaultActive) this.activate();
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.options !== this.props.options) this.reset();
   }
@@ -153,7 +157,7 @@ class ContextList extends PureComponent {
     const className = clsx('c-context_list', this.props.className, {
       'is-active': this.state.isActive,
     });
-    const cleanProps = omit(this.props, 'className', 'options', 'getOption', 'onSelect');
+    const cleanProps = omit(this.props, 'className', 'defaultActive', 'options', 'getOption', 'onSelect');
 
     return (
       <ul {...cleanProps} className={className} onMouseLeave={this.handleMouseLeave}>
@@ -165,10 +169,12 @@ class ContextList extends PureComponent {
 
 ContextList.defaultProps = {
   options: [],
+  defaultActive: false,
 };
 
 ContextList.propTypes = {
   className: PropTypes.string,
+  defaultActive: PropTypes.bool.isRequired,
 
   options: PropTypes.oneOfType([
     PropTypes.array,

@@ -29,7 +29,6 @@ class Autocomplete extends PureComponent {
     this.state = this.getDefaultState();
 
     this.container = createRef();
-    this.list = createRef();
     this.input = createRef();
   }
 
@@ -56,7 +55,6 @@ class Autocomplete extends PureComponent {
   show() {
     if (this._isActive) return;
 
-    if (this.list.current) this.list.current.activate();
     this.stopListeningToKeys = keymanager('esc', this.hide);
     this.stopListeningToClicks = eventproxy('click', this.handleGlobalClick);
 
@@ -109,7 +107,8 @@ class Autocomplete extends PureComponent {
 
     return (
       <ContextList
-        ref={this.list} className="ui-options"
+        defaultActive
+        className="ui-options"
         options={options} getOption={getOption}
         onSelect={this.handleSelect}
       />
