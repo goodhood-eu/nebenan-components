@@ -60,7 +60,6 @@ class Misc extends PureComponent {
           <DateBox date={todayDate} />
           <DateBox date={todayDate} active={false} />
           <DateBox date={greatDate} />
-          <DateBox date={greatDate} type={DATE_TYPE_LARGE} />
         </div>
 
         <div className="preview-section">
