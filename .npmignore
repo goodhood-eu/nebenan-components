@@ -13,3 +13,4 @@ test/
 .stylelintrc
 gulpfile.js
 !style.css
+.idea
