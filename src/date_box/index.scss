@@ -1,34 +1,45 @@
 .c-date_box {
+  width: 60px;
+  height: 60px;
+
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+
   &.is-disabled {
     background: $color-gray-02;
     color: $color-gray-09;
   }
 
+  strong,
+  small {
+    font-weight: normal;
+  }
+
   strong {
-    padding-top: 12px;
-    display: block;
-    font-size: 17px;
-    line-height: 17px;
+    font-size: 20px;
+    line-height: 25px;
   }
 
   small {
     display: block;
-    font-size: 10px;
-    line-height: 10px;
-    font-weight: $font-weight-l;
+    font-size: 14px;
+    line-height: 20px;
     text-transform: uppercase;
   }
 
-  &.ui-iconbox-label-large {
+  @media ($media-m) {
+    width: 80px;
+    height: 80px;
+
     strong {
-      padding-top: 21px;
-      font-size: 26px;
-      line-height: 26px;
+      font-size: 30px;
+      line-height: 35px;
     }
 
     small {
-      font-size: 12px;
-      line-height: 12px;
+      font-size: 20px;
+      line-height: 25px;
     }
   }
 }

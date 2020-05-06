@@ -12,7 +12,7 @@ import Badge, {
 import Dots from '../../../lib/dots';
 import HamburgerIcon from '../../../lib/hamburger_icon';
 import IconBox, { TYPE_LARGE as ICON_TYPE_LARGE } from '../../../lib/icon_box';
-import DateBox, { TYPE_LARGE as DATE_TYPE_LARGE } from '../../../lib/date_box';
+import DateBox from '../../../lib/date_box';
 import Logo from '../../../lib/logo';
 import LoadingBar, { LoadingSpinner } from '../../../lib/loading';
 
@@ -60,7 +60,6 @@ class Misc extends PureComponent {
           <DateBox date={todayDate} />
           <DateBox date={todayDate} active={false} />
           <DateBox date={greatDate} />
-          <DateBox date={greatDate} type={DATE_TYPE_LARGE} />
         </div>
 
         <div className="preview-section">
