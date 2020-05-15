@@ -142,13 +142,15 @@ class ContextList extends PureComponent {
   }
 
   renderOption(key) {
+    const getOption = this.props.getOption || defaultGetOption;
+    const children = getOption(key, this.props.options);
     const className = clsx('c-context_list-item', {
       'is-selected': this.state.selected === key,
+      'is-active': children.props.className.includes('is-active'),
     });
-    const getOption = this.props.getOption || defaultGetOption;
+
     const onClick = this.handleClick.bind(this, key);
     const onMouseEnter = this.handleMouseEnter.bind(this, key);
-    const children = getOption(key, this.props.options);
 
     return <li {...{ key, className, onClick, onMouseEnter }}>{children}</li>;
   }
