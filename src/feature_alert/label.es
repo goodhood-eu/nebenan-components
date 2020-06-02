@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 
 const FeatureAlertLabel = (props) => {
-  const className = clsx('c-feature_alert_label', props.className);
+  const className = clsx('c-feature_alert_label ui-badge ui-badge-rect', props.className);
   return <span {...props} className={className} />;
 };
 

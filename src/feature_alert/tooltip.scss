@@ -1,3 +1,42 @@
 .c-feature_alert_tooltip {
-  color: #f00;
+  position: relative;
+}
+
+.c-feature_alert_tooltip-arrow {
+  width: 50px;
+  height: 50px;
+  margin-top: -1px;
+  margin-left: -25px;
+
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+
+  &::after {
+    width: 25px;
+    height: 25px;
+
+    content: '';
+    position: absolute;
+    bottom: 38px;
+    left: 14px;
+
+    border-radius: $border-radius-m;
+
+    background: $color-blue-01;
+    box-shadow: $shadow-bottom-default;
+    transform: rotate(45deg);
+  }
+}
+
+.c-feature_alert_tooltip-content {
+  padding: 10px;
+
+  color: $color-gray-09;
+  background: linear-gradient(110deg, #33a6b4, $color-blue-01);
+
+  border-radius: $border-radius-m;
+  box-shadow: $shadow-bottom-default;
 }

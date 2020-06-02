@@ -1,15 +1,32 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 import Header from '../../components/header';
 
 import Tooltip from '../../../lib/tooltip';
-import { Label, Tooltip } from '../../../lib/feature_alert';
+import { Label as FALabel, Tooltip as FATooltip } from '../../../lib/feature_alert';
 import content from '../../sample_data';
 
 
 const Dropdowns = () => (
   <article className="preview-content">
     <Header>Content</Header>
+
+    <div className="preview-section preview-feature_alert_label">
+      <ul>
+        <li>
+          <div><FALabel>test</FALabel></div>
+        </li>
+      </ul>
+    </div>
+
+
+    <div className="preview-section preview-feature_alert_tooltip">
+      <ul>
+        <li>
+          <div><FATooltip>{content.lorem}</FATooltip></div>
+        </li>
+      </ul>
+    </div>
 
     <div className="preview-section preview-tooltips">
       <ul>
@@ -27,4 +44,4 @@ const Dropdowns = () => (
   </article>
 );
 
-export default Inputs;
+export default Dropdowns;
