@@ -4,10 +4,10 @@ import clsx from 'clsx';
 
 
 const FeatureAlertTooltip = ({ children, ...props }) => {
-  const className = clsx('c-feature_alert_tooltip', props.className);
+  const className = clsx('c-feature_alert_tooltip is-placement-left', props.className);
   return (
     <article {...props} className={className}>
-      <i className="c-feature_alert_tooltip-arrow is-placement-bottom" />
+      <i className="c-feature_alert_tooltip-arrow" />
       <div className="c-feature_alert_tooltip-content">
         {children}
         <i className="c-feature_alert_tooltip-cross icon-cross" />

@@ -1,14 +1,3 @@
-.c-feature_alert_tooltip {
-  position: relative;
-  cursor: pointer;
-
-  &:hover {
-    .c-feature_alert_tooltip-cross {
-      opacity: .5;
-    }
-  }
-}
-
 .c-feature_alert_tooltip-arrow {
   width: 25px;
   height: 25px;
@@ -29,54 +18,6 @@
     background: $color-blue-01;
     box-shadow: $shadow-bottom-default;
     transform: rotate(45deg);
-  }
-
-  // v
-  &.is-placement-top {
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    &::after {
-      bottom: 18px;
-      left: 5px;
-    }
-  }
-
-  // ^
-  &.is-placement-bottom {
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    &::after {
-      top: 18px;
-      left: 5px;
-    }
-  }
-
-  // >
-  &.is-placement-left {
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
-
-    &::after {
-      top: 4px;
-      right: 18px;
-    }
-  }
-
-  // <
-  &.is-placement-right {
-    top: 50%;
-    right: 100%;
-    transform: translateY(-50%);
-
-    &::after {
-      top: 4px;
-      left: 18px;
-    }
   }
 }
 
@@ -104,4 +45,69 @@
   color: $color-blue-01;
   background: $color-gray-09;
   border-radius: 50%;
+}
+
+.c-feature_alert_tooltip {
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    .c-feature_alert_tooltip-cross {
+      opacity: .5;
+    }
+  }
+
+  // v
+  &.is-placement-top .c-feature_alert_tooltip-arrow {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &::after {
+      bottom: 18px;
+      left: 5px;
+    }
+  }
+
+  // ^
+  &.is-placement-bottom .c-feature_alert_tooltip-arrow {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &::after {
+      top: 18px;
+      left: 5px;
+    }
+  }
+
+  // >
+  &.is-placement-left .c-feature_alert_tooltip-arrow {
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+
+    &::after {
+      top: 4px;
+      right: 18px;
+    }
+  }
+
+  // <
+  &.is-placement-right .c-feature_alert_tooltip-arrow {
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+
+    &::after {
+      top: 4px;
+      left: 18px;
+    }
+  }
+
+  &.is-placement-left .c-feature_alert_tooltip-cross {
+    margin-right: 10px;
+    margin-left: 0;
+    order: -1;
+  }
 }
