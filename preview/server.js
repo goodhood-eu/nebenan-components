@@ -55,7 +55,7 @@ const fonts = serveStatic(`${__dirname}/../node_modules/nebenan-ui-kit/fonts/`, 
 app.use(morgan('dev'));
 
 app.use('/images/emojis-5.0.2', emojis);
-app.use('/fonts/nebenan-ui-kit', fonts);
+app.use('/fonts', fonts);
 app.use(serveStatic(`${__dirname}/public`, { redirect: false }));
 
 app.use(renderApp);
