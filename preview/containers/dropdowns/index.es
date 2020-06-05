@@ -8,6 +8,11 @@ import {
   POSITION_BOTTOM,
   POSITION_LEFT,
   POSITION_RIGHT,
+
+  TRIGGER_HOVER,
+  TRIGGER_CLICK,
+  TRIGGER_DELAYED,
+
   Label as FALabel,
   Tooltip as FATooltip,
 } from '../../../lib/feature_alert';
@@ -41,7 +46,48 @@ const Dropdowns = () => (
     <div className="preview-section preview-feature_alert_tooltip">
       <ul>
         <li>
-          <div><FATooltip>{content.tooltip}</FATooltip></div>
+          <div>
+            <FATooltip content={content.tooltip} position={POSITION_TOP} defaultOpen>
+              {POSITION_TOP}
+            </FATooltip>
+          </div>
+          <div>
+            <FATooltip content={content.tooltip} position={POSITION_BOTTOM} defaultOpen>
+              {POSITION_BOTTOM}
+            </FATooltip>
+          </div>
+          <div>
+            <FATooltip content={content.tooltip} position={POSITION_LEFT} defaultOpen>
+              {POSITION_LEFT}
+            </FATooltip>
+          </div>
+          <div>
+            <FATooltip content={content.tooltip} position={POSITION_RIGHT} defaultOpen>
+              {POSITION_RIGHT}
+            </FATooltip>
+          </div>
+        </li>
+        <li>
+          <div>
+            <FATooltip content={content.tooltip} trigger={TRIGGER_HOVER}>
+              {TRIGGER_HOVER}
+            </FATooltip>
+          </div>
+          <div>
+            <FATooltip content={content.tooltip} trigger={TRIGGER_CLICK}>
+              {TRIGGER_CLICK}
+            </FATooltip>
+          </div>
+          <div>
+            <FATooltip content={content.tooltip} trigger={TRIGGER_DELAYED}>
+              {TRIGGER_DELAYED}
+            </FATooltip>
+          </div>
+          <div>
+            <FATooltip content={content.tooltip} trigger={TRIGGER_DELAYED} closeIcon>
+              {TRIGGER_DELAYED}
+            </FATooltip>
+          </div>
         </li>
       </ul>
     </div>
