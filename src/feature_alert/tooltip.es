@@ -29,13 +29,18 @@ const FeatureAlertTooltip = (props) => {
 
   const [open, setOpen] = useState(defaultOpen);
   const ref = useRef(null);
+  const isActive = useRef(defaultOpen);
 
   const handleOpen = () => {
+    if (isActive.current) return;
+    isActive.current = true;
     setOpen(true);
     invoke(onOpen);
   };
 
   const handleClose = () => {
+    if (!isActive.current) return;
+    isActive.current = false;
     setOpen(false);
     invoke(onClose);
   };
