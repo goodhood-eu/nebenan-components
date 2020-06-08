@@ -27,16 +27,24 @@ const Dropdowns = () => (
       <ul>
         <li>
           <div>
-            <FALabel label="top" position={POSITION_TOP}>{content.tooltip.slice(0, 15)}</FALabel>
+            <FALabel label="top" position={POSITION_TOP}>
+              {content.tooltip.slice(0, 15)}
+            </FALabel>
           </div>
           <div>
-            <FALabel label="bottom" position={POSITION_BOTTOM}>{content.tooltip.slice(0, 15)}</FALabel>
+            <FALabel label="bottom" position={POSITION_BOTTOM}>
+              {content.tooltip.slice(0, 15)}
+            </FALabel>
           </div>
           <div>
-            <FALabel label="left" position={POSITION_LEFT}>{content.tooltip.slice(0, 15)}</FALabel>
+            <FALabel label="left" position={POSITION_LEFT}>
+              {content.tooltip.slice(0, 15)}
+            </FALabel>
           </div>
           <div>
-            <FALabel label="right" position={POSITION_RIGHT}>{content.tooltip.slice(0, 15)}</FALabel>
+            <FALabel label="right" position={POSITION_RIGHT}>
+              {content.tooltip.slice(0, 15)}
+            </FALabel>
           </div>
         </li>
       </ul>
@@ -47,27 +55,49 @@ const Dropdowns = () => (
       <ul>
         <li>
           <div>
-            <FATooltip content={content.tooltip} position={POSITION_TOP} defaultOpen>
+            <FATooltip
+              content={content.tooltip} position={POSITION_TOP}
+              trigger={TRIGGER_HOVER} closeIcon
+            >
               {POSITION_TOP}
             </FATooltip>
           </div>
           <div>
-            <FATooltip content={content.tooltip} position={POSITION_BOTTOM} defaultOpen>
+            <FATooltip
+              content={content.tooltip} position={POSITION_BOTTOM}
+              trigger={TRIGGER_HOVER} closeIcon
+            >
               {POSITION_BOTTOM}
             </FATooltip>
           </div>
           <div>
-            <FATooltip content={content.tooltip} position={POSITION_LEFT} defaultOpen>
+            <FATooltip
+              content={content.tooltip} position={POSITION_LEFT}
+              trigger={TRIGGER_HOVER} closeIcon
+            >
               {POSITION_LEFT}
             </FATooltip>
           </div>
           <div>
-            <FATooltip content={content.tooltip} position={POSITION_RIGHT} defaultOpen>
+            <FATooltip
+              content={content.tooltip} position={POSITION_RIGHT}
+              trigger={TRIGGER_HOVER} closeIcon
+            >
               {POSITION_RIGHT}
             </FATooltip>
           </div>
         </li>
         <li>
+          <div>
+            <FATooltip content={content.tooltip}>
+              NO TRIGGER
+            </FATooltip>
+          </div>
+          <div>
+            <FATooltip content={content.tooltip} defaultOpen closeIcon>
+              defaultOpen
+            </FATooltip>
+          </div>
           <div>
             <FATooltip content={content.tooltip} trigger={TRIGGER_HOVER}>
               {TRIGGER_HOVER}
@@ -80,11 +110,6 @@ const Dropdowns = () => (
           </div>
           <div>
             <FATooltip content={content.tooltip} trigger={TRIGGER_DELAYED}>
-              {TRIGGER_DELAYED}
-            </FATooltip>
-          </div>
-          <div>
-            <FATooltip content={content.tooltip} trigger={TRIGGER_DELAYED} closeIcon>
               {TRIGGER_DELAYED}
             </FATooltip>
           </div>

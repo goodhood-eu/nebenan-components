@@ -21,24 +21,33 @@ const DELAY_TIMEOUT = 1000 * 3;
 
 const FeatureAlertTooltip = (props) => {
   const {
-    position, trigger, content, children,
-    closeIcon, defaultOpen,
-    onOpen, onClose,
+    position,
+    trigger,
+    content,
+    children,
+    closeIcon,
+    defaultOpen,
+    onOpen,
+    onClose,
     ...cleanProps
   } = props;
 
-  const [open, setOpen] = useState(defaultOpen);
+  const [isOpen, setOpen] = useState(false);
   const ref = useRef(null);
-  const isActive = useRef(defaultOpen);
+  const wasActive = useRef(null);
+  const isActive = useRef(false);
 
-  const handleOpen = () => {
-    if (isActive.current) return;
+  const handleOpen = (event) => {
+    if (event) event.stopPropagation();
+    if (wasActive.current) return;
+    wasActive.current = true;
     isActive.current = true;
     setOpen(true);
     invoke(onOpen);
   };
 
   const handleClose = () => {
+    console.warn('close', isOpen, wasActive.current, isActive.current);
     if (!isActive.current) return;
     isActive.current = false;
     setOpen(false);
@@ -49,29 +58,26 @@ const FeatureAlertTooltip = (props) => {
   useMisClickHandler(ref, handleClose);
 
   useEffect(() => {
+    if (defaultOpen) return handleOpen();
     if (trigger !== TRIGGER_DELAYED) return;
     const tid = setTimeout(handleOpen, DELAY_TIMEOUT);
     return () => clearTimeout(tid);
   }, []);
 
-  const openHandlers = getTriggerProps(trigger, handleOpen);
-
   const className = clsx(`c-feature_alert_tooltip is-placement-${position}`, props.className, {
-    'is-open': open,
+    'is-active': isOpen,
   });
 
   return (
-    <article {...cleanProps} className={className} ref={ref}>
-      <aside className="c-feature_alert_tooltip-container" onClick={handleClose}>
+    <article {...cleanProps} className={className} ref={ref} onClick={handleClose}>
+      <aside className="c-feature_alert_tooltip-container">
         <i className="c-feature_alert_tooltip-arrow" />
         <div className="c-feature_alert_tooltip-content">
           {content}
           {closeIcon && <i className="c-feature_alert_tooltip-cross icon-cross" />}
         </div>
       </aside>
-      <div {...openHandlers}>
-        {children}
-      </div>
+      <div {...getTriggerProps(trigger, handleOpen)}>{children}</div>
     </article>
   );
 };
