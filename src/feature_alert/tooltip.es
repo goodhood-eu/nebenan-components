@@ -34,6 +34,8 @@ const FeatureAlertTooltip = (props) => {
 
   const [isOpen, setOpen] = useState(false);
   const ref = useRef(null);
+
+  // need to be able to only open once
   const wasActive = useRef(null);
   const isActive = useRef(false);
 
@@ -47,7 +49,6 @@ const FeatureAlertTooltip = (props) => {
   };
 
   const handleClose = () => {
-    console.warn('close', isOpen, wasActive.current, isActive.current);
     if (!isActive.current) return;
     isActive.current = false;
     setOpen(false);
