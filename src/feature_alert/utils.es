@@ -4,8 +4,7 @@ import {
 } from './constants';
 
 export const getTriggerProps = (trigger, handler) => {
-  const props = {};
-  if (trigger === TRIGGER_HOVER) props.onMouseEnter = handler;
-  else if (trigger === TRIGGER_CLICK) props.onClick = handler;
-  return props;
+  if (trigger === TRIGGER_HOVER) return { onMouseEnter: handler };
+  if (trigger === TRIGGER_CLICK) return { onClick: handler };
+  return {};
 };

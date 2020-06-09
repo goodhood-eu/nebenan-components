@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import { invoke } from 'nebenan-helpers/lib/utils';
 
-import { useEscHandler, useMisClickHandler } from './hooks';
+import { useEscHandler, useOutsideClick } from './hooks';
 import { getTriggerProps } from './utils';
 import {
   POSITION_TOP,
@@ -39,31 +39,31 @@ const FeatureAlertTooltip = (props) => {
   const wasActive = useRef(null);
   const isActive = useRef(false);
 
-  const handleOpen = (event) => {
+  const handleOpen = useCallback((event) => {
     if (event) event.stopPropagation();
     if (wasActive.current) return;
     wasActive.current = true;
     isActive.current = true;
     setOpen(true);
     invoke(onOpen);
-  };
+  }, [onOpen]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     if (!isActive.current) return;
     isActive.current = false;
     setOpen(false);
     invoke(onClose);
-  };
+  }, [onClose]);
 
   useEscHandler(handleClose);
-  useMisClickHandler(ref, handleClose);
+  useOutsideClick(ref, handleClose);
 
   useEffect(() => {
     if (defaultOpen) return handleOpen();
     if (trigger !== TRIGGER_DELAYED) return;
     const tid = setTimeout(handleOpen, DELAY_TIMEOUT);
     return () => clearTimeout(tid);
-  }, []);
+  }, [trigger, handleOpen]);
 
   const className = clsx(`c-feature_alert_tooltip is-placement-${position}`, props.className, {
     'is-active': isOpen,
