@@ -32,18 +32,20 @@ const FeatureAlertTooltip = (props) => {
     ...cleanProps
   } = props;
 
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(defaultOpen);
   const ref = useRef(null);
 
   // need to be able to only open once
-  const wasActive = useRef(null);
-  const isActive = useRef(false);
+  const wasActive = useRef(defaultOpen);
+  const isActive = useRef(defaultOpen);
 
   const handleOpen = useCallback((event) => {
     if (event) event.stopPropagation();
-    if (wasActive.current) return;
+    if (isActive.current || wasActive.current) return;
+
     wasActive.current = true;
     isActive.current = true;
+
     setOpen(true);
     invoke(onOpen);
   }, [onOpen]);
@@ -51,6 +53,7 @@ const FeatureAlertTooltip = (props) => {
   const handleClose = useCallback(() => {
     if (!isActive.current) return;
     isActive.current = false;
+
     setOpen(false);
     invoke(onClose);
   }, [onClose]);
@@ -59,15 +62,15 @@ const FeatureAlertTooltip = (props) => {
   useOutsideClick(ref, handleClose);
 
   useEffect(() => {
-    if (defaultOpen) return handleOpen();
-    if (trigger !== TRIGGER_DELAYED) return;
-    const tid = setTimeout(handleOpen, DELAY_TIMEOUT);
+    const tid = (trigger === TRIGGER_DELAYED) ? setTimeout(handleOpen, DELAY_TIMEOUT) : 0;
     return () => clearTimeout(tid);
   }, [trigger, handleOpen]);
 
   const className = clsx(`c-feature_alert_tooltip is-placement-${position}`, props.className, {
     'is-active': isOpen,
   });
+
+  const triggerProps = !isOpen && getTriggerProps(trigger, handleOpen);
 
   return (
     <article {...cleanProps} className={className} ref={ref} onClick={handleClose}>
@@ -78,7 +81,7 @@ const FeatureAlertTooltip = (props) => {
           {closeIcon && <i className="c-feature_alert_tooltip-cross icon-cross" />}
         </div>
       </aside>
-      <div {...getTriggerProps(trigger, handleOpen)}>{children}</div>
+      <div {...triggerProps}>{children}</div>
     </article>
   );
 };
