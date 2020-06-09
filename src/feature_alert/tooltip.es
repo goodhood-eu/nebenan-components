@@ -37,32 +37,30 @@ const FeatureAlertTooltip = (props) => {
 
   // need to be able to only open once
   const wasActive = useRef(defaultOpen);
-  const isActive = useRef(defaultOpen);
 
   const handleOpen = useCallback((event) => {
     if (event) event.stopPropagation();
-    if (isActive.current || wasActive.current) return;
-
+    if (isOpen || wasActive.current) return;
     wasActive.current = true;
-    isActive.current = true;
-
     setOpen(true);
     invoke(onOpen);
-  }, [onOpen]);
+  }, [isOpen, onOpen]);
 
   const handleClose = useCallback(() => {
-    if (!isActive.current) return;
-    isActive.current = false;
-
+    if (!isOpen) return;
     setOpen(false);
     invoke(onClose);
-  }, [onClose]);
+  }, [isOpen, onClose]);
 
   useEscHandler(handleClose);
   useOutsideClick(ref, handleClose);
 
   useEffect(() => {
-    const tid = (trigger === TRIGGER_DELAYED) ? setTimeout(handleOpen, DELAY_TIMEOUT) : 0;
+    let tid;
+    if (trigger === TRIGGER_DELAYED && !wasActive.current) {
+      tid = setTimeout(handleOpen, DELAY_TIMEOUT);
+    }
+
     return () => clearTimeout(tid);
   }, [trigger, handleOpen]);
 
