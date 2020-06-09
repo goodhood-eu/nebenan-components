@@ -8,6 +8,7 @@ export default () => (
     <div className="preview-section">
       <ul className="ui-options">
         <li><Link to="/meta">Meta</Link></li>
+        <li><Link to="/dropdowns">Dropdowns</Link></li>
         <li><Link to="/sliders">Sliders</Link></li>
         <li><Link to="/content">Content</Link></li>
         <li><Link to="/markdown">Markdown</Link></li>
