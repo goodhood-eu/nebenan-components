@@ -150,9 +150,11 @@ class ContextList extends PureComponent {
     const onMouseEnter = this.handleMouseEnter.bind(this, key);
     const children = getOption(key, this.props.options);
     const { dataTrack } = this.props.options[key];
+    const cleanProps = { key, className, onClick, onMouseEnter };
+    cleanProps['data-track'] = dataTrack;
 
     return (
-      <li {...{ key, className, onClick, onMouseEnter }} data-track={dataTrack}>{children}</li>
+      <li {...cleanProps}>{children}</li>
     );
   }
 
