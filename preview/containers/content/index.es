@@ -249,6 +249,7 @@ class Inputs extends PureComponent {
             label="Multiple selected validation" name="tags_2"
             items={tags} error="Select at least 3 tags"
             validate="isLength:3" multiple
+            itemClassName="custom_item_css"
           />
         </div>
 

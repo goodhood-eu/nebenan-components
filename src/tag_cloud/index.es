@@ -89,7 +89,7 @@ class TagCloud extends InputComponent {
   }
 
   renderTag(item) {
-    const { multiple, readOnly } = this.props;
+    const { multiple, readOnly, itemClassName } = this.props;
     const { key, value } = getOption(item);
     const currentValue = this.getValue();
 
@@ -99,7 +99,7 @@ class TagCloud extends InputComponent {
       else isActive = value === currentValue;
     }
 
-    const className = clsx('c-tag_cloud-item ui-tag', {
+    const className = clsx('c-tag_cloud-item ui-tag', itemClassName, {
       'ui-tag-secondary': !isActive,
       'ui-tag-primary': isActive,
     });
@@ -148,6 +148,7 @@ TagCloud.propTypes = {
   ...InputComponent.propTypes,
 
   className: PropTypes.string,
+  itemClassName: PropTypes.string,
   readOnly: PropTypes.bool.isRequired,
   radio: PropTypes.bool.isRequired,
   label: PropTypes.node,
