@@ -54,6 +54,8 @@ module.exports = `
   [I'm a reference-style link][Arbitrary case-insensitive reference text]
 
   [I'm a relative reference to a file](../images/users/male_01.jpg)
+  
+  [I'm a link that may try to access window.opener](https://malicious-domain.netlify.app/)
 
   [You can use numbers for reference-style link definitions][1]
 
