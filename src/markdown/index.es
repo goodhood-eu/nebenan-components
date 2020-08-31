@@ -36,7 +36,7 @@ class Markdown extends PureComponent {
       const path = stripOriginFromUrl(href, global.location.origin);
 
       if ((isLocal || isSameDomain) && !hasExtension) this.props.history.push(path);
-      else global.open(href);
+      else global.open(href, undefined, 'noreferrer noopener');
     }
 
     invoke(this.props.onClick, event);
