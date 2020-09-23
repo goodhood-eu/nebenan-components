@@ -224,7 +224,6 @@ class Slideshow extends PureComponent {
         <Draggable
           style={draggableStyle}
           className="c-slideshow-draggable"
-
           onDragStart={this.handleDragStart}
           onDrag={this.handleDrag}
           onDragStop={this.handleDragStop}
