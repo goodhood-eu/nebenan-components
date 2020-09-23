@@ -67,20 +67,20 @@ class Slider extends InputComponent {
 
   activateSwipe() {
     if (this.isActive) return;
-    document.addEventListener('mousemove', this.handleSwipe);
-    document.addEventListener('touchmove', this.handleSwipe);
-    document.addEventListener('mouseup', this.handleSwipeEnd);
-    document.addEventListener('touchend', this.handleSwipeEnd);
+    document.addEventListener('mousemove', this.handleSwipe, { passive: false });
+    document.addEventListener('touchmove', this.handleSwipe, { passive: false });
+    document.addEventListener('mouseup', this.handleSwipeEnd, { passive: false });
+    document.addEventListener('touchend', this.handleSwipeEnd, { passive: false });
     this.setError(null);
     this.isActive = true;
   }
 
   deactivateSwipe() {
     if (!this.isActive) return;
-    document.removeEventListener('mousemove', this.handleSwipe);
-    document.removeEventListener('touchmove', this.handleSwipe);
-    document.removeEventListener('mouseup', this.handleSwipeEnd);
-    document.removeEventListener('touchend', this.handleSwipeEnd);
+    document.removeEventListener('mousemove', this.handleSwipe, { passive: false });
+    document.removeEventListener('touchmove', this.handleSwipe, { passive: false });
+    document.removeEventListener('mouseup', this.handleSwipeEnd, { passive: false });
+    document.removeEventListener('touchend', this.handleSwipeEnd, { passive: false });
     this.isActive = false;
   }
 

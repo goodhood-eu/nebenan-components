@@ -40,29 +40,29 @@ class DraggableBox extends PureComponent {
 
   activateDrag() {
     if (this.isActive) return;
-    document.addEventListener('mousemove', this.handleDragMove);
-    document.addEventListener('mouseup', this.handleDragEnd);
+    document.addEventListener('mousemove', this.handleDragMove, { passive: false });
+    document.addEventListener('mouseup', this.handleDragEnd, { passive: false });
     this.isActive = true;
   }
 
   deactivateDrag() {
     if (!this.isActive) return;
-    document.removeEventListener('mousemove', this.handleDragMove);
-    document.removeEventListener('mouseup', this.handleDragEnd);
+    document.removeEventListener('mousemove', this.handleDragMove, { passive: false });
+    document.removeEventListener('mouseup', this.handleDragEnd, { passive: false });
     this.isActive = false;
   }
 
   activateSwipe() {
     if (this.isActive) return;
-    document.addEventListener('touchmove', this.handleSwipeMove);
-    document.addEventListener('touchend', this.handleSwipeEnd);
+    document.addEventListener('touchmove', this.handleSwipeMove, { passive: false });
+    document.addEventListener('touchend', this.handleSwipeEnd, { passive: false });
     this.isActive = true;
   }
 
   deactivateSwipe() {
     if (!this.isActive) return;
-    document.removeEventListener('touchmove', this.handleSwipeMove);
-    document.removeEventListener('touchend', this.handleSwipeEnd);
+    document.removeEventListener('touchmove', this.handleSwipeMove, { passive: false });
+    document.removeEventListener('touchend', this.handleSwipeEnd, { passive: false });
     this.isActive = false;
   }
 

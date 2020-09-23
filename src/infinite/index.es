@@ -56,7 +56,7 @@ class Infinite extends PureComponent {
 
     this.scroll = scroll(this.scrolledNode);
 
-    this.scrolledNode.addEventListener('scroll', this.handleScroll);
+    this.scrolledNode.addEventListener('scroll', this.handleScroll, { passive: true });
     this.stopListeningToResize = eventproxy('resize', this.checkViewportPosition);
     this.isActive = true;
   }
@@ -64,7 +64,7 @@ class Infinite extends PureComponent {
   deactivate() {
     if (!this.isComponentMounted || !this.isActive) return;
 
-    this.scrolledNode.removeEventListener('scroll', this.handleScroll);
+    this.scrolledNode.removeEventListener('scroll', this.handleScroll, { passive: true });
     invoke(this.handleScroll.cancel);
     this.stopListeningToResize();
     this.isActive = false;

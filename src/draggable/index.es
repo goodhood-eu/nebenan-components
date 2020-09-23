@@ -30,29 +30,29 @@ class Draggable extends PureComponent {
 
   activateMouse() {
     if (this.isMouseActive) return;
-    document.addEventListener('mousemove', this.handleMove);
-    document.addEventListener('mouseup', this.handleStop);
+    document.addEventListener('mousemove', this.handleMove, { passive: false });
+    document.addEventListener('mouseup', this.handleStop, { passive: false });
     this.isMouseActive = true;
   }
 
   deactivateMouse() {
     if (!this.isMouseActive) return;
-    document.removeEventListener('mousemove', this.handleMove);
-    document.removeEventListener('mouseup', this.handleStop);
+    document.removeEventListener('mousemove', this.handleMove, { passive: false });
+    document.removeEventListener('mouseup', this.handleStop, { passive: false });
     this.isMouseActive = false;
   }
 
   activateTouch() {
     if (this.isTouchActive) return;
-    document.addEventListener('touchmove', this.handleMove);
-    document.addEventListener('touchend', this.handleStop);
+    document.addEventListener('touchmove', this.handleMove, { passive: false });
+    document.addEventListener('touchend', this.handleStop, { passive: false });
     this.isTouchActive = true;
   }
 
   deactivateTouch() {
     if (!this.isTouchActive) return;
-    document.removeEventListener('touchmove', this.handleMove);
-    document.removeEventListener('touchend', this.handleStop);
+    document.removeEventListener('touchmove', this.handleMove, { passive: false });
+    document.removeEventListener('touchend', this.handleStop, { passive: false });
     this.isTouchActive = false;
   }
 
