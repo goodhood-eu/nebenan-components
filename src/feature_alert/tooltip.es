@@ -5,8 +5,8 @@ import { usePopper } from 'react-popper';
 
 import { invoke } from 'nebenan-helpers/lib/utils';
 
-import { useEscHandler, useOutsideClick } from './hooks';
-import { getTriggerProps } from './utils';
+import { useEscHandler, useOutsideClick, usePopperInit } from './hooks';
+import { getTriggerProps, getPopperOptions } from './utils';
 import {
   POSITION_TOP,
   POSITION_BOTTOM,
@@ -39,24 +39,11 @@ const FeatureAlertTooltip = (props) => {
   const refElement = useRef(null);
   const refTooltip = useRef(null);
   const refArrow = useRef(null);
-  const { styles, attributes } = usePopper(refElement.current, refTooltip.current, {
-    placement: position,
-    modifiers: [
-      {
-        name: 'arrow', options: { element: refArrow.current },
-      },
-      {
-        name: 'offset', options: { offset: [0, 10] },
-      },
-      {
-        name: 'flip',
-        options: {
-          padding: 10,
-          fallbackPlacements: [POSITION_TOP, POSITION_LEFT, POSITION_BOTTOM, POSITION_RIGHT],
-        },
-      },
-    ],
-  });
+  const { styles, attributes } = usePopper(
+    refElement.current,
+    refTooltip.current,
+    getPopperOptions(refArrow, position),
+  );
 
   // need to be able to only open once
   const wasActive = useRef(false);
@@ -77,6 +64,7 @@ const FeatureAlertTooltip = (props) => {
 
   useEscHandler(handleClose);
   useOutsideClick(ref, handleClose);
+  usePopperInit(defaultOpen, wasActive, handleOpen);
 
   useEffect(() => {
     let tid;
@@ -86,13 +74,6 @@ const FeatureAlertTooltip = (props) => {
 
     return () => clearTimeout(tid);
   }, [trigger, handleOpen]);
-
-  // To apply popper styles properly for defaultOpen tooltip
-  useEffect(() => {
-    if (defaultOpen && !wasActive.current) {
-      handleOpen();
-    }
-  });
 
   const className = clsx('c-feature_alert_tooltip', props.className, {
     'is-active': isOpen,
