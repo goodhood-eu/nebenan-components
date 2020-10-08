@@ -90,7 +90,6 @@ const FeatureAlertTooltip = (props) => {
   // To apply popper styles properly for defaultOpen tooltip
   useEffect(() => {
     if (defaultOpen && !wasActive.current) {
-      console.log('PEMOS');
       handleOpen();
     }
   });
