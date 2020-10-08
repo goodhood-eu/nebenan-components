@@ -24,6 +24,20 @@ $feature-alert-arrow-size: 16px;
   }
 }
 
+//.c-feature_alert_tooltip-arrow {
+//  width: $feature-alert-arrow-size;
+//  height: $feature-alert-arrow-size;
+//
+//  position: absolute;
+//
+//  border-radius: $border-radius-m;
+//
+//  background: $color-blue-01;
+//  box-shadow: $shadow-bottom-default;
+//  transform: rotate(45deg);
+//  z-index: -1;
+//}
+
 .c-feature_alert_tooltip-arrow {
   width: 25px;
   height: 25px;

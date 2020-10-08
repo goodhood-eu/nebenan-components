@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { usePopper } from 'react-popper';
 
 import { invoke } from 'nebenan-helpers/lib/utils';
 
@@ -22,6 +23,7 @@ const DELAY_TIMEOUT = 1000 * 3;
 const FeatureAlertTooltip = (props) => {
   const {
     position,
+    fallbackPosition,
     trigger,
     content,
     children,
@@ -34,6 +36,29 @@ const FeatureAlertTooltip = (props) => {
 
   const [isOpen, setOpen] = useState(defaultOpen);
   const ref = useRef(null);
+  const refElement = useRef(null);
+  const refTooltip = useRef(null);
+  const refArrow = useRef(null);
+  const { styles, attributes, state } = usePopper(refElement.current, refTooltip.current, {
+    placement: position,
+    modifiers: [
+      {
+        name: 'arrow', options: { element: refArrow.current },
+      },
+      {
+        name: 'offset', options: { offset: [0, 10] },
+      },
+      {
+        name: 'flip',
+        options: {
+          padding: 10,
+          fallbackPlacements: [POSITION_TOP, POSITION_LEFT, POSITION_BOTTOM, POSITION_RIGHT],
+        },
+      },
+    ],
+  });
+
+  console.log(state, 'HERE IS STATE');
 
   // need to be able to only open once
   const wasActive = useRef(defaultOpen);
@@ -64,7 +89,7 @@ const FeatureAlertTooltip = (props) => {
     return () => clearTimeout(tid);
   }, [trigger, handleOpen]);
 
-  const className = clsx(`c-feature_alert_tooltip is-placement-${position}`, props.className, {
+  const className = clsx('c-feature_alert_tooltip', props.className, {
     'is-active': isOpen,
   });
 
@@ -72,20 +97,21 @@ const FeatureAlertTooltip = (props) => {
 
   return (
     <article {...cleanProps} className={className} ref={ref} onClick={handleClose}>
-      <aside className="c-feature_alert_tooltip-container">
-        <i className="c-feature_alert_tooltip-arrow" />
+      <aside className="c-feature_alert_tooltip-container" ref={refTooltip} style={styles.popper} {...attributes.popper}>
+        <div data-popper-arrow className="c-feature_alert_tooltip-arrow" ref={refArrow} style={styles.arrow} />
         <div className="c-feature_alert_tooltip-content">
           {content}
           {closeIcon && <i className="c-feature_alert_tooltip-cross icon-cross" />}
         </div>
       </aside>
-      <div {...triggerProps}>{children}</div>
+      <div {...triggerProps} ref={refElement}>{children}</div>
     </article>
   );
 };
 
 FeatureAlertTooltip.defaultProps = {
   position: POSITION_LEFT,
+  fallbackPosition: POSITION_RIGHT,
   closeIcon: false,
   defaultOpen: false,
 };
@@ -93,6 +119,12 @@ FeatureAlertTooltip.defaultProps = {
 FeatureAlertTooltip.propTypes = {
   className: PropTypes.string,
   position: PropTypes.oneOf([
+    POSITION_TOP,
+    POSITION_BOTTOM,
+    POSITION_LEFT,
+    POSITION_RIGHT,
+  ]),
+  fallbackPosition: PropTypes.oneOf([
     POSITION_TOP,
     POSITION_BOTTOM,
     POSITION_LEFT,
