@@ -83,8 +83,8 @@ const FeatureAlertTooltip = (props) => {
 
   return (
     <article {...cleanProps} className={className} ref={ref} onClick={handleClose}>
-      <aside className="c-feature_alert_tooltip-container" id="tooltip" ref={refTooltip} style={styles.popper} {...attributes.popper}>
-        <div className="c-feature_alert_tooltip-arrow" ref={refArrow} style={styles.arrow} />
+      <aside className="c-feature_alert_tooltip-container" ref={refTooltip} style={styles.popper} {...attributes.popper}>
+        <i className="c-feature_alert_tooltip-arrow" ref={refArrow} style={styles.arrow} />
         <div className="c-feature_alert_tooltip-content">
           {content}
           {closeIcon && <i className="c-feature_alert_tooltip-cross icon-cross" />}

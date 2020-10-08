@@ -43,7 +43,6 @@ $feature-alert-arrow-size: 16px;
   height: $feature-alert-arrow-size;
 
   display: block;
-  position: absolute;
   z-index: -1;
 
   &::after {
