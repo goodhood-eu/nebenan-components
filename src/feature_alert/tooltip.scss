@@ -24,27 +24,27 @@ $feature-alert-arrow-size: 16px;
   }
 }
 
-//.c-feature_alert_tooltip-arrow {
-//  width: $feature-alert-arrow-size;
-//  height: $feature-alert-arrow-size;
-//
-//  position: absolute;
-//
-//  border-radius: $border-radius-m;
-//
-//  background: $color-blue-01;
-//  box-shadow: $shadow-bottom-default;
-//  transform: rotate(45deg);
-//  z-index: -1;
-//}
+// Application of css classes that are not being applied by popper.js
+.c-feature_alert_tooltip-container[data-popper-placement^='top'] > .c-feature_alert_tooltip-arrow {
+  bottom: -4px;
+}
+.c-feature_alert_tooltip-container[data-popper-placement^='bottom'] > .c-feature_alert_tooltip-arrow {
+  top: -4px;
+}
+.c-feature_alert_tooltip-container[data-popper-placement^='left'] > .c-feature_alert_tooltip-arrow {
+  right: -4px;
+}
+.c-feature_alert_tooltip-container[data-popper-placement^='right'] > .c-feature_alert_tooltip-arrow {
+  left: -4px;
+}
 
 .c-feature_alert_tooltip-arrow {
-  width: 25px;
-  height: 25px;
+  width: $feature-alert-arrow-size;
+  height: $feature-alert-arrow-size;
 
   display: block;
-  overflow: hidden;
   position: absolute;
+  z-index: -1;
 
   &::after {
     width: $feature-alert-arrow-size;

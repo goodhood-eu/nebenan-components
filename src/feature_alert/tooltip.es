@@ -34,12 +34,12 @@ const FeatureAlertTooltip = (props) => {
     ...cleanProps
   } = props;
 
-  const [isOpen, setOpen] = useState(defaultOpen);
+  const [isOpen, setOpen] = useState(false);
   const ref = useRef(null);
   const refElement = useRef(null);
   const refTooltip = useRef(null);
   const refArrow = useRef(null);
-  const { styles, attributes, state } = usePopper(refElement.current, refTooltip.current, {
+  const { styles, attributes } = usePopper(refElement.current, refTooltip.current, {
     placement: position,
     modifiers: [
       {
@@ -58,10 +58,8 @@ const FeatureAlertTooltip = (props) => {
     ],
   });
 
-  console.log(state, 'HERE IS STATE');
-
   // need to be able to only open once
-  const wasActive = useRef(defaultOpen);
+  const wasActive = useRef(false);
 
   const handleOpen = useCallback((event) => {
     if (event) event.stopPropagation();
@@ -89,6 +87,14 @@ const FeatureAlertTooltip = (props) => {
     return () => clearTimeout(tid);
   }, [trigger, handleOpen]);
 
+  // To apply popper styles properly for defaultOpen tooltip
+  useEffect(() => {
+    if (defaultOpen && !wasActive.current) {
+      console.log('PEMOS');
+      handleOpen();
+    }
+  });
+
   const className = clsx('c-feature_alert_tooltip', props.className, {
     'is-active': isOpen,
   });
@@ -97,8 +103,8 @@ const FeatureAlertTooltip = (props) => {
 
   return (
     <article {...cleanProps} className={className} ref={ref} onClick={handleClose}>
-      <aside className="c-feature_alert_tooltip-container" ref={refTooltip} style={styles.popper} {...attributes.popper}>
-        <div data-popper-arrow className="c-feature_alert_tooltip-arrow" ref={refArrow} style={styles.arrow} />
+      <aside className="c-feature_alert_tooltip-container" id="tooltip" ref={refTooltip} style={styles.popper} {...attributes.popper}>
+        <div className="c-feature_alert_tooltip-arrow" ref={refArrow} style={styles.arrow} />
         <div className="c-feature_alert_tooltip-content">
           {content}
           {closeIcon && <i className="c-feature_alert_tooltip-cross icon-cross" />}
