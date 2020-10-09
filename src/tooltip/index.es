@@ -18,13 +18,12 @@ const Tooltip = (props) => {
   });
 
   const handleOpen = useCallback((event) => {
-    if (event) event.stopPropagation();
-    if (isOpen) return;
+    event.stopPropagation();
     setOpen(true);
   }, [isOpen]);
 
-  const handleClose = useCallback(() => {
-    if (!isOpen) return;
+  const handleClose = useCallback((event) => {
+    event.stopPropagation();
     setOpen(false);
   }, [isOpen]);
 

@@ -6,7 +6,6 @@ $tooltip-arrow-size: 10px;
 
   > .c-tooltip-text {
     padding: 5px 10px;
-    width: 150px;
 
     display: none;
     position: absolute;
@@ -68,6 +67,7 @@ $tooltip-arrow-size: 10px;
 }
 
 .c-tooltip-element {
+  display: block;
   width: max-content;
 }
 

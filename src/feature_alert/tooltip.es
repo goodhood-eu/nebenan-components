@@ -23,7 +23,6 @@ const DELAY_TIMEOUT = 1000 * 3;
 const FeatureAlertTooltip = (props) => {
   const {
     position,
-    fallbackPosition,
     trigger,
     content,
     children,
@@ -97,7 +96,6 @@ const FeatureAlertTooltip = (props) => {
 
 FeatureAlertTooltip.defaultProps = {
   position: POSITION_LEFT,
-  fallbackPosition: POSITION_RIGHT,
   closeIcon: false,
   defaultOpen: false,
 };
@@ -105,12 +103,6 @@ FeatureAlertTooltip.defaultProps = {
 FeatureAlertTooltip.propTypes = {
   className: PropTypes.string,
   position: PropTypes.oneOf([
-    POSITION_TOP,
-    POSITION_BOTTOM,
-    POSITION_LEFT,
-    POSITION_RIGHT,
-  ]),
-  fallbackPosition: PropTypes.oneOf([
     POSITION_TOP,
     POSITION_BOTTOM,
     POSITION_LEFT,
