@@ -46,7 +46,7 @@ const Tooltip = (props) => {
         {text}
         <span className="c-tooltip-arrow" ref={refArrow} style={styles.arrow} />
       </em>
-      <span ref={refElement}>
+      <span className="c-tooltip-element" ref={refElement}>
         {children}
       </span>
     </span>
