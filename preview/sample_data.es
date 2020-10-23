@@ -8,6 +8,7 @@ export default {
           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
 
   tooltip: 'Design is like a joke. If it needs explaining, it\'s probably bad.',
+  tooltipShort: 'Design is like a joke.',
 
   images: [
     { id: 0, url: 'http://i.kinja-img.com/gawker-media/image/upload/yvqylz3c0ywhkpt1g8of.jpg' },

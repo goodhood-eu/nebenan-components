@@ -120,12 +120,12 @@ const Dropdowns = () => (
     <div className="preview-section preview-tooltips">
       <ul>
         <li>
-          <div><Tooltip text={content.tooltip}>Tooltip top</Tooltip></div>
-          <div><Tooltip type="bottom" text={content.tooltip}>Tooltip bottom</Tooltip></div>
+          <div><Tooltip text={content.tooltipShort}>Tooltip top</Tooltip></div>
+          <div><Tooltip type="bottom" text={content.tooltipShort}>Tooltip bottom</Tooltip></div>
         </li>
         <li>
-          <div><Tooltip type="left" text={content.tooltip}>Tooltip left</Tooltip></div>
-          <div><Tooltip type="right" text={content.tooltip}>Tooltip right</Tooltip></div>
+          <div><Tooltip type="left" text={content.tooltipShort}>Tooltip left</Tooltip></div>
+          <div><Tooltip type="right" text={content.tooltipShort}>Tooltip right</Tooltip></div>
         </li>
       </ul>
     </div>

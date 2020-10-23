@@ -1,13 +1,12 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { usePopper } from 'react-popper';
+import { createPopper } from '@popperjs/core';
 
 import { arrayToHash } from 'nebenan-helpers/lib/data';
 import { getPopperOptions } from '../feature_alert/utils';
 
 const knownTypes = arrayToHash(['left', 'right', 'top', 'bottom']);
-
 
 const Tooltip = (props) => {
   const [isOpen, setOpen] = useState(false);
@@ -30,20 +29,26 @@ const Tooltip = (props) => {
   const refElement = useRef(null);
   const refTooltip = useRef(null);
   const refArrow = useRef(null);
-  const { styles, attributes } = usePopper(
-    refElement.current,
-    refTooltip.current,
-    getPopperOptions(refArrow, selectedType),
-  );
+
+  useEffect(() => {
+    if (refElement.current && refTooltip.current) {
+      createPopper(
+        refElement.current,
+        refTooltip.current,
+        getPopperOptions(refArrow, selectedType),
+      );
+    }
+  });
+
 
   return (
     <span
       {...cleanProps} className={className}
       onMouseEnter={handleOpen} onMouseLeave={handleClose}
     >
-      <em className="c-tooltip-text" ref={refTooltip} style={styles.popper} {...attributes.popper}>
+      <em className="c-tooltip-text" ref={refTooltip}>
         {text}
-        <span className="c-tooltip-arrow" ref={refArrow} style={styles.arrow} />
+        <span className="c-tooltip-arrow" ref={refArrow} />
       </em>
       <span className="c-tooltip-element" ref={refElement}>
         {children}
