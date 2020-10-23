@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { usePopper } from 'react-popper';
 
 import { invoke } from 'nebenan-helpers/lib/utils';
 
-import { useEscHandler, useOutsideClick, usePopperInit } from './hooks';
-import { getTriggerProps, getPopperOptions } from './utils';
+import { useEscHandler, useOutsideClick } from './hooks';
+import { getTriggerProps } from './utils';
 import {
   POSITION_TOP,
   POSITION_BOTTOM,
@@ -33,19 +32,11 @@ const FeatureAlertTooltip = (props) => {
     ...cleanProps
   } = props;
 
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(defaultOpen);
   const ref = useRef(null);
-  const refElement = useRef(null);
-  const refTooltip = useRef(null);
-  const refArrow = useRef(null);
-  const { styles, attributes } = usePopper(
-    refElement.current,
-    refTooltip.current,
-    getPopperOptions(refArrow, position),
-  );
 
   // need to be able to only open once
-  const wasActive = useRef(false);
+  const wasActive = useRef(defaultOpen);
 
   const handleOpen = useCallback((event) => {
     if (event) event.stopPropagation();
@@ -63,7 +54,6 @@ const FeatureAlertTooltip = (props) => {
 
   useEscHandler(handleClose);
   useOutsideClick(ref, handleClose);
-  usePopperInit(defaultOpen, wasActive, handleOpen);
 
   useEffect(() => {
     let tid;
@@ -74,7 +64,7 @@ const FeatureAlertTooltip = (props) => {
     return () => clearTimeout(tid);
   }, [trigger, handleOpen]);
 
-  const className = clsx('c-feature_alert_tooltip', props.className, {
+  const className = clsx(`c-feature_alert_tooltip is-placement-${position}`, props.className, {
     'is-active': isOpen,
   });
 
@@ -82,14 +72,14 @@ const FeatureAlertTooltip = (props) => {
 
   return (
     <article {...cleanProps} className={className} ref={ref} onClick={handleClose}>
-      <aside className="c-feature_alert_tooltip-container" ref={refTooltip} style={styles.popper} {...attributes.popper}>
-        <i className="c-feature_alert_tooltip-arrow" ref={refArrow} style={styles.arrow} />
+      <aside className="c-feature_alert_tooltip-container">
+        <i className="c-feature_alert_tooltip-arrow" />
         <div className="c-feature_alert_tooltip-content">
           {content}
           {closeIcon && <i className="c-feature_alert_tooltip-cross icon-cross" />}
         </div>
       </aside>
-      <div {...triggerProps} ref={refElement}>{children}</div>
+      <div {...triggerProps}>{children}</div>
     </article>
   );
 };

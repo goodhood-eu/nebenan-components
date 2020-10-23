@@ -24,26 +24,13 @@ $feature-alert-arrow-size: 16px;
   }
 }
 
-// Application of css classes that are not being applied by popper.js
-.c-feature_alert_tooltip-container[data-popper-placement^='top'] > .c-feature_alert_tooltip-arrow {
-  bottom: -4px;
-}
-.c-feature_alert_tooltip-container[data-popper-placement^='bottom'] > .c-feature_alert_tooltip-arrow {
-  top: -4px;
-}
-.c-feature_alert_tooltip-container[data-popper-placement^='left'] > .c-feature_alert_tooltip-arrow {
-  right: -4px;
-}
-.c-feature_alert_tooltip-container[data-popper-placement^='right'] > .c-feature_alert_tooltip-arrow {
-  left: -4px;
-}
-
 .c-feature_alert_tooltip-arrow {
-  width: $feature-alert-arrow-size;
-  height: $feature-alert-arrow-size;
+  width: 25px;
+  height: 25px;
 
   display: block;
-  z-index: -1;
+  overflow: hidden;
+  position: absolute;
 
   &::after {
     width: $feature-alert-arrow-size;
@@ -93,5 +80,99 @@ $feature-alert-arrow-size: 16px;
   &.is-active .c-feature_alert_tooltip-container {
     animation: 300ms ease-in feature-alert-appear;
     display: block;
+  }
+
+  // v
+  &.is-placement-top {
+    .c-feature_alert_tooltip-container {
+      margin-bottom: $feature-alert-arrow-size;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .c-feature_alert_tooltip-arrow {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+
+      &::after {
+        bottom: 18px;
+        left: 5px;
+      }
+    }
+  }
+
+  // ^
+  &.is-placement-bottom {
+    .c-feature_alert_tooltip-container {
+      margin-top: $feature-alert-arrow-size;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .c-feature_alert_tooltip-arrow {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+
+      &::after {
+        top: 18px;
+        left: 5px;
+      }
+    }
+  }
+
+  // >
+  &.is-placement-left {
+    .c-feature_alert_tooltip-container {
+      margin-right: $feature-alert-arrow-size;
+      top: 50%;
+      right: 100%;
+      transform: translateY(-50%);
+    }
+
+    .c-feature_alert_tooltip-arrow {
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%);
+
+      &::after {
+        top: 4px;
+        right: 18px;
+      }
+    }
+  }
+
+  // <
+  &.is-placement-right {
+    .c-feature_alert_tooltip-container {
+      margin-left: $feature-alert-arrow-size;
+      top: 50%;
+      left: 100%;
+      transform: translateY(-50%);
+    }
+
+    .c-feature_alert_tooltip-arrow {
+      top: 50%;
+      right: 100%;
+      transform: translateY(-50%);
+
+      &::after {
+        top: 4px;
+        left: 18px;
+      }
+    }
+  }
+
+  &.is-placement-left .c-feature_alert_tooltip-cross {
+    margin-right: 10px;
+    margin-left: 0;
+    order: -1;
+
+    &::before {
+      letter-spacing: -1px;
+    }
   }
 }
