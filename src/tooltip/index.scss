@@ -1,10 +1,10 @@
-$tooltip-arrow-size: 5px;
+$tooltip-arrow-size: 10px;
 
 .c-tooltip {
   position: relative;
   cursor: default;
 
-  > em {
+  > .c-tooltip-text {
     padding: 5px 10px;
 
     display: none;
@@ -21,73 +21,53 @@ $tooltip-arrow-size: 5px;
     color: $color-gray-09;
     word-wrap: break-word;
     white-space: pre;
-
-    &::after {
-      content: '';
-      position: absolute;
-      border: $tooltip-arrow-size solid transparent;
-    }
   }
 
   @media ($media-m) {
-    &:hover em {
+    &.is-active .c-tooltip-text {
       display: block;
     }
   }
 }
 
-.c-tooltip-bottom > em {
-  margin-top: $tooltip-arrow-size + 2px;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+.c-tooltip-arrow {
+  width: $tooltip-arrow-size;
+  height: $tooltip-arrow-size;
+  z-index: -1;
 
   &::after {
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-bottom-color: $color-gray-00;
+    width: $tooltip-arrow-size;
+    height: $tooltip-arrow-size;
+
+    content: '';
+    position: absolute;
+
+    border-radius: $border-radius-s;
+
+    background: $color-gray-00;
+    //background: red;
+    transform: rotate(45deg);
   }
 }
 
-.c-tooltip-top > em {
-  margin-bottom: $tooltip-arrow-size + 2px;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-
-  &::after {
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-top-color: $color-gray-00;
-  }
+// Application of css classes that are not being applied by popper.js
+.c-tooltip-text[data-popper-placement^='top'] > .c-tooltip-arrow {
+  bottom: -4px;
 }
-
-.c-tooltip-right > em {
-  margin-left: $tooltip-arrow-size + 2px;
-  top: 50%;
-  left: 100%;
+.c-tooltip-text[data-popper-placement^='bottom'] > .c-tooltip-arrow {
+  top: -4px;
+}
+.c-tooltip-text[data-popper-placement^='left'] > .c-tooltip-arrow {
+  right: -4px;
+  top:50%;
   transform: translateY(-50%);
-
-  &::after {
-    top: 50%;
-    right: 100%;
-    transform: translateY(-50%);
-    border-right-color: $color-gray-00;
-  }
+}
+.c-tooltip-text[data-popper-placement^='right'] > .c-tooltip-arrow {
+  left: -4px;
 }
 
-.c-tooltip-left > em {
-  margin-right: $tooltip-arrow-size + 2px;
-  top: 50%;
-  right: 100%;
-  transform: translateY(-50%);
-
-  &::after {
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
-    border-left-color: $color-gray-00;
-  }
+.c-tooltip-element {
+  display: block;
+  width: max-content;
 }
+
