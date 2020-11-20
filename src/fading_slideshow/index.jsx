@@ -1,4 +1,4 @@
-import React, { PureComponent, Children } from 'react';
+import { PureComponent, Children } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import omit from 'lodash/omit';

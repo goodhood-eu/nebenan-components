@@ -1,4 +1,4 @@
-import React, { PureComponent, createRef } from 'react';
+import { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 

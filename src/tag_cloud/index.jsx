@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import throttle from 'lodash/throttle';
 import clsx from 'clsx';
