@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
 import { arrayOf } from 'nebenan-helpers/lib/data';
 import { Link } from 'react-router-dom';
 

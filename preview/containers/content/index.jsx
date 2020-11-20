@@ -1,4 +1,4 @@
-import React, { PureComponent, createRef } from 'react';
+import { PureComponent, createRef } from 'react';
 import uniq from 'lodash/uniq';
 import { emojiCollection } from 'emojitsu';
 import { bindTo } from 'nebenan-helpers/lib/utils';

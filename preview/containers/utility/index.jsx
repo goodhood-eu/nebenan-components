@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 
-import React, { PureComponent, createRef } from 'react';
+import { PureComponent, createRef } from 'react';
 
 import Header from '../../components/header';
 
