@@ -12,7 +12,7 @@ import { getAnimationPosition } from './utils';
 
 import Draggable from '../draggable';
 
-// How mych % of container width to shift
+// How much % of container width to shift
 const SHIFT_PERCENT = .75;
 // If within this distance of the end of the element, scroll to the end instead
 const SHIFT_TOLERANCE = 10;
@@ -154,18 +154,17 @@ class SideScroller extends PureComponent {
     this.stopScrollAnimation();
   }
 
-  handleDragStop() {
-    this.preventClick = false;
-  }
-
   handleDrag(event) {
     const diff = this.startX - eventCoordinates(event, 'pageX').pageX;
     const shift = Math.abs(diff);
     const newPosition = this.startPosition + diff;
 
-    // Prevents vertical scroll on touch devices
-    if (shift >= DISABLE_SCROLL_DISTANCE) event.preventDefault();
-    if (shift > 0) this.preventClick = true;
+    if (shift >= DISABLE_SCROLL_DISTANCE) {
+      this.preventClick = true;
+
+      // Prevents vertical scroll on touch devices
+      event.preventDefault();
+    }
 
     this.getScrollableNode().scrollLeft = newPosition;
   }
