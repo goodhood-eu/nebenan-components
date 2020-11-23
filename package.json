@@ -7,7 +7,7 @@
   "homepage": "https://nebenan.de/",
   "repository": "good-hood-gmbh/nebenan-components",
   "bugs": "https://github.com/good-hood-gmbh/nebenan-components/issues",
-  "version": "9.6.1",
+  "version": "9.6.2",
   "files": [
     "images/*.svg",
     "images/*/*.svg",
