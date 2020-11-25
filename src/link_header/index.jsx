@@ -41,7 +41,7 @@ const LinkHeader = ({
       </span>
     );
   }
-  return <Link {...cleanProps} {...{ to, className }}>{icon}{children}</Link>;
+  return <Link {...cleanProps} {...{ to, className, onClick }}>{icon}{children}</Link>;
 };
 
 LinkHeader.propTypes = {
