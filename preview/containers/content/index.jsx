@@ -64,6 +64,7 @@ class Inputs extends PureComponent {
       'handleClipboardTextCopy',
       'handleAutocomplete',
       'handleTagsPickerSelect',
+      'handleLinkHeaderClick',
     );
 
     this.clipboardText = createRef();
@@ -95,6 +96,10 @@ class Inputs extends PureComponent {
     console.info('Got autocomplete input:', value);
     const autocompleteSuggestions = (value && value.length) ? value.split('') : [];
     this.setState({ suggestions: autocompleteSuggestions });
+  }
+
+  handleLinkHeaderClick() {
+    console.log('link header clicked');
   }
 
   render() {
@@ -169,6 +174,13 @@ class Inputs extends PureComponent {
           <LinkHeader to="/" reversed>
             <span className="ui-h3">Link Header</span>
             Content!
+          </LinkHeader>
+        </div>
+
+        <div className="preview-section">
+          <LinkHeader onClick={this.handleLinkHeaderClick} reversed>
+            <span className="ui-h3">Link Header</span>
+            Content with onClick handler!
           </LinkHeader>
         </div>
 
