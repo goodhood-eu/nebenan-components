@@ -2,13 +2,14 @@
   padding-right: 25px;
   display: block;
   position: relative;
+  cursor: pointer;
 
   &.is-reversed {
     padding-right: 0;
     padding-left: 25px;
   }
 
-  @at-root a#{&} {
+  &.is-clickable {
     color: $color-gray-00;
   }
 
