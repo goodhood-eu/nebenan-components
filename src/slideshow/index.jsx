@@ -206,7 +206,7 @@ class Slideshow extends PureComponent {
   }
 
   renderItem(item) {
-    return <li style={{ width: this.state.itemWidth }}>{item}</li>;
+    return <li className="c-slideshow-list_item" style={{ width: this.state.itemWidth }}>{item}</li>;
   }
 
   render() {
