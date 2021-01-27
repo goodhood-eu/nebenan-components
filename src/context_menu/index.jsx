@@ -41,7 +41,7 @@ class ContextMenu extends PureComponent {
 
       document.addEventListener('click', this.handleGlobalClick);
       this.isListenerActive = true;
-    }, 1);
+    }, 0);
   }
 
   deactivate() {
