@@ -29,10 +29,19 @@ class ContextMenu extends PureComponent {
   }
 
   activate() {
-    if (this.isListenerActive) return;
-    this.stopListeningToKeys = keymanager('esc', this.hide);
-    document.addEventListener('click', this.handleGlobalClick);
-    this.isListenerActive = true;
+    // # Workaround for event bubbling issue in react 17
+    // Prevents the following:
+    // - Some click handler calls ContextMenu.show()
+    // - ContextMenu attaches global click listener
+    // - Click event bubbles up from react root node to document
+    // - ContextMenu global click handler is called
+    setTimeout(() => {
+      if (this.isListenerActive) return;
+      this.stopListeningToKeys = keymanager('esc', this.hide);
+
+      document.addEventListener('click', this.handleGlobalClick);
+      this.isListenerActive = true;
+    }, 1);
   }
 
   deactivate() {
