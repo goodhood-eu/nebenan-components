@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 import keymanager from 'nebenan-helpers/lib/keymanager';
 import { bindTo } from 'nebenan-helpers/lib/utils';
+import { getReactRootElement } from './utils';
 
 
 class ContextMenu extends PureComponent {
@@ -29,25 +30,20 @@ class ContextMenu extends PureComponent {
   }
 
   activate() {
-    // # Workaround for event bubbling issue in react 17
-    // Prevents the following:
-    // - Some click handler calls ContextMenu.show()
-    // - ContextMenu attaches global click listener
-    // - Click event bubbles up from react root node to document
-    // - ContextMenu global click handler is called
-    setTimeout(() => {
-      if (this.isListenerActive) return;
-      this.stopListeningToKeys = keymanager('esc', this.hide);
+    if (this.isListenerActive) return;
+    this.stopListeningToKeys = keymanager('esc', this.hide);
 
-      document.addEventListener('click', this.handleGlobalClick);
-      this.isListenerActive = true;
-    }, 0);
+    getReactRootElement(document).addEventListener('click', this.handleGlobalClick);
+
+    this.isListenerActive = true;
   }
 
   deactivate() {
     if (!this.isListenerActive) return;
     this.stopListeningToKeys();
-    document.removeEventListener('click', this.handleGlobalClick);
+
+    getReactRootElement(document).removeEventListener('click', this.handleGlobalClick);
+
     this.isListenerActive = false;
   }
 
