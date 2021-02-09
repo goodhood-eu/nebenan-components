@@ -4,8 +4,8 @@ import omit from 'lodash/omit';
 import clsx from 'clsx';
 
 import keymanager from 'nebenan-helpers/lib/keymanager';
+import eventproxy from 'nebenan-helpers/lib/eventproxy';
 import { bindTo } from 'nebenan-helpers/lib/utils';
-import { getReactRootElement } from './utils';
 
 
 class ContextMenu extends PureComponent {
@@ -32,8 +32,7 @@ class ContextMenu extends PureComponent {
   activate() {
     if (this.isListenerActive) return;
     this.stopListeningToKeys = keymanager('esc', this.hide);
-
-    getReactRootElement(document).addEventListener('click', this.handleGlobalClick);
+    this.stopListeningToClicks = eventproxy('click', this.handleGlobalClick);
 
     this.isListenerActive = true;
   }
@@ -41,8 +40,7 @@ class ContextMenu extends PureComponent {
   deactivate() {
     if (!this.isListenerActive) return;
     this.stopListeningToKeys();
-
-    getReactRootElement(document).removeEventListener('click', this.handleGlobalClick);
+    this.stopListeningToClicks();
 
     this.isListenerActive = false;
   }

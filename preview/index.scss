@@ -8,10 +8,10 @@ html {
 }
 
 main {
-  margin: 10px;
+  padding: 10px;
 
   @media ($media-m) {
-    margin: 30px 100px;
+    padding: 30px 100px;
   }
 }
 
