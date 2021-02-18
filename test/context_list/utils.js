@@ -23,6 +23,8 @@ describe('parse data-track', () => {
       ...result,
       bird: 'animal',
       data: 'value',
+      'some-random-data-track': 'value',
+      'data-tracright': 'kek',
     };
 
     assert.deepEqual(parseDataTrack(options), result);
