@@ -1,7 +1,7 @@
-const DATA_TRACK_PREFIX = 'data-track';
+const DATA_TRACK_REGEX = /^data-track[^\s]*/;
 
 export const parseDataTrack = (options) => Object.keys(options).reduce((acc, elem) => {
-  if (elem.includes(DATA_TRACK_PREFIX)) {
+  if (DATA_TRACK_REGEX.test(elem)) {
     acc[elem] = options[elem];
   }
   return acc;
