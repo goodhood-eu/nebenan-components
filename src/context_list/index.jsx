@@ -7,7 +7,7 @@ import { arrayToHash } from 'nebenan-helpers/lib/data';
 import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
 import keymanager, { keys as keyMap } from 'nebenan-helpers/lib/keymanager';
 
-import { parseDataTrack } from './utils';
+import { getTrackingAttributes } from './utils';
 
 const { UP, DOWN, TAB, ENTER } = keyMap;
 const defaultGetOption = (key, options) => options[key];
@@ -151,8 +151,8 @@ class ContextList extends PureComponent {
     const onClick = this.handleClick.bind(this, key);
     const onMouseEnter = this.handleMouseEnter.bind(this, key);
     const children = getOption(key, this.props.options);
-    const dataTrack = parseDataTrack(this.props.options[key]);
-    const cleanProps = { key, className, onClick, onMouseEnter, ...dataTrack };
+    const trackingAttributes = getTrackingAttributes(this.props.options[key]);
+    const cleanProps = { key, className, onClick, onMouseEnter, ...trackingAttributes };
 
     return (
       <li {...cleanProps}>{children}</li>
