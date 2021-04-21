@@ -29,13 +29,13 @@ class Infinite extends PureComponent {
   componentDidMount() {
     this.isComponentMounted = true;
     // pause to render to get refs
-    process.nextTick(this.startScroller);
+    setTimeout(this.startScroller, 0);
   }
 
   componentDidUpdate() {
     if (this.props.loading) this.deactivate();
     // pause to render to get refs
-    else process.nextTick(this.startScroller);
+    else setTimeout(this.startScroller, 0);
   }
 
   componentWillUnmount() {
