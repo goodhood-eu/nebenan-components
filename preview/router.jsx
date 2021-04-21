@@ -5,7 +5,6 @@ import Index from './containers/index';
 
 import Sliders from './containers/sliders';
 import Content from './containers/content';
-import Meta from './containers/meta';
 import Utility from './containers/utility';
 import Misc from './containers/misc';
 import Markdown from './containers/markdown';
@@ -15,7 +14,6 @@ export default () => (
   <Switch>
     <Route path="/" component={Index} exact />
 
-    <Route path="/meta" component={Meta} />
     <Route path="/dropdowns" component={Dropdowns} />
     <Route path="/sliders" component={Sliders} />
     <Route path="/content" component={Content} />

@@ -35,9 +35,7 @@ class Carousel extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.children !== this.props.children) {
-      process.nextTick(this.handleResize);
-    }
+    if (prevProps.children !== this.props.children) setTimeout(this.handleResize, 0);
   }
 
   componentWillUnmount() {

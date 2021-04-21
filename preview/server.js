@@ -8,17 +8,15 @@ const { renderToString } = require('react-dom/server');
 
 const { StaticRouter } = require('react-router');
 const createRouter = require('./router');
-const { Provider: MicroHelmetProvider } = require('../lib/micro_helmet');
-
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 
-const getHTML = (meta, content) => (`<!DOCTYPE html>
+const getHTML = (content) => (`<!DOCTYPE html>
 <html lang="en-US">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>${meta && meta.title ? meta.title : 'React Nebenan UI Components'}</title>
+    <title>React Nebenan UI Components</title>
     <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no" />
     <meta name="HandheldFriendly" content="True" />
     <meta name="MobileOptimized" content="320" />
@@ -34,18 +32,16 @@ const getHTML = (meta, content) => (`<!DOCTYPE html>
 `);
 
 const renderApp = (req, res) => {
-  const helmetContext = {};
   const routerContext = {};
   const routes = createRouter();
 
-  const Component = e(StaticRouter, { context: routerContext, location: req.url }, routes);
-  const App = e(MicroHelmetProvider, { context: helmetContext }, Component);
+  const App = e(StaticRouter, { context: routerContext, location: req.url }, routes);
 
   const content = renderToString(App);
 
   if (routerContext.url) return res.redirect(302, routerContext.url);
 
-  res.send(getHTML(helmetContext.getProps(), content));
+  res.send(getHTML(content));
 };
 
 app.set('port', port);
@@ -54,7 +50,7 @@ const emojis = serveStatic(`${__dirname}/../node_modules/emoji-assets/png/`, { r
 const fonts = serveStatic(`${__dirname}/../node_modules/nebenan-ui-kit/fonts/`, { redirect: false });
 app.use(morgan('dev'));
 
-app.use('/images/emojis-5.0.2', emojis);
+app.use('/images/emojis-6.0.0', emojis);
 app.use('/fonts', fonts);
 app.use(serveStatic(`${__dirname}/public`, { redirect: false }));
 

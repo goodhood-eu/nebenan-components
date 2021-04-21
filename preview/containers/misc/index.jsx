@@ -13,7 +13,6 @@ import Dots from '../../../lib/dots';
 import HamburgerIcon from '../../../lib/hamburger_icon';
 import IconBox, { TYPE_LARGE as ICON_TYPE_LARGE } from '../../../lib/icon_box';
 import DateBox from '../../../lib/date_box';
-import Logo from '../../../lib/logo';
 import LoadingBar, { LoadingSpinner } from '../../../lib/loading';
 
 const todayDate = (new Date()).toISOString();
@@ -60,38 +59,6 @@ class Misc extends PureComponent {
           <DateBox date={todayDate} />
           <DateBox date={todayDate} active={false} />
           <DateBox date={greatDate} />
-        </div>
-
-        <div className="preview-section">
-          <Logo />
-          <Logo>amazing subtitle</Logo>
-          <Logo to="/" />
-          <Logo compact />
-          <Logo compact to="/" />
-        </div>
-
-        <div className="preview-section preview-dark">
-          <Logo />
-          <Logo>Für nette Leute</Logo>
-          <Logo to="/" />
-          <Logo compact />
-          <Logo compact to="/" />
-        </div>
-
-        <div className="preview-section">
-          <Logo localeName="fr_fr" />
-          <Logo localeName="fr_fr">amazing subtitle</Logo>
-          <Logo localeName="fr_fr" to="/" />
-          <Logo localeName="fr_fr" compact />
-          <Logo localeName="fr_fr" compact to="/" />
-        </div>
-
-        <div className="preview-section preview-dark">
-          <Logo localeName="fr_fr" />
-          <Logo localeName="fr_fr">Für nette Leute</Logo>
-          <Logo localeName="fr_fr" to="/" />
-          <Logo localeName="fr_fr" compact />
-          <Logo localeName="fr_fr" compact to="/" />
         </div>
 
         <div className="preview-section">
