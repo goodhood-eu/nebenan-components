@@ -14,7 +14,6 @@ import Emoji from '../../../lib/emoji';
 import EmojiSuggestions from '../../../lib/emoji_suggestions';
 import TabBar from '../../../lib/tab_bar';
 import FlatTabBar from '../../../lib/flat_tab_bar';
-import LinkHeader from '../../../lib/link_header';
 import Progress from '../../../lib/progress';
 import ProgressLine from '../../../lib/progress_line';
 import PhoneNumber from '../../../lib/phone_number';
@@ -156,27 +155,6 @@ class Inputs extends PureComponent {
             <FlatTabBar activeIndex={0} items={[{ text: 'One' }, { text: 'Two' }]} />
             <div className="ui-card-section">{content.lorem.slice(0, 26)}</div>
           </div>
-        </div>
-
-        <div className="preview-section">
-          <LinkHeader to="/">
-            <span className="ui-h3">Link Header</span>
-            Content!
-          </LinkHeader>
-        </div>
-
-        <div className="preview-section">
-          <LinkHeader to="/" reversed>
-            <span className="ui-h3">Link Header</span>
-            Content!
-          </LinkHeader>
-        </div>
-
-        <div className="preview-section">
-          <LinkHeader onClick={this.handleLinkHeaderClick} reversed>
-            <span className="ui-h3">Link Header</span>
-            Content with onClick handler!
-          </LinkHeader>
         </div>
 
         <div className="preview-section preview-clipboard_text">
