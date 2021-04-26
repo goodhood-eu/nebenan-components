@@ -18,7 +18,7 @@ import {
 } from './utils';
 
 import Draggable from '../draggable';
-import Dots from '../dots';
+import Dots from '../private/dots';
 
 
 class Slideshow extends PureComponent {

@@ -7,7 +7,7 @@ import clamp from 'lodash/clamp';
 import heartbeat from 'nebenan-helpers/lib/heartbeat';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
-import Dots from '../dots';
+import Dots from '../private/dots';
 
 
 class FadingSlideshow extends PureComponent {

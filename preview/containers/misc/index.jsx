@@ -9,7 +9,6 @@ import Badge, {
   BADGE_BLUE,
   BADGE_PURPLE,
 } from '../../../lib/badge';
-import Dots from '../../../lib/dots';
 import HamburgerIcon from '../../../lib/hamburger_icon';
 import IconBox, { TYPE_LARGE as ICON_TYPE_LARGE } from '../../../lib/icon_box';
 import DateBox from '../../../lib/date_box';
@@ -23,10 +22,6 @@ class Misc extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { loading: true };
-  }
-
-  static handleDotClick(index) {
-    console.warn('Index clicked:', index);
   }
 
   componentDidMount() {
@@ -59,14 +54,6 @@ class Misc extends PureComponent {
           <DateBox date={todayDate} />
           <DateBox date={todayDate} active={false} />
           <DateBox date={greatDate} />
-        </div>
-
-        <div className="preview-section">
-          <Dots count={10} active={3} onItemClick={this.constructor.handleDotClick} />
-        </div>
-
-        <div className="preview-section">
-          <Dots count={10} onItemClick={this.constructor.handleDotClick} />
         </div>
 
         <div className="preview-section">
