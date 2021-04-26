@@ -6,7 +6,6 @@ export default () => (
     <Header noLink>Index</Header>
     <div className="preview-section">
       <ul className="ui-options">
-        <li><Link to="/dropdowns">Dropdowns</Link></li>
         <li><Link to="/sliders">Sliders</Link></li>
         <li><Link to="/content">Content</Link></li>
         <li><Link to="/markdown">Markdown</Link></li>
