@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import Header from '../../components/header';
 
-import Accordion from '../../../lib/accordion';
 import Slideshow from '../../../lib/slideshow';
 import FadingSlideshow from '../../../lib/fading_slideshow';
 import Carousel from '../../../lib/carousel';
@@ -19,16 +18,6 @@ const getBackgroundImageStyle = (url) => ({ backgroundImage: `url("${url}")` });
 
 
 class Sliders extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { accordionActiveIndex: 0 };
-    this.handleAccordionChange = this.handleAccordionChange.bind(this);
-  }
-
-  handleAccordionChange(index) {
-    this.setState({ accordionActiveIndex: index });
-  }
-
   renderSlide(slide, index) {
     const body = (
       <>
@@ -115,14 +104,6 @@ class Sliders extends PureComponent {
               {arrayOf(50).map(this.renderBlock)}
             </ul>
           </SideScroller>
-        </div>
-
-        <div className="preview-section">
-          <Accordion
-            items={content.content_array}
-            activeIndex={this.state.accordionActiveIndex}
-            onChange={this.handleAccordionChange}
-          />
         </div>
 
         <div className="preview-section">
