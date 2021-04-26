@@ -1,4 +1,4 @@
-import { PureComponent, createRef } from 'react';
+import { createRef, PureComponent } from 'react';
 import uniq from 'lodash/uniq';
 import { emojiCollection } from 'emojitsu';
 import { bindTo } from 'nebenan-helpers/lib/utils';
@@ -8,7 +8,6 @@ import { getMergedRef } from 'nebenan-react-hocs/lib/proxy_ref';
 import Header from '../../components/header';
 
 import ClipboardText from '../../../lib/clipboard_text';
-import ContentHeader from '../../../lib/content_header';
 import EmailLink from '../../../lib/email_link';
 import PopupLink from '../../../lib/popup_link';
 import Emoji from '../../../lib/emoji';
@@ -43,10 +42,6 @@ const suggestions = emojiCollection
 
 
 suggestions.length = 20;
-
-const headerAction = (
-  <span className="ui-button ui-button-small ui-button-primary">Button</span>
-);
 
 const action = <i className="icon-cross ui-link" />;
 
@@ -195,20 +190,6 @@ class Inputs extends PureComponent {
           >
             Copy to clipboard
           </button>
-        </div>
-
-        <div className="preview-section">
-          <ContentHeader
-            title="Optional Headline" description="Optional Description" action={headerAction}
-          >
-            <a href="/sandbox/content">Link</a>
-          </ContentHeader>
-          <ContentHeader
-            title="Optional Headline" description="Optional Description" action={headerAction}
-          />
-          <ContentHeader title="Optional Headline" description="Optional Description" />
-          <ContentHeader />
-          <ContentHeader>Aint no thing but a chicken wing</ContentHeader>
         </div>
 
         <div className="preview-section">

@@ -8,7 +8,6 @@ export default () => (
       <ul className="ui-options">
         <li><Link to="/sliders">Sliders</Link></li>
         <li><Link to="/content">Content</Link></li>
-        <li><Link to="/markdown">Markdown</Link></li>
         <li><Link to="/utility">Utility</Link></li>
         <li><Link to="/misc">Misc</Link></li>
       </ul>

@@ -123,7 +123,6 @@
     "string-validate": "^3.5.0"
   },
   "dependencies": {
-    "escape-html": "^1.0.3",
-    "marked": "^2.0.3"
+    "escape-html": "^1.0.3"
   }
 }
