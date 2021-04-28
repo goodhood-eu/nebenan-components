@@ -7,17 +7,13 @@ import Sliders from './containers/sliders';
 import Content from './containers/content';
 import Utility from './containers/utility';
 import Misc from './containers/misc';
-import Markdown from './containers/markdown';
-import Dropdowns from './containers/dropdowns';
 
 export default () => (
   <Switch>
     <Route path="/" component={Index} exact />
 
-    <Route path="/dropdowns" component={Dropdowns} />
     <Route path="/sliders" component={Sliders} />
     <Route path="/content" component={Content} />
-    <Route path="/markdown" component={Markdown} />
     <Route path="/utility" component={Utility} />
     <Route path="/misc" component={Misc} />
 

@@ -1,4 +1,4 @@
-import { PureComponent, createRef } from 'react';
+import { createRef, PureComponent } from 'react';
 import uniq from 'lodash/uniq';
 import { emojiCollection } from 'emojitsu';
 import { bindTo } from 'nebenan-helpers/lib/utils';
@@ -8,14 +8,12 @@ import { getMergedRef } from 'nebenan-react-hocs/lib/proxy_ref';
 import Header from '../../components/header';
 
 import ClipboardText from '../../../lib/clipboard_text';
-import ContentHeader from '../../../lib/content_header';
 import EmailLink from '../../../lib/email_link';
 import PopupLink from '../../../lib/popup_link';
 import Emoji from '../../../lib/emoji';
 import EmojiSuggestions from '../../../lib/emoji_suggestions';
 import TabBar from '../../../lib/tab_bar';
 import FlatTabBar from '../../../lib/flat_tab_bar';
-import LinkHeader from '../../../lib/link_header';
 import Progress from '../../../lib/progress';
 import ProgressLine from '../../../lib/progress_line';
 import PhoneNumber from '../../../lib/phone_number';
@@ -43,10 +41,6 @@ const suggestions = emojiCollection
 
 
 suggestions.length = 20;
-
-const headerAction = (
-  <span className="ui-button ui-button-small ui-button-primary">Button</span>
-);
 
 const action = <i className="icon-cross ui-link" />;
 
@@ -163,27 +157,6 @@ class Inputs extends PureComponent {
           </div>
         </div>
 
-        <div className="preview-section">
-          <LinkHeader to="/">
-            <span className="ui-h3">Link Header</span>
-            Content!
-          </LinkHeader>
-        </div>
-
-        <div className="preview-section">
-          <LinkHeader to="/" reversed>
-            <span className="ui-h3">Link Header</span>
-            Content!
-          </LinkHeader>
-        </div>
-
-        <div className="preview-section">
-          <LinkHeader onClick={this.handleLinkHeaderClick} reversed>
-            <span className="ui-h3">Link Header</span>
-            Content with onClick handler!
-          </LinkHeader>
-        </div>
-
         <div className="preview-section preview-clipboard_text">
           <ClipboardText className="ui-input" ref={this.clipboardText}>
             {content.lorem}
@@ -195,20 +168,6 @@ class Inputs extends PureComponent {
           >
             Copy to clipboard
           </button>
-        </div>
-
-        <div className="preview-section">
-          <ContentHeader
-            title="Optional Headline" description="Optional Description" action={headerAction}
-          >
-            <a href="/sandbox/content">Link</a>
-          </ContentHeader>
-          <ContentHeader
-            title="Optional Headline" description="Optional Description" action={headerAction}
-          />
-          <ContentHeader title="Optional Headline" description="Optional Description" />
-          <ContentHeader />
-          <ContentHeader>Aint no thing but a chicken wing</ContentHeader>
         </div>
 
         <div className="preview-section">

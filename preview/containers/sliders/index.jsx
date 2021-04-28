@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import Header from '../../components/header';
 
-import Accordion from '../../../lib/accordion';
 import Slideshow from '../../../lib/slideshow';
 import FadingSlideshow from '../../../lib/fading_slideshow';
 import Carousel from '../../../lib/carousel';
@@ -12,7 +11,6 @@ import Expandable from '../../../lib/expandable';
 import ExpandableCard from '../../../lib/expandable_card';
 import SideScroller from '../../../lib/side_scroller';
 import TabScroller from '../../../lib/tab_scroller';
-import Slider from '../../../lib/slider';
 
 import content from '../../sample_data';
 
@@ -20,16 +18,6 @@ const getBackgroundImageStyle = (url) => ({ backgroundImage: `url("${url}")` });
 
 
 class Sliders extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { accordionActiveIndex: 0 };
-    this.handleAccordionChange = this.handleAccordionChange.bind(this);
-  }
-
-  handleAccordionChange(index) {
-    this.setState({ accordionActiveIndex: index });
-  }
-
   renderSlide(slide, index) {
     const body = (
       <>
@@ -119,14 +107,6 @@ class Sliders extends PureComponent {
         </div>
 
         <div className="preview-section">
-          <Accordion
-            items={content.content_array}
-            activeIndex={this.state.accordionActiveIndex}
-            onChange={this.handleAccordionChange}
-          />
-        </div>
-
-        <div className="preview-section">
           <Slideshow items={slideshowItems} rotationInterval={1000 * 5} />
         </div>
 
@@ -144,11 +124,6 @@ class Sliders extends PureComponent {
 
         <div className="preview-section">
           <Expandable control={control}>This is more stuff</Expandable>
-        </div>
-
-        <div className="preview-section">
-          <Slider label="Default slider" />
-          <Slider label="Slider with min-max values and step 2" min={4} max={20} step={2} />
         </div>
       </article>
     );
