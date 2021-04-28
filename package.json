@@ -121,8 +121,5 @@
     "sass-functions": "^1.4.0 || ^2.0.0",
     "smartcontent": "^3.10.0",
     "string-validate": "^3.5.0"
-  },
-  "dependencies": {
-    "escape-html": "^1.0.3"
   }
 }
