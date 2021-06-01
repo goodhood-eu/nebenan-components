@@ -194,8 +194,6 @@ class Slideshow extends PureComponent {
   }
 
   renderDots() {
-    if (this.sectionsCount <= 1) return null;
-
     return (
       <Dots
         count={this.sectionsCount}
@@ -210,14 +208,31 @@ class Slideshow extends PureComponent {
   }
 
   render() {
-    const className = clsx('c-slideshow', this.props.className, { 'is-animated': this.state.isAnimated });
-    const cleanProps = omit(this.props, 'items', 'visibleMobile', 'visibleTablet', 'visibleDesktop', 'rotationInterval');
-    const { items } = this.props;
+    const { isAnimated, position, sceneWidth, listWidth, section } = this.state;
+    const className = clsx('c-slideshow', this.props.className, { 'is-animated': isAnimated });
+    const cleanProps = omit(
+      this.props,
+      'items',
+      'visibleMobile',
+      'visibleTablet',
+      'visibleDesktop',
+      'rotationInterval',
+      'showDots',
+      'arrowPrev',
+      'arrowNext',
+    );
+
+    const { items, showDots, arrowPrev, arrowNext } = this.props;
 
     const content = Children.map(items, this.renderItem);
-    const draggableStyle = getPrefixed({ transform: `translateX(${this.state.position}px)` });
+    const draggableStyle = getPrefixed({ transform: `translateX(${position}px)` });
 
-    this.sectionsCount = getSectionsCount(this.state.sceneWidth, this.state.listWidth);
+    this.sectionsCount = getSectionsCount(sceneWidth, listWidth);
+
+    let dots;
+    if (showDots && this.sectionsCount > 1) {
+      dots = this.renderDots();
+    }
 
     return (
       <article {...cleanProps} className={className} ref={this.element}>
@@ -231,7 +246,31 @@ class Slideshow extends PureComponent {
         >
           <ul className="c-slideshow-list">{content}</ul>
         </Draggable>
-        {this.renderDots()}
+        {dots}
+
+        {(arrowPrev && arrowNext) && (
+          <div className="arrows">
+            {(section > 0) && (
+              <button
+                type="button"
+                onClick={this.prevSection}
+                className='c-slideshow-arrow c-slideshow-arrow--prev'
+              >
+                {arrowPrev}
+              </button>
+            )}
+
+            {(section + 1) < this.sectionsCount && (
+              <button
+                type="button"
+                onClick={this.nextSection}
+                className='c-slideshow-arrow c-slideshow-arrow--next'
+              >
+                {arrowNext}
+              </button>
+            )}
+          </div>
+        )}
       </article>
     );
   }
@@ -241,6 +280,9 @@ Slideshow.defaultProps = {
   visibleMobile: 1,
   visibleTablet: 2,
   visibleDesktop: 3,
+  showDots: true,
+  arrowPrev: null,
+  arrowNext: null,
 };
 
 Slideshow.propTypes = {
@@ -251,6 +293,10 @@ Slideshow.propTypes = {
   visibleMobile: PropTypes.number.isRequired,
   visibleTablet: PropTypes.number.isRequired,
   visibleDesktop: PropTypes.number.isRequired,
+
+  showDots: PropTypes.bool,
+  arrowPrev: PropTypes.node,
+  arrowNext: PropTypes.node,
 
   rotationInterval: PropTypes.number,
   onChange: PropTypes.func,
