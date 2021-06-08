@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .c-flat_tab_bar {
   &.c-tab_bar {
     padding: 0;
@@ -66,7 +68,7 @@
 
   @for $i from 1 through 8 {
     &.is-size-#{$i} .c-tab_bar-item {
-      width: (100% / $i);
+      width: math.div(100%, $i);
     }
   }
 }

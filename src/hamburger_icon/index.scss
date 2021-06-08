@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .c-hamburger_icon {
   $icon-size: 24px;
 
@@ -19,7 +21,7 @@
   }
 
   .c-hamburger_icon-2 {
-    top: (($icon-size / 2) - 1px);
+    top: (math.div($icon-size, 2) - 1px);
   }
 
   .c-hamburger_icon-3 {
