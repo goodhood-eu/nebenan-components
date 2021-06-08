@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $scrollable-control-width: 8px;
 
 .c-scrollable {
@@ -22,7 +24,7 @@ $scrollable-control-width: 8px;
   top: 0;
   right: 0;
   background: rgba($color-dark-alpha, .15);
-  border-radius: ($scrollable-control-width / 2);
+  border-radius: math.div($scrollable-control-width, 2);
 
   opacity: 0;
   transition: opacity $transition;
@@ -34,7 +36,7 @@ $scrollable-control-width: 8px;
     top: 0;
     right: 0;
     background: rgba($color-dark-alpha, .4);
-    border-radius: ($scrollable-control-width / 2);
+    border-radius: math.div($scrollable-control-width, 2);
   }
 
   &.is-active {
