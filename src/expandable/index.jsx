@@ -16,12 +16,20 @@ class Expandable extends PureComponent {
 
   render() {
     const { isActive } = this.state;
-    const { children, defaultState, control, onUpdate, ...cleanProps } = this.props;
+    const {
+      children,
+      defaultState,
+      control,
+      onUpdate,
+      expandableContentClassName: passedExpandableContentClassName,
+      ...cleanProps
+    } = this.props;
     const className = clsx('c-expandable', this.props.className, {
       'is-active': isActive,
     });
+    const expandableContentClassName = clsx('c-expandable-content', passedExpandableContentClassName);
 
-    const content = isActive && <div className="c-expandable-content">{children}</div>;
+    const content = isActive && <div className={expandableContentClassName}>{children}</div>;
 
     return (
       <article {...cleanProps} className={className}>
@@ -40,6 +48,7 @@ Expandable.defaultProps = {
 
 Expandable.propTypes = {
   className: PropTypes.string,
+  expandableContentClassName: PropTypes.string,
   control: PropTypes.node.isRequired,
   defaultState: PropTypes.bool.isRequired,
   onUpdate: PropTypes.func,

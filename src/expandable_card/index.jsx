@@ -5,12 +5,20 @@ import Expandable from '../expandable';
 
 
 const ExpandableCard = (props) => {
-  const { children, title, ...cleanProps } = props;
+  const {
+    children,
+    title,
+    controlClassName: passedControlClassName,
+    stateClassName: passedStateClassName,
+    ...cleanProps
+  } = props;
   const className = clsx('c-expandable_card', props.className);
+  const controlClassName = clsx('c-expandable_card-control', passedControlClassName);
+  const stateClassName = clsx('c-expandable_card-state ui-link', passedStateClassName);
 
   const control = (
-    <span className="c-expandable_card-control">
-      <span className="c-expandable_card-state ui-link">
+    <span className={controlClassName}>
+      <span className={stateClassName}>
         <i className="icon-arrow_up" />
         <i className="icon-arrow_down" />
       </span>
@@ -26,6 +34,8 @@ const ExpandableCard = (props) => {
 };
 
 ExpandableCard.propTypes = {
+  controlClassName: PropTypes.string,
+  stateClassName: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.node,
   title: PropTypes.node.isRequired,
