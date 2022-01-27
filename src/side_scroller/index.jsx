@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import omit from 'lodash/omit';
 
 import { size, eventCoordinates, stopEvent } from 'nebenan-helpers/lib/dom';
-import eventproxy from 'nebenan-helpers/lib/eventproxy';
+import eventproxy from 'nebenan-eventproxy';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
 import { DISABLE_SCROLL_DISTANCE } from '../constants/swipe';

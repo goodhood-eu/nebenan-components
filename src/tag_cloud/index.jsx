@@ -3,7 +3,7 @@ import throttle from 'lodash/throttle';
 import clsx from 'clsx';
 
 import { bindTo, invoke } from 'nebenan-helpers/lib/utils';
-import eventproxy from 'nebenan-helpers/lib/eventproxy';
+import eventproxy from 'nebenan-eventproxy';
 
 import InputComponent from 'nebenan-form/lib/base';
 import Emoji from '../emoji';

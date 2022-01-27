@@ -1,3 +1,18 @@
+
+## v12.0.0 Breaking changes
+
+- Peer dependency changes
+    - -`clsx`
+    - -`date-fns`
+    - -`lodash`
+    - -`qs`
+    - -`react-router-dom`
+    - -`string-validate`
+    - +`nebenan-eventproxy`
+    - +`nebenan-heartbeat`
+    - +`nebenan-keymanager`
+    - (plus some version changes)
+
 ## v11.0.0 Breaking changes
 
 - Removed `Tooltip` component, use [@goodhood/components Tooltip](https://github.com/goodhood-eu/goodhood/tree/master/packages/components) instead

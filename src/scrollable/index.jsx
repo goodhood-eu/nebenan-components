@@ -12,7 +12,7 @@ import {
   stopEvent,
   eventCoordinates,
 } from 'nebenan-helpers/lib/dom';
-import eventproxy from 'nebenan-helpers/lib/eventproxy';
+import eventproxy from 'nebenan-eventproxy';
 import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
 
 const UPDATE_RATE = 20;

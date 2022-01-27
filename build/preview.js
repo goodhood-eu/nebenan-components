@@ -23,6 +23,8 @@ const sassOptions = {
   sourceComments: true,
 };
 
+gulpSass.compiler = sass;
+
 const browserifyOptions = {
   entries: SCRIPT_SOURCE,
   extensions: ['.jsx'],

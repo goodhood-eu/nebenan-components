@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import omit from 'lodash/omit';
 import clamp from 'lodash/clamp';
 
-import eventproxy from 'nebenan-helpers/lib/eventproxy';
-import heartbeat from 'nebenan-helpers/lib/heartbeat';
+import eventproxy from 'nebenan-eventproxy';
+import heartbeat from 'nebenan-heartbeat';
 import { getPrefixed, eventCoordinates, size, stopEvent } from 'nebenan-helpers/lib/dom';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
