@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 import clsx from 'clsx';
 
-import keymanager from 'nebenan-helpers/lib/keymanager';
-import eventproxy from 'nebenan-helpers/lib/eventproxy';
+import keymanager from 'nebenan-keymanager';
+import eventproxy from 'nebenan-eventproxy';
 import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
 
 import Input from 'nebenan-form/lib/input';

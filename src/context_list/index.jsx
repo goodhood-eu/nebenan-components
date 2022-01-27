@@ -5,7 +5,7 @@ import omit from 'lodash/omit';
 
 import { arrayToHash } from 'nebenan-helpers/lib/data';
 import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
-import keymanager, { keys as keyMap } from 'nebenan-helpers/lib/keymanager';
+import keymanager, { keys as keyMap } from 'nebenan-keymanager';
 
 import { getTrackingAttributes } from './utils';
 

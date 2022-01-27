@@ -7,7 +7,7 @@ import throttle from 'lodash/throttle';
 
 import { invoke, bindTo } from 'nebenan-helpers/lib/utils';
 
-import eventproxy from 'nebenan-helpers/lib/eventproxy';
+import eventproxy from 'nebenan-eventproxy';
 import { scroll, documentOffset, offset } from 'nebenan-helpers/lib/dom';
 
 import { LoadingSpinner } from '../loading';

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import omit from 'lodash/omit';
 import clamp from 'lodash/clamp';
 
-import heartbeat from 'nebenan-helpers/lib/heartbeat';
+import heartbeat from 'nebenan-heartbeat';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
 import Dots from '../_dots';

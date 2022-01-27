@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import clamp from 'lodash/clamp';
 
-import eventproxy from 'nebenan-helpers/lib/eventproxy';
+import eventproxy from 'nebenan-eventproxy';
 import { getPrefixed, eventCoordinates, size } from 'nebenan-helpers/lib/dom';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
