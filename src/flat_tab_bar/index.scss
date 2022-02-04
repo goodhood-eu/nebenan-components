@@ -39,7 +39,7 @@
       &::after,
       &::before {
         margin: 0;
-        content: '';
+        content: "";
         position: absolute;
         top: 100%;
         left: 50%;
@@ -48,7 +48,7 @@
 
       &::before {
         border: 13px solid transparent;
-        border-top-color: rgba(0, 0, 0, .05);
+        border-top-color: rgb(0 0 0 / 5%);
       }
 
       &::after {
