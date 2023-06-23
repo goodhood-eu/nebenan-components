@@ -1,12 +1,11 @@
 {
   "name": "nebenan-components",
   "description": "A collection of React Nebenan UI Components",
-  "author": "Nebenan.de <max@nebenan.de>",
+  "author": "Good Hood GmbH <tech@nebenan.de>",
   "license": "MIT",
-  "readmeFilename": "README.md",
-  "homepage": "https://nebenan.de/",
-  "repository": "good-hood-gmbh/nebenan-components",
-  "bugs": "https://github.com/good-hood-gmbh/nebenan-components/issues",
+  "homepage": "https://github.com/goodhood-eu/nebenan-components#readme",
+  "repository": "github:goodhood-eu/nebenan-components",
+  "bugs": "https://github.com/goodhood-eu/nebenan-components/issues",
   "version": "12.1.0",
   "files": [
     "images/*.svg",
