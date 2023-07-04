@@ -34,7 +34,7 @@ const tags = [
   'frantic',
 ];
 
-const emoji = 'Hello 👩🏿😎🙈🏳️‍🌈👨‍👨‍👧‍👦';
+const emoji = 'Hello 👩🏿😎🙈🏳️‍🌈👨‍👨‍👧‍👦🫠';
 const suggestions = emojiCollection
   .filter(({ suggest, category }) => (suggest && category === 'people'))
   .map(({ shortname }) => shortname);
