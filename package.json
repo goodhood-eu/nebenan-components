@@ -64,7 +64,7 @@
     "mocha": "^10.2.0",
     "morgan": "^1.10.0",
     "nebenan-eventproxy": "^1.0.0",
-    "nebenan-form": "^10.4.0-beta.1",
+    "nebenan-form": "^10.4.0-beta.2",
     "nebenan-heartbeat": "^1.1.1",
     "nebenan-keymanager": "^1.0.3",
     "nebenan-ui-kit": "^5.7.0-beta.2",
