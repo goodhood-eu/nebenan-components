@@ -1,3 +1,7 @@
+## v14.0.0 Breaking changes
+
+- Peer dependency changes
+  - `nebenan-ui.kit`
 
 ## v12.0.0 Breaking changes
 
