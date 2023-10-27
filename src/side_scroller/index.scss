@@ -8,8 +8,7 @@
   padding-bottom: 30px;
   box-sizing: content-box;
 
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow: scroll hidden;
   -webkit-overflow-scrolling: touch;
 
   transform: translate3d(0, 0, 0);
