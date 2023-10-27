@@ -12,8 +12,7 @@ $scrollable-control-width: 8px;
   margin-right: -30px;
   padding-right: 30px;
 
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden scroll;
   -webkit-overflow-scrolling: touch;
 }
 
