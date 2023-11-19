@@ -1,25 +1,4 @@
 .preview-content {
-  .preview-tooltips > ul {
-    @include legacy-clearfix;
-    margin: 30px 0;
-
-    > li {
-      margin-top: 10px;
-
-      > div {
-        margin-top: 10px;
-      }
-
-      @media ($media-m) {
-        width: 50%;
-        margin-top: 0;
-        padding-right: 15px;
-        display: block;
-        float: left;
-      }
-    }
-  }
-
   .preview-progress {
     display: flex;
     justify-content: space-between;
