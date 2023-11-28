@@ -9,8 +9,7 @@
   }
 
   .c-tab_bar-list {
-    @include legacy-clearfix;
-    display: block;
+    display: flex;
   }
 
   .c-tab_bar-item {
