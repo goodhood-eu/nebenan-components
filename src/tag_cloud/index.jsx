@@ -4,9 +4,8 @@ import clsx from 'clsx';
 
 import { bindTo, invoke } from 'nebenan-helpers/lib/utils';
 import eventproxy from 'nebenan-eventproxy';
-
 import InputComponent from 'nebenan-form/lib/base';
-import Emoji from '../emoji';
+import { shortenString } from 'smartcontent/lib/strings';
 
 import { getOption } from './utils';
 
@@ -106,9 +105,11 @@ class TagCloud extends InputComponent {
     let handler;
     if (!readOnly) handler = this.handleClick.bind(this, item);
 
+    const text = shortenString(key, TAG_LIMIT);
+
     return (
       <li key={value} className={className} onClick={handler}>
-        <Emoji text={key} limit={TAG_LIMIT} />
+        <span>{text}</span>
       </li>
     );
   }

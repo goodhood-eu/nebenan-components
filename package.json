@@ -48,8 +48,6 @@
     "browserslist-config-nebenan": "^1.0.2",
     "chai": "^4.3.10",
     "del": "^6.0.0",
-    "emoji-assets": "^7.0.1",
-    "emojitsu": "^5.0.0",
     "errorhandler": "^1.5.1",
     "eslint": "^8.54.0",
     "eslint-config-nebenan": "^4.4.1",
@@ -89,7 +87,6 @@
   },
   "peerDependencies": {
     "@babel/runtime": "^7.12.5",
-    "emojitsu": "^5.0.0",
     "nebenan-eventproxy": "^1.0.0",
     "nebenan-form": "^12.0.0",
     "nebenan-heartbeat": "^1.0.0",
