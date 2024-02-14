@@ -17,6 +17,9 @@ const renderOption = (key, list) => {
   );
 };
 
+/**
+ * @deprecated switch to emoji-mart based solution, see CORE-14087 for implementation details
+ */
 const EmojiSuggestions = (props) => {
   const className = clsx('c-emoji_suggestions', props.className);
   return <ContextList {...props} defaultActive className={className} getOption={renderOption} />;

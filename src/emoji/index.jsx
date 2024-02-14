@@ -4,7 +4,9 @@ import { shortnamesToUnicode, render } from 'emojitsu';
 
 import { shortenString } from 'smartcontent/lib/strings';
 
-
+/**
+ * @deprecated switch to emoji-mart based solution, see CORE-14087 for implementation details
+ */
 const Emoji = (props) => {
   const className = clsx('c-emoji', props.className);
   const { limit, text, options, ...cleanProps } = props;
