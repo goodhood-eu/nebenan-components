@@ -46,11 +46,9 @@ const renderApp = (req, res) => {
 
 app.set('port', port);
 
-const emojis = serveStatic(`${__dirname}/../node_modules/emoji-assets/png/`, { redirect: false });
 const fonts = serveStatic(`${__dirname}/../node_modules/nebenan-ui-kit/fonts/`, { redirect: false });
 app.use(morgan('dev'));
 
-app.use('/images/emojis-7.0.1', emojis);
 app.use('/fonts', fonts);
 app.use(serveStatic(`${__dirname}/public`, { redirect: false }));
 

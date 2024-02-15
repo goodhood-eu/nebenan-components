@@ -1,6 +1,5 @@
 import { createRef, PureComponent } from 'react';
 import uniq from 'lodash/uniq';
-import { emojiCollection } from 'emojitsu';
 import { bindTo } from 'nebenan-helpers/lib/utils';
 
 import { getMergedRef } from 'nebenan-react-hocs/lib/proxy_ref';
@@ -10,8 +9,6 @@ import Header from '../../components/header';
 import ClipboardText from '../../../lib/clipboard_text';
 import EmailLink from '../../../lib/email_link';
 import PopupLink from '../../../lib/popup_link';
-import Emoji from '../../../lib/emoji';
-import EmojiSuggestions from '../../../lib/emoji_suggestions';
 import TabBar from '../../../lib/tab_bar';
 import FlatTabBar from '../../../lib/flat_tab_bar';
 import Progress from '../../../lib/progress';
@@ -34,16 +31,7 @@ const tags = [
   'frantic',
 ];
 
-const emoji = 'Hello 👩🏿😎🙈🏳️‍🌈👨‍👨‍👧‍👦🫠';
-const suggestions = emojiCollection
-  .filter(({ suggest, category }) => (suggest && category === 'people'))
-  .map(({ shortname }) => shortname);
-
-
-suggestions.length = 20;
-
 const action = <i className="icon-cross ui-link" />;
-
 
 class Inputs extends PureComponent {
   constructor(props) {
@@ -123,22 +111,6 @@ class Inputs extends PureComponent {
             <li><ProgressLine steps={10} current={4} /></li>
             <li><ProgressLine steps={10} current={9} /></li>
           </ul>
-        </div>
-
-        <div className="preview-section">
-          <Emoji text={emoji} />
-        </div>
-
-        <div className="preview-section">
-          <Emoji text={emoji} limit={20} />
-        </div>
-
-        <div className="preview-section">
-          <Emoji className="preview-single-emoji" text=":poop:" options={{ size: 128 }} />
-        </div>
-
-        <div className="preview-section">
-          <EmojiSuggestions className="ui-card" options={suggestions} onSelect={this.handleSelect} />
         </div>
 
         <div className="preview-section">
