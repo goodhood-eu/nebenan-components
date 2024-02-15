@@ -1,3 +1,12 @@
+## v16.0.0 Breaking changes
+
+- Removed emoji / emoji-suggestions component 
+- Removed emojitsu dependency
+
+## v15.0.0 Breaking changes
+
+- Minimum node version bumped to 20
+
 ## v14.0.0 Breaking changes
 
 - Peer dependency changes
