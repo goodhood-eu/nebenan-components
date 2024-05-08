@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-import parseDate from 'date-fns/parseISO';
-import formatDate from 'date-fns/format';
-
+import { format, parseISO} from 'date-fns';
 
 const DateBox = (props) => {
   const { date, locale, active, ...cleanProps } = props;
@@ -11,7 +9,7 @@ const DateBox = (props) => {
     'is-disabled': !active,
   });
 
-  const dateObj = parseDate(date);
+  const dateObj = parseISO(date);
 
   let options;
   if (locale) options = { locale: locale.modules.dateFns };
@@ -19,7 +17,7 @@ const DateBox = (props) => {
   return (
     <span {...cleanProps} className={className}>
       <strong>{dateObj.getDate()}</strong>
-      <small>{formatDate(dateObj, 'MMM', options)}</small>
+      <small>{format(dateObj, 'MMM', options)}</small>
     </span>
   );
 };
