@@ -1,3 +1,7 @@
+## v17.0.0 Breaking changes
+
+- Updated date-fns to v3
+
 ## v16.0.0 Breaking changes
 
 - Removed emoji / emoji-suggestions component 
