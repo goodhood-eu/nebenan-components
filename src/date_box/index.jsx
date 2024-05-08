@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
-import { format, parseISO} from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 const DateBox = (props) => {
   const { date, locale, active, ...cleanProps } = props;
