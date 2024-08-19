@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { format, parseISO } from 'date-fns';
 
 const DateBox = (props) => {
-  const { date, locale, active, ...cleanProps } = props;
+  const { date, locale, active = true, ...cleanProps } = props;
   const className = clsx('c-date_box ui-iconbox-label', props.className, {
     'is-disabled': !active,
   });
@@ -20,10 +20,6 @@ const DateBox = (props) => {
       <small>{format(dateObj, 'MMM', options)}</small>
     </span>
   );
-};
-
-DateBox.defaultProps = {
-  active: true,
 };
 
 DateBox.propTypes = {

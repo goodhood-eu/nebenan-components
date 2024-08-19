@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { getPercentage } from './utils';
 
 const Progress = (props) => {
-  const { state, size, type, children, ...cleanProps } = props;
+  const { state, size, type = 'primary', children, ...cleanProps } = props;
   const percent = getPercentage(state);
 
   const className = clsx(`c-progress c-progress-${type}`, props.className, {
@@ -17,10 +17,6 @@ const Progress = (props) => {
       {children}
     </div>
   );
-};
-
-Progress.defaultProps = {
-  type: 'primary',
 };
 
 Progress.propTypes = {
