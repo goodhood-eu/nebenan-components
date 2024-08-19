@@ -8,9 +8,8 @@ import {
   BADGE_PURPLE,
 } from './constants';
 
-
 const Badge = (props) => {
-  const { type, ...cleanProps } = props;
+  const { type = BADGE_GREEN, ...cleanProps } = props;
 
   const url = `/images/components/badge-${type}.svg`;
   const style = { backgroundImage: `url('${url}')` };
@@ -22,10 +21,6 @@ const Badge = (props) => {
       style={style}
     />
   );
-};
-
-Badge.defaultProps = {
-  type: BADGE_GREEN,
 };
 
 Badge.propTypes = {

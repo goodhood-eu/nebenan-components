@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 
 const HamburgerIcon = (props) => {
-  const { active, ...cleanProps } = props;
+  const { active = false, ...cleanProps } = props;
   const className = clsx('c-hamburger_icon', props.className, { 'is-active': active });
 
   return (
@@ -13,10 +13,6 @@ const HamburgerIcon = (props) => {
       <i className="c-hamburger_icon-3" />
     </span>
   );
-};
-
-HamburgerIcon.defaultProps = {
-  active: false,
 };
 
 HamburgerIcon.propTypes = {
