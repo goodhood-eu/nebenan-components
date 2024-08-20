@@ -17,6 +17,7 @@
 .c-slideshow-list {
   display: flex;
   flex-shrink: 0;
+  // stylelint-disable-next-line
   @include cursor-draggable;
 
   > li {

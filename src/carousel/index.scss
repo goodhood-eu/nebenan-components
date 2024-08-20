@@ -16,6 +16,7 @@
 
 .c-carousel-list {
   white-space: nowrap;
+  // stylelint-disable-next-line
   @include cursor-draggable;
 }
 
