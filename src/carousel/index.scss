@@ -15,8 +15,8 @@
 }
 
 .c-carousel-list {
-  @include cursor-draggable;
   white-space: nowrap;
+  @include cursor-draggable;
 }
 
 .c-carousel-item {
