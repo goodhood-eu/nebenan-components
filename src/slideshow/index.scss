@@ -15,9 +15,10 @@
 }
 
 .c-slideshow-list {
-  @include cursor-draggable;
   display: flex;
   flex-shrink: 0;
+  // stylelint-disable-next-line
+  @include cursor-draggable;
 
   > li {
     padding: 5px;

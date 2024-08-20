@@ -6,7 +6,7 @@
   "homepage": "https://github.com/goodhood-eu/nebenan-components#readme",
   "repository": "github:goodhood-eu/nebenan-components",
   "bugs": "https://github.com/goodhood-eu/nebenan-components/issues",
-  "version": "17.1.0",
+  "version": "17.1.1",
   "files": [
     "images/*.svg",
     "images/*/*.svg",
