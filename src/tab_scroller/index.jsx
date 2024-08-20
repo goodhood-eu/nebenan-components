@@ -34,9 +34,7 @@ class TabScroller extends PureComponent {
       'is-clickable': Boolean(href || callback),
     });
     const onClick = this.handleClick.bind(this, key);
-    const props = { key, className, onClick };
-
-    return <li {...props}>{renderer(key, items)}</li>;
+    return <li key={key}{...{ className, onClick }}>{renderer(key, items)}</li>;
   }
 
   render() {

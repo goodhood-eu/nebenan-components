@@ -22,7 +22,7 @@ class Dots extends PureComponent {
     let onClick;
     if (typeof onItemClick === 'function') onClick = onItemClick.bind(this, key);
 
-    return <li {...{ key, className, onClick }} />;
+    return <li key={key} {...{ className, onClick }} />;
   }
 
   render() {
